@@ -1,0 +1,281 @@
+{
+  "help": {
+    "title": "ZOOT! 帮助文档",
+    "version": "1.0",
+    "updated": "2026-07-21",
+    "sections": [
+      {
+        "id": "getting-started",
+        "title": "开始使用",
+        "icon": "/static/images/img_help.png",
+        "items": [
+          {
+            "id": "first-login",
+            "title": "首次启动向导",
+            "content": "首次启动时，系统会引导您完成基础设置：\n- 选择 API 服务商并配置密钥\n- 设置博士姓名\n- 决定是否启用自主消息和随机事件\n\n完成后即可开始使用。",
+            "jump": null
+          },
+          {
+            "id": "interface-overview",
+            "title": "界面概览",
+            "content": "PC 端采用三栏布局：\n- **左侧导航栏**：切换聊天列表、联系人、事务、动态等核心模块\n- **中间列表区**：展示聊天列表、联系人列表、设置项等\n- **右侧内容区**：显示聊天详情、干员档案、设置页面等\n\n点击左侧导航项可展开个人页，个人页包含统计卡片和功能菜单。",
+            "jump": null
+          }
+        ]
+      },
+      {
+        "id": "chat",
+        "title": "聊天",
+        "icon": "/static/images/img_message.png",
+        "items": [
+          {
+            "id": "private-chat",
+            "title": "私聊",
+            "content": "与干员一对一交流。\n- 从联系人页点击干员头像进入私聊\n- 支持文本、表情包、情景模式\n- 可切换人格，不同人格拥有独立的对话记忆\n- 长按消息可引用、复制、重新生成或撤回",
+            "jump": { "type": "page", "target": "contacts", "label": "去联系人页" }
+          },
+          {
+            "id": "group-chat",
+            "title": "群聊",
+            "content": "多干员群组聊天。\n- 从聊天列表点击群聊进入\n- 支持提及干员（@代号）\n- 群管理员可管理群名称、标签、成员\n- 群聊消息会触发干员间互动",
+            "jump": { "type": "page", "target": "chat-list", "label": "去聊天列表" }
+          },
+          {
+            "id": "emoji",
+            "title": "表情包",
+            "content": "干员专属表情包。\n- 点击输入框左侧表情按钮打开表情选择器\n- 可选择干员专属表情包发送\n- 最近使用的表情包会记录在“最近”标签页",
+            "jump": null
+          },
+          {
+            "id": "scenario-mode",
+            "title": "情景模式",
+            "content": "情景模式让对话更具沉浸感。\n- 点击输入框旁的“情景”按钮可切换\n- 博士消息可标记为情景描述（会显示为旁白样式）\n- 干员回复也支持情景模式（含动作描述）",
+            "jump": null
+          }
+        ]
+      },
+      {
+        "id": "contacts",
+        "title": "联系人",
+        "icon": "/static/images/img_contact.png",
+        "items": [
+          {
+            "id": "contact-list",
+            "title": "联系人列表",
+            "content": "查看所有可用干员。\n- 按拼音首字母分组\n- 支持搜索、筛选（势力、种族、性别等）\n- 星标干员置顶显示\n- 点击干员进入档案页",
+            "jump": { "type": "page", "target": "contacts", "label": "去联系人页" }
+          },
+          {
+            "id": "operator-profile",
+            "title": "干员档案",
+            "content": "干员详情页面包含：\n- 基本信息（性别、种族、出身等）\n- 信赖值进度\n- 人际关系图谱\n- 互动记录（中期记忆、重要记忆、博士印象、记忆索引）\n- 自定义档案和发言设置\n- 日记功能（需信赖值≥100）",
+            "jump": null
+          },
+          {
+            "id": "custom-operator",
+            "title": "自定义干员",
+            "content": "创建属于你的干员。\n- 在联系人页点击加号，选择“创建自定义干员”\n- 填写代号、基本信息、背景、性格等\n- 可上传头像\n- 创建后即可在联系人列表中看到并开始聊天",
+            "jump": { "type": "page", "target": "custom-operator", "label": "去创建干员" }
+          }
+        ]
+      },
+      {
+        "id": "persona",
+        "title": "人格管理",
+        "icon": "/static/images/icon_persona.png",
+        "items": [
+          {
+            "id": "persona-intro",
+            "title": "人格系统概述",
+            "content": "人格系统允许您以不同身份与干员交流。\n- **博士人格**：默认人格，全局基础\n- **自定义人格**：自定义名称、性别、档案\n- **克隆人格**：基于已有干员克隆，可开启记忆同步\n\n每个人格拥有独立的对话记忆和扩展设定。",
+            "jump": { "type": "page", "target": "persona-manager", "label": "去人格管理" }
+          },
+          {
+            "id": "persona-sharing",
+            "title": "上下文互通",
+            "content": "开启后，干员能同时看到博士人格和其他互通人格的对话记忆。\n- 适用于多个人格共享同一干员记忆的场景\n- 关闭互通后，各人格记忆隔离",
+            "jump": null
+          },
+          {
+            "id": "persona-sync",
+            "title": "克隆人格记忆同步",
+            "content": "开启后，克隆人格与源干员的对话会同步到源干员的记忆中。\n- 模拟源干员与目标干员间的对话\n- 同步消息不会出现在前端聊天界面（仅用于记忆增强）",
+            "jump": null
+          }
+        ]
+      },
+      {
+        "id": "tasks",
+        "title": "事务与助理",
+        "icon": "/static/images/img_business.png",
+        "items": [
+          {
+            "id": "todo",
+            "title": "待办事项",
+            "content": "管理事务清单。\n- 在事务页点击加号添加事务\n- 支持设置标题、描述、优先级、截止日期\n- 可标记完成或删除\n- 长按事务卡片可进入批量选择模式",
+            "jump": { "type": "page", "target": "tasks", "label": "去事务页" }
+          },
+          {
+            "id": "assistant",
+            "title": "助理系统",
+          "content": "AI 助理帮助您处理事务并协调多端工作。\n- 在事务页点击助理头像可切换助理干员；角色人设与中立 skills 分开保存，换班后能力可以安全继承\n- 助理支持结构化回复、图片/文档/录音附件、事务、提醒、简报、本舰环境和同步状态查询\n- 每次复杂处理都会形成可恢复的 Agent 运行，记录模型轮次、工具步骤、检查点和结果；异常退出后不会自动重复执行结果不确定的副作用\n- 需要权限的操作会暂停并进入“助理控制台”的工具审批区。可允许本次、拒绝、取消运行，也可按能力授予长期权限\n- 中立 Skill 按当前任务检索，不会把所有技能一次性塞入上下文；每个 Skill 带有版本、校验值、触发条件、工具白名单、作用域和声明测试\n- 助理只能提出用户习惯候选。候选按人格隔离，并在控制台由用户确认或拒绝；只有已确认习惯会进入后续上下文，冲突旧值会保留为已取代记录\n- 上下文会按系统指令、当前工作、程序知识、世界状态、语义记忆、情节记忆和工具结果分层分配预算；截断会保留策略、遗漏项和快照哈希以供追查\n- 处理期间会显示明确的工作状态；服务商支持推理时，可在消息下方展开安全的思考与执行摘要，也可在助理设置中关闭\n- 工作日志可保留当前助理与协作者信息，但不会写入可继承的 skills，避免角色设定污染",
+            "jump": null
+          },
+          {
+            "id": "briefing",
+            "title": "简报",
+            "content": "定期生成工作摘要。\n- 早间简报（8:00）和晚间简报（20:00）自动生成\n- 包含事务统计、今日到期事项等\n- 可手动触发重新生成",
+            "jump": null
+          }
+        ]
+      },
+      {
+        "id": "dynamics",
+        "title": "动态",
+        "icon": "/static/images/icon_moments.png",
+        "items": [
+          {
+            "id": "dynamics-posts",
+            "title": "动态发布与互动",
+            "content": "发布动态并与干员互动。\n- 点击动态页底部“发布动态”按钮\n- 输入内容、图片、位置\n- 其他干员可以点赞、评论\n- 评论支持回复（@干员）\n- 可转发动态到聊天",
+            "jump": { "type": "page", "target": "zoot-dynamics", "label": "去动态页" }
+          },
+          {
+            "id": "dynamics-notifications",
+            "title": "动态消息通知",
+            "content": "当有干员互动时，动态页按钮会显示红点。\n- 点击消息按钮可查看所有通知\n- 点击通知可跳转到对应动态",
+            "jump": null
+          }
+        ]
+      },
+      {
+        "id": "settings",
+        "title": "设置",
+        "icon": "/static/images/img_settings.png",
+        "items": [
+          {
+            "id": "settings-about",
+            "title": "关于与更新",
+            "content": "查看版本信息、检查更新、查看鸣谢与赞助者。\n- 版本更新支持热更新和全量更新\n- 鸣谢列表包含开发支持者",
+            "jump": { "type": "page", "target": "settings-about", "label": "去关于页" }
+          },
+          {
+            "id": "settings-api",
+            "title": "API 设置",
+            "content": "配置大模型服务商。\n- 支持 DeepSeek、智谱、阿里云、Moonshot 等\n- 可自定义 API 地址和密钥\n- 支持测试连接和获取模型列表",
+            "jump": { "type": "page", "target": "settings-api", "label": "去 API 设置" }
+          },
+          {
+            "id": "settings-memory",
+            "title": "记忆设置",
+            "content": "调整记忆相关参数。\n- 短期记忆条数\n- 中期记忆条数\n- 索引记忆限制\n- 自动总结开关",
+            "jump": { "type": "page", "target": "settings-memory", "label": "去记忆设置" }
+          },
+          {
+            "id": "settings-auto-message",
+            "title": "自主消息推送",
+            "content": "配置干员主动发言。\n- 全局开关控制是否启用\n- 可分别设置私聊和群聊的白名单\n- 支持调整推送频率、队列大小等",
+            "jump": { "type": "page", "target": "settings-auto-message", "label": "去自主消息设置" }
+          },
+          {
+            "id": "settings-event",
+            "title": "事件生成器",
+            "content": "事件发生器会结合静态知识、时间线、纪事与近期上下文生成连续事件。\n- 遭遇事件先以独立旁白消息进入私聊，再续接相关干员发言\n- 多人事件优先依据干员关系选角，默认保留 10% 探索随机率\n- 外勤事件先进入事务/事件库，由用户或获授权助理提交为带执行结点、日志和奖励的任务\n- 事件投递有预约、认领、完成与失败状态，避免重复消费",
+            "jump": { "type": "page", "target": "settings-event", "label": "去事件设置" }
+          },
+          {
+            "id": "settings-multi-device",
+            "title": "多端互通",
+            "content": "PC 与移动端数据同步。\n- 设备发现与配对\n- 支持全量同步记忆、聊天记录\n- 可开启协同加速",
+            "jump": { "type": "page", "target": "settings-multi-device", "label": "去多端互通" }
+          },
+          {
+            "id": "settings-debug",
+            "title": "调试模式",
+            "content": "开发者调试工具。\n- 显示后端错误日志\n- 支持调试指令（如 /trust set 150）\n- 可查看群组活跃度状态",
+            "jump": { "type": "page", "target": "settings-debug", "label": "去调试页面" }
+          }
+        ]
+      },
+      {
+        "id": "multimodal",
+        "title": "多模态与附件",
+        "icon": "/static/images/img_workbench.png",
+        "items": [
+          {"id":"multimodal-send","title":"发送图片、文件与录音","content":"聊天输入为空时点击加号，可选择图片、文件、按住悬浮麦克风录音，或进入生图。附件会先作为可取消的临时标签显示，可补充文字后一起发送。选择附件期间会锁定情景发言切换。","jump":{"type":"page","target":"chat","label":"去聊天页"}},
+          {"id":"multimodal-api","title":"配置多模态服务 API","content":"在“设置 → API设置&云端服务 → 多模态服务API”按视觉、语音、图像生成、文档与网页解析分类配置。各服务可独立选择 OpenAI-compatible 或专有协议适配器；密钥仅保存在本机配置中。PDF 与 Office 文档会提取正文、表格和元数据，网页解析会限制大小、跳转和内网地址以降低风险。","jump":{"type":"page","target":"settings-api","label":"去 API 设置"}},
+          {"id":"multimodal-stats","title":"用量与故障排查","content":"详细统计页可按服务和调用位置查看请求、Token 与多模态调用次数。失败时依次检查服务地址、模型名、密钥、文件大小与格式；录音还需要系统麦克风权限。","jump":{"type":"page","target":"statistics-detail","label":"去统计页"}}
+        ]
+      },
+      {
+        "id": "assistant-agent",
+        "title": "助理 Agent 与工作区",
+        "icon": "/static/images/img_workbench.png",
+        "items": [
+          {"id":"assistant-agent-runtime","title":"运行、审批与恢复","content":"助理的复杂工作以可恢复的 Agent Run 执行。控制台会显示当前状态、每一步 Trace、待确认工具和工作日志；需要权限的操作会暂停，只有用户允许后才继续。取消运行不会自动批准或执行剩余动作。","jump":null},
+          {"id":"assistant-workspace-grant","title":"限定 PC Workspace","content":"在 PC 助理控制台创建 Workspace Grant 后，助理才可访问所选目录。授权分别包含读取、写入和验证，并可限制文件类型、隐藏文件、符号链接及大小。所有路径都会解析并确认仍位于授权根目录；移动端不执行桌面文件或 shell 操作。","jump":null},
+          {"id":"assistant-workspace-change","title":"Diff、备份、验证与回滚","content":"助理修改文件时先创建结构化变更集并显示 Diff，不会直接覆盖文件。应用前会再次核对 Diff 摘要和源文件哈希，随后创建独立备份并原子写入。验证只使用固定配置，包括 Python 语法、JSON 解析、Node 语法和限定 unittest；不接受任意命令字符串。文件在审批或应用后被其他程序修改时，系统会拒绝覆盖或回滚。","jump":null},
+          {"id":"assistant-device-fabric","title":"可信设备与安全配对","content":"旧设备发现只负责找到局域网地址，不代表获得助理或文件权限。在“设置 → 多端互通 → 设备发现”的可信设备区域生成六位短码，并在五分钟内于另一端输入地址、配对 ID 和短码；确认前必须核对双方设备指纹。设备私钥在 PC 使用 Windows DPAPI 保护，在 Android 使用系统 Keystore。每个跨端请求都带会话、单调序号、时间戳、随机数和签名，重放、篡改、过期、冻结或撤销设备都会被拒绝。","jump":{"type":"page","target":"settings-multi-device","label":"去可信设备设置"}},
+          {"id":"assistant-remote-work","title":"移动审批与 PC 工作任务","content":"完成可信配对后，移动端助理控制台可读取可信 PC 的待确认工具，并允许或拒绝单次审批。移动端不会执行桌面 shell 或直接访问 PC 文件；它只能向 PC 提交 list、search、read 和固定验证类型的远程任务。PC Worker 领取任务后仍会重新检查 Workspace Grant、相对路径、文件类型、大小和验证白名单。任务具有幂等键、租约、检查点、结果与失败记录，重复提交和租约过期不会绕过原有安全边界。","jump":null},
+          {"id":"assistant-model-profiles","title":"助理专用模型档案与能力探测","content":"助理模型档案独立于普通聊天模型，记录服务商、模型、Planner/Worker/Verifier 等角色、工具调用与结构化输出能力、上下文和输出上限、质量/费用/延迟偏好以及是否为本地模型。档案只引用“API 设置”中已有的服务商凭据，不保存或复制 API Key。每次 Agent Run 开始后会锁定模型档案，审批、重启和恢复不会静默换模型；候选模型调用失败时才回退稳定档案并写入 Trace。点击“能力探测”会产生一次极小的真实 API 调用，用于检查可达性和工具调用格式。模型选择不会改变工具权限、Workspace 边界或审批规则。","jump":null}
+        ]
+      },
+      {
+        "id": "statistics",
+        "title": "统计",
+        "icon": "/static/images/img_statistics.png",
+        "items": [
+          {
+            "id": "statistics-overview",
+            "title": "统计概览",
+            "content": "查看应用使用数据。\n- 对话次数、Token 用量、知识图谱调用\n- 干员数量、使用时长\n- 按天/小时查看走势\n- 干员互动排行榜\n- 话题词云",
+            "jump": { "type": "page", "target": "statistics-detail", "label": "去统计页" }
+          }
+        ]
+      },
+      {
+        "id": "extensions",
+        "title": "扩展功能",
+        "icon": "/static/images/img_ap.png",
+        "items": [
+          {
+            "id": "rhodes-island",
+            "title": "罗德岛本舰",
+            "content": "罗德岛本舰以固定斜向俯视的等轴测场景展示舰内设施。\n- 支持拖拽平移、滚轮或按钮缩放、复位，以及点击设施查看状态和在场干员\n- 顶部环境栏显示舰体地点、天气、时间段、当前航线、目的地和航程进度\n- 干员位置使用 idle、walk、work、talk、alert、unavailable 状态；场景资源不可用时自动使用轻量降级视图，不显示空白页\n- 本舰环境、助理排班、设施状态和干员分布会作为助理与事件系统的整体上下文",
+            "jump": { "type": "page", "target": "rhodes-island", "label": "去罗德岛本舰" }
+          },
+          {
+            "id": "zoot-runtime",
+            "title": "ZOOT 世界运行时",
+            "content": "ZOOT（不带感叹号）是 ZOOT! 内部的低耗世界感知、上下文治理与规划系统。它通过业务实时事件和数据库兜底校对汇总聊天、动态、事件、外勤、仓储、财务、本舰、纪事与传闻，更新叙事、社交、物资、财务、医疗和安全压力。日常感知、检索与规划不调用 LLM。\n- PC：展开个人页后点击底部 ZOOT 按钮进入\n- 移动端：个人页滚动到顶端后向下拉动进入\n- 本舰：点击场景中心的 ZOOT 核心设施，再点击管理入口\n- “立即感知”执行一次增量采集、状态投影、压力计算和规划\n- “上下文”可查看来源、向量索引数量，并预览聊天、助理、事件或外勤调用时将注入的内容\n- ZOOT 会结合语义相似度、人物、时间、来源权威和当前状态筛选内容；罗德岛设定和静态知识优先于观察与传闻\n- 每次注入会保存来源快照，便于复现；不同人格的私有上下文不会跨人格检索\n- 规划会生成独立命令。事件、自主消息、物资、财务、医疗及安全响应需要批准后执行，高风险响应会转成由 ZOOT 提交的事务\n- 命令执行结果会重新进入事件流，形成可审计闭环；策略页可调整全部压力阈值和低风险执行开关",
+            "jump": { "type": "page", "target": "zoot-runtime", "label": "进入 ZOOT" }
+          },
+          {
+            "id": "external-contact",
+            "title": "对外联络",
+            "content": "非干员普通角色已统一到联系人页的“对外联络”标签。普通角色可以私聊、加入群聊、主动发言、参与事件和被克隆，但不能派遣、发送动态或担任助理。自定义角色会使用独立角色档案和身份标识。",
+            "jump": { "type": "page", "target": "contacts", "label": "去联系人页" }
+          },
+          {
+            "id": "rhodes-finance",
+            "title": "罗德岛财务部",
+            "content": "模拟财务系统。\n- 查看资产、债务、净收益\n- 可进行任务派遣、制药生产、股票交易、借款还款\n- 财务历史记录",
+            "jump": { "type": "page", "target": "rhodes-finance", "label": "去财务部" }
+          },
+          {
+            "id": "warehouse",
+            "title": "仓储",
+            "content": "管理物品库存。\n- 查看库存物品及数量\n- 支持入库、出库、丢弃操作\n- 交易记录可追溯",
+            "jump": { "type": "page", "target": "warehouse", "label": "去仓储" }
+          },
+          {
+            "id": "ops-department",
+            "title": "外勤部",
+            "content": "任务派遣系统。\n- 查看待处理、进行中、已完成任务\n- 可派遣干员执行任务\n- 任务有不同风格和处理方式\n- 任务完成后有奖励",
+            "jump": { "type": "page", "target": "ops-department", "label": "去外勤部" }
+          }
+        ]
+      }
+    ]
+  }
+}

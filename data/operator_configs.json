@@ -1,0 +1,50 @@
+{
+  "template": {
+    "base_activeness": 1.0,
+    "curve_type": "normal//night_owl/standard/workaholic//custom",
+    "tags": [],
+    "trust": 0
+  },
+  "ambriel": {
+    "base_activeness": 1.0,
+    "curve_type": "night_owl",
+    "tags": [],
+    "trust": 0
+  },
+  "ceobe": {
+    "base_activeness": 1.0,
+    "curve_type": "standard",
+    "tags": [],
+    "trust": 0
+  },
+  "amiya": {
+    "base_activeness": 1.0,
+    "curve_type": "workaholic",
+    "tags": [],
+    "trust": 0
+  },
+  "angelina": {
+    "base_activeness": 1.0,
+    "curve_type": "normal",
+    "tags": [],
+    "trust": 0
+  },
+  "chen": {
+    "base_activeness": 1.0,
+    "curve_type": "workaholic",
+    "tags": [],
+    "trust": 0
+  },
+  "swire": {
+    "base_activeness": 1.0,
+    "curve_type": "standard",
+    "tags": [],
+    "trust": 0
+  },
+  "bagpipe": {
+    "base_activeness": 1.0,
+    "curve_type": "normal",
+    "tags": [],
+    "trust": 0
+  }
+}

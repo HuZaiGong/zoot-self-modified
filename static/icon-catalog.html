@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>ZOOT UI Icon Catalog</title><link rel="stylesheet" href="/static/css/style.css?v=20260802-100-0776"><script src="/static/js/ui-icons.js?v=20260802-100-0776"></script><style>
+body {
+    margin: 0;
+    padding: 20px;
+    background: var(--background-color, #f2f3f5);
+    color: var(--text-color, #202124);
+}
+main {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+    gap: 8px;
+}
+article {
+    display: grid;
+    place-items: center;
+    min-height: 92px;
+    border: 1px solid var(--border-color, #d7d9dd);
+    background: var(--card-bg, #fff);
+}
+article .zoot-ui-icon {
+    width: 32px;
+    height: 32px;
+}
+article code {
+    font-size: 10px;
+}
+</style></head>
+<body><h1>ZOOT UI ICONS</h1><main id="catalog"></main><script>
+const names=['search','filter','close','check','menu','send','edit','trash','refresh','save','plus','minus','previous','next','more','clipboard','attachment','audio','expand','diary','message','notification','location','user','users','link','info','warning','success','error','thinking','chart','settings','wardrobe','persona','archive','camera','gallery','favorite','favoriteOutline','zoomIn','zoomOut','inbound','outbound','bank','wallet','trend','pharmacy','sparkle','heart','calendar','pin','target','book','globe','cloud','brain','sync','mute','device','plugin','database','timeline'];
+document.getElementById('catalog').innerHTML=names.map((name)=>`<article>${ZootIcons.html(name)}<code>${name}</code></article>`).join('');
+</script></body></html>

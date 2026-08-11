@@ -1,0 +1,9 @@
+logs/
+venv/
+__pycache__/
+bootstrap_token.txt
+cookies.txt
+server.log
+server_err.log
+*.log
+session_token.txt

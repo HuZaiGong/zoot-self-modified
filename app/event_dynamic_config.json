@@ -1,0 +1,18 @@
+{
+  "enabled": true,
+  "interval": 3600,
+  "max_per_day": 5,
+  "max_operators_per_event": 2,
+  "topic_pool": [
+    "工作",
+    "训练",
+    "闲聊",
+    "节日",
+    "战术讨论",
+    "医疗",
+    "源石技艺",
+    "后勤"
+  ],
+  "temperature": 0.8,
+  "max_tokens": 800
+}

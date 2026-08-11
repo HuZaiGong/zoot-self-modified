@@ -1,0 +1,399 @@
+{
+    "schema_version":  1,
+    "generated_at":  1786028327,
+    "reviewed_at":  1786028591,
+    "characters":  {
+                       "yvonne":  {
+                                      "character_id":  "yvonne",
+                                      "variants":  [
+                                                       {
+                                                           "file":  "yvonne.webp",
+                                                           "primary":  true,
+                                                           "sha256":  "00616ffcb29ee6703bf550c1fcadfcb25224e5897718891a67c592a1f7e3c722",
+                                                           "width":  256,
+                                                           "height":  256
+                                                       }
+                                                   ],
+                                      "source_status":  "packaged",
+                                      "review_status":  "reviewed"
+                                  },
+                       "ember":  {
+                                     "character_id":  "ember",
+                                     "variants":  [
+                                                      {
+                                                          "file":  "ember.webp",
+                                                          "primary":  true,
+                                                          "sha256":  "7c09e5ca228828de9b255b325455d6204a65aba66eedc50d120e290f7ffd8f85",
+                                                          "width":  256,
+                                                          "height":  256
+                                                      }
+                                                  ],
+                                     "source_status":  "packaged",
+                                     "review_status":  "reviewed"
+                                 },
+                       "perlica":  {
+                                       "character_id":  "perlica",
+                                       "variants":  [
+                                                        {
+                                                            "file":  "perlica.webp",
+                                                            "primary":  true,
+                                                            "sha256":  "3953f435d2c2dc88b6b481c6a0e3a5ff8f3a47a98c023ca6ce2b2a15d12bcd89",
+                                                            "width":  256,
+                                                            "height":  256
+                                                        }
+                                                    ],
+                                       "source_status":  "packaged",
+                                       "review_status":  "reviewed"
+                                   },
+                       "last_rite":  {
+                                         "character_id":  "last_rite",
+                                         "variants":  [
+                                                          {
+                                                              "file":  "last_rite.webp",
+                                                              "primary":  true,
+                                                              "sha256":  "06b43a34ac39f1d822821f6a6130712e2a37caa26780dbc23fa2fa3760977cd4",
+                                                              "width":  256,
+                                                              "height":  256
+                                                          }
+                                                      ],
+                                         "source_status":  "packaged",
+                                         "review_status":  "reviewed"
+                                     },
+                       "catcher":  {
+                                       "character_id":  "catcher",
+                                       "variants":  [
+                                                        {
+                                                            "file":  "catcher.webp",
+                                                            "primary":  true,
+                                                            "sha256":  "be4ee04413cf2d40c08e08252a80f1d7fc895fae203861f0d69cb35477c067fe",
+                                                            "width":  256,
+                                                            "height":  256
+                                                        }
+                                                    ],
+                                       "source_status":  "packaged",
+                                       "review_status":  "reviewed"
+                                   },
+                       "camille":  {
+                                       "character_id":  "camille",
+                                       "variants":  [
+                                                        {
+                                                            "file":  "camille.webp",
+                                                            "primary":  true,
+                                                            "sha256":  "b522761c38a64fdf2b622283bba362167abbcbbc1b2c90db6dcd50f9d507d3ba",
+                                                            "width":  256,
+                                                            "height":  256
+                                                        }
+                                                    ],
+                                       "source_status":  "packaged",
+                                       "review_status":  "reviewed"
+                                   },
+                       "estella":  {
+                                       "character_id":  "estella",
+                                       "variants":  [
+                                                        {
+                                                            "file":  "estella.webp",
+                                                            "primary":  true,
+                                                            "sha256":  "7376dae586e22ba3661423974be9295f248742457cb5e4b0f365af2226ec8323",
+                                                            "width":  256,
+                                                            "height":  256
+                                                        }
+                                                    ],
+                                       "source_status":  "packaged",
+                                       "review_status":  "reviewed"
+                                   },
+                       "da_pan":  {
+                                      "character_id":  "da_pan",
+                                      "variants":  [
+                                                       {
+                                                           "file":  "da_pan.webp",
+                                                           "primary":  true,
+                                                           "sha256":  "addd6e47f42c3403153d526e2ba6bca0bdfacfe4f6519081c844db22e5ef77b4",
+                                                           "width":  256,
+                                                           "height":  256
+                                                       }
+                                                   ],
+                                      "source_status":  "packaged",
+                                      "review_status":  "reviewed"
+                                  },
+                       "antal":  {
+                                     "character_id":  "antal",
+                                     "variants":  [
+                                                      {
+                                                          "file":  "antal.webp",
+                                                          "primary":  true,
+                                                          "sha256":  "75e6a3b77476d75691df8b9f85e4f2f6aec95b2edb44d48b2d620fcb844eadbc",
+                                                          "width":  256,
+                                                          "height":  256
+                                                      }
+                                                  ],
+                                     "source_status":  "packaged",
+                                     "review_status":  "reviewed"
+                                 },
+                       "zhuang_fangyi":  {
+                                             "character_id":  "zhuang_fangyi",
+                                             "variants":  [
+                                                              {
+                                                                  "file":  "zhuang_fangyi.webp",
+                                                                  "primary":  true,
+                                                                  "sha256":  "529b9410653de32d51d77c2bbbb01c6777a5c951d017c50f7a2e40c7de606146",
+                                                                  "width":  256,
+                                                                  "height":  256
+                                                              }
+                                                          ],
+                                             "source_status":  "packaged",
+                                             "review_status":  "reviewed"
+                                         },
+                       "arclight":  {
+                                        "character_id":  "arclight",
+                                        "variants":  [
+                                                         {
+                                                             "file":  "arclight.webp",
+                                                             "primary":  true,
+                                                             "sha256":  "c8c95d02085056e8ba355a414308f4bac3401de91c93591b8dd307d1f24856b1",
+                                                             "width":  256,
+                                                             "height":  256
+                                                         }
+                                                     ],
+                                        "source_status":  "packaged",
+                                        "review_status":  "reviewed"
+                                    },
+                       "mifu":  {
+                                    "character_id":  "mifu",
+                                    "variants":  [
+                                                     {
+                                                         "file":  "mifu.webp",
+                                                         "primary":  true,
+                                                         "sha256":  "da2f0c56a38fd373c1342d3e76b3ee34424e752dce3c277caa9d544d398f4ceb",
+                                                         "width":  256,
+                                                         "height":  256
+                                                     }
+                                                 ],
+                                    "source_status":  "packaged",
+                                    "review_status":  "reviewed"
+                                },
+                       "snowshine":  {
+                                         "character_id":  "snowshine",
+                                         "variants":  [
+                                                          {
+                                                              "file":  "snowshine.webp",
+                                                              "primary":  true,
+                                                              "sha256":  "07cff6bc956857e30cc9f25729b2c95d2338dbb4ce008cb91665c91a42c694bb",
+                                                              "width":  256,
+                                                              "height":  256
+                                                          }
+                                                      ],
+                                         "source_status":  "packaged",
+                                         "review_status":  "reviewed"
+                                     },
+                       "tangtang":  {
+                                        "character_id":  "tangtang",
+                                        "variants":  [
+                                                         {
+                                                             "file":  "tangtang.webp",
+                                                             "primary":  true,
+                                                             "sha256":  "f9d328d26da3bab2c7ee82b49eff2ebb02adaff3d3c5b1fac784195836d39d82",
+                                                             "width":  256,
+                                                             "height":  256
+                                                         }
+                                                     ],
+                                        "source_status":  "packaged",
+                                        "review_status":  "reviewed"
+                                    },
+                       "gilberta":  {
+                                        "character_id":  "gilberta",
+                                        "variants":  [
+                                                         {
+                                                             "file":  "gilberta.webp",
+                                                             "primary":  true,
+                                                             "sha256":  "ee5570b247f8d91ad03d65e302b102b31526d6a7f9b26187a49caf0a1f00a168",
+                                                             "width":  256,
+                                                             "height":  256
+                                                         }
+                                                     ],
+                                        "source_status":  "packaged",
+                                        "review_status":  "reviewed"
+                                    },
+                       "rossi":  {
+                                     "character_id":  "rossi",
+                                     "variants":  [
+                                                      {
+                                                          "file":  "rossi.webp",
+                                                          "primary":  true,
+                                                          "sha256":  "0398ecd8000d48d9467a3d215bfcc4603e67fc886b1f64560881beaaa6688d39",
+                                                          "width":  256,
+                                                          "height":  256
+                                                      }
+                                                  ],
+                                     "source_status":  "packaged",
+                                     "review_status":  "reviewed"
+                                 },
+                       "wulfgard":  {
+                                        "character_id":  "wulfgard",
+                                        "variants":  [
+                                                         {
+                                                             "file":  "wulfgard.webp",
+                                                             "primary":  true,
+                                                             "sha256":  "738655a03ad7feb80978bcf8bd86c4a24d0cfc5b88073583bdbb6e3ab1a54d46",
+                                                             "width":  256,
+                                                             "height":  256
+                                                         }
+                                                     ],
+                                        "source_status":  "packaged",
+                                        "review_status":  "reviewed"
+                                    },
+                       "akekuri":  {
+                                       "character_id":  "akekuri",
+                                       "variants":  [
+                                                        {
+                                                            "file":  "akekuri.webp",
+                                                            "primary":  true,
+                                                            "sha256":  "ba2264bdc2a45c21893d55c4b45ebd3661df2ea9972bf72772a36f6efd45b8b5",
+                                                            "width":  256,
+                                                            "height":  256
+                                                        }
+                                                    ],
+                                       "source_status":  "packaged",
+                                       "review_status":  "reviewed"
+                                   },
+                       "ardelia":  {
+                                       "character_id":  "ardelia",
+                                       "variants":  [
+                                                        {
+                                                            "file":  "ardelia.webp",
+                                                            "primary":  true,
+                                                            "sha256":  "c4421300147c077e19b5e8e941fdd6a826ad8253e489ce8a73d89491169f70a0",
+                                                            "width":  256,
+                                                            "height":  256
+                                                        }
+                                                    ],
+                                       "source_status":  "packaged",
+                                       "review_status":  "reviewed"
+                                   },
+                       "avywenna":  {
+                                        "character_id":  "avywenna",
+                                        "variants":  [
+                                                         {
+                                                             "file":  "avywenna.webp",
+                                                             "primary":  true,
+                                                             "sha256":  "8b9948a673eaba00f0560584af69892e9af1e92532bfe7960406cce1e7ec1d10",
+                                                             "width":  256,
+                                                             "height":  256
+                                                         }
+                                                     ],
+                                        "source_status":  "packaged",
+                                        "review_status":  "reviewed"
+                                    },
+                       "laevatain":  {
+                                         "character_id":  "laevatain",
+                                         "variants":  [
+                                                          {
+                                                              "file":  "laevatain.webp",
+                                                              "primary":  true,
+                                                              "sha256":  "645eddcb742915397640465765472f04eff5857d58af2ffae86b885aa5fef744",
+                                                              "width":  256,
+                                                              "height":  256
+                                                          }
+                                                      ],
+                                         "source_status":  "packaged",
+                                         "review_status":  "reviewed"
+                                     },
+                       "fluorite":  {
+                                        "character_id":  "fluorite",
+                                        "variants":  [
+                                                         {
+                                                             "file":  "fluorite.webp",
+                                                             "primary":  true,
+                                                             "sha256":  "293dd8541dc33bb052d36e5b581b961c86c05ebe15e13a5f54b6e6b29e50088b",
+                                                             "width":  256,
+                                                             "height":  256
+                                                         }
+                                                     ],
+                                        "source_status":  "packaged",
+                                        "review_status":  "reviewed"
+                                    },
+                       "arcane":  {
+                                      "character_id":  "arcane",
+                                      "variants":  [
+                                                       {
+                                                           "file":  "arcane.webp",
+                                                           "primary":  true,
+                                                           "sha256":  "8b49381950a34cac2c5e9ead54868063481bb05c461202268fd8100d4e6b49ad",
+                                                           "width":  256,
+                                                           "height":  256
+                                                       }
+                                                   ],
+                                      "source_status":  "packaged",
+                                      "review_status":  "reviewed"
+                                  },
+                       "xaihi":  {
+                                     "character_id":  "xaihi",
+                                     "variants":  [
+                                                      {
+                                                          "file":  "xaihi.webp",
+                                                          "primary":  true,
+                                                          "sha256":  "aa192f80b453084ed5cf1df56254f4decf45b5f39c2007855dba1faf32d201bf",
+                                                          "width":  256,
+                                                          "height":  256
+                                                      }
+                                                  ],
+                                     "source_status":  "packaged",
+                                     "review_status":  "reviewed"
+                                 },
+                       "alesh":  {
+                                     "character_id":  "alesh",
+                                     "variants":  [
+                                                      {
+                                                          "file":  "alesh.webp",
+                                                          "primary":  true,
+                                                          "sha256":  "4ce119e7db972597572f529e191d828657749ce1c842fbfa3343f193b24dac1a",
+                                                          "width":  256,
+                                                          "height":  256
+                                                      }
+                                                  ],
+                                     "source_status":  "packaged",
+                                     "review_status":  "reviewed"
+                                 },
+                       "chen_qianyu":  {
+                                           "character_id":  "chen_qianyu",
+                                           "variants":  [
+                                                            {
+                                                                "file":  "chen_qianyu.webp",
+                                                                "primary":  true,
+                                                                "sha256":  "bc9e4d3125720ab703ca887492afaf92e739baacc8b0f71857783e4625d9a880",
+                                                                "width":  256,
+                                                                "height":  256
+                                                            }
+                                                        ],
+                                           "source_status":  "packaged",
+                                           "review_status":  "reviewed"
+                                       },
+                       "pogranichnik":  {
+                                            "character_id":  "pogranichnik",
+                                            "variants":  [
+                                                             {
+                                                                 "file":  "pogranichnik.webp",
+                                                                 "primary":  true,
+                                                                 "sha256":  "86ccfa9c4f688be4673e096fd06969e1789784a6c06bcd8ba7e5629c573a8c4d",
+                                                                 "width":  256,
+                                                                 "height":  256
+                                                             }
+                                                         ],
+                                            "source_status":  "packaged",
+                                            "review_status":  "reviewed"
+                                        },
+                       "lifeng":  {
+                                      "character_id":  "lifeng",
+                                      "variants":  [
+                                                       {
+                                                           "file":  "lifeng.webp",
+                                                           "primary":  true,
+                                                           "sha256":  "edb477a06b258a3123a62e33a4727f3597940a70dd489ae88406c83211fc14fb",
+                                                           "width":  256,
+                                                           "height":  256
+                                                       }
+                                                   ],
+                                      "source_status":  "packaged",
+                                      "review_status":  "reviewed"
+                                  }
+                   }
+}

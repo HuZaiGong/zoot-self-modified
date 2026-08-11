@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>正在启动</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            background-color: #0a0c10;
+        }
+        .splash-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            z-index: 1;
+        }
+        .splash-bg {
+            background-image: url('file:///android_asset/splash_backgrounds/splash_mobile.jpg');
+        }
+        @media (min-width: 768px) {
+            .splash-bg {
+                background-image: url('file:///android_asset/splash_backgrounds/splash_slab.jpg');
+            }
+        }
+        .load-area {
+            position: fixed;
+            bottom: 25%;
+            left: 0;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            z-index: 2;
+            pointer-events: none;
+        }
+        .splash-text {
+            font-family: 'Segoe UI', 'Inter', sans-serif;
+            font-size: 16px;
+            color: #fedc00;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .line-wrapper {
+            width: 100%;
+            height: 3px;
+            position: relative;
+            overflow: visible;
+        }
+        .dynamic-line {
+            position: absolute;
+            top: 0;
+            height: 100%;
+            background-color: #fedc00;
+            box-shadow: 0 0 6px #fedc00;
+            transition: width 0.2s linear;
+        }
+        .left-line { left: 0; transform-origin: left center; }
+        .right-line { right: 0; transform-origin: right center; }
+        @media (max-width: 768px) {
+            .load-area { bottom: 20%; }
+            .splash-text { font-size: 14px; margin-bottom: 16px; }
+            .line-wrapper { height: 2.5px; }
+        }
+        .splash-fade-out {
+            animation: fadeOut 0.3s forwards;
+        }
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; visibility: hidden; }
+        }
+    </style>
+</head>
+<body>
+    <div class="splash-bg"></div>
+    <div class="load-area">
+        <div class="splash-text" id="splash-text">正在启动 0%</div>
+        <div class="line-wrapper">
+            <div class="dynamic-line left-line" id="leftLine"></div>
+            <div class="dynamic-line right-line" id="rightLine"></div>
+        </div>
+    </div>
+
+    <script>
+        const leftLine = document.getElementById('leftLine');
+        const rightLine = document.getElementById('rightLine');
+        const splashText = document.getElementById('splash-text');
+        let progress = 0;
+
+        function updateProgress(percent) {
+            percent = Math.min(100, Math.max(0, percent));
+            // 左边线条宽度 = (percent/100)*50 %
+            const leftWidth = (percent / 100) * 50;
+            const rightWidth = (percent / 100) * 50;
+            leftLine.style.width = leftWidth + '%';
+            rightLine.style.width = rightWidth + '%';
+            splashText.innerText = `正在启动 ${Math.round(percent)}%`;
+        }
+
+        async function fetchProgress() {
+            try {
+                const res = await fetch('/api/startup_progress');
+                if (res.ok) {
+                    const data = await res.json();
+                    if (data.progress !== undefined) {
+                        progress = data.progress;
+                        updateProgress(progress);
+                        if (progress >= 100) {
+                            // 启动完成，停止轮询
+                            if (window.progressInterval) clearInterval(window.progressInterval);
+                        }
+                    }
+                }
+            } catch (e) {
+                // 静默失败，继续轮询
+            }
+        }
+
+        // 每秒轮询一次
+        window.progressInterval = setInterval(fetchProgress, 1000);
+        fetchProgress(); // 立即执行一次
+    </script>
+</body>
+</html>

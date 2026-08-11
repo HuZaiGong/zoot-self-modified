@@ -1,0 +1,7407 @@
+{
+  "template": {
+    "base_activeness": 1.0,
+    "curve_type": "normal//night_owl/standard/workaholic//custom",
+    "tags": [],
+    "trust": 0,
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "mood": "平静",
+    "sync_info": {}
+  },
+  "ambriel": {
+    "base_activeness": 1.0,
+    "curve_type": "night_owl",
+    "tags": [],
+    "trust": 0,
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "悠闲中",
+      "timestamp": 1778552627.9190545
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "ceobe": {
+    "base_activeness": 1.0,
+    "curve_type": "standard",
+    "tags": [],
+    "trust": 0,
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552621.702634
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "amiya": {
+    "base_activeness": 1.0,
+    "curve_type": "workaholic",
+    "tags": [],
+    "trust": 0,
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "mood": "平静",
+    "sync_info": {}
+  },
+  "angelina": {
+    "base_activeness": 1.0,
+    "curve_type": "normal",
+    "tags": [],
+    "trust": 0,
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552624.54487
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "chen": {
+    "base_activeness": 1.0,
+    "curve_type": "workaholic",
+    "tags": [],
+    "trust": 0,
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552627.797134
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "swire": {
+    "base_activeness": 1.0,
+    "curve_type": "standard",
+    "tags": [],
+    "trust": 0,
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552627.2136717
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "bagpipe": {
+    "base_activeness": 1.0,
+    "curve_type": "normal",
+    "tags": [],
+    "trust": 0,
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552622.671784
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "hoshiguma": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552607.9316392
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "akafuyu": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552610.2212214
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "firewhistle": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552609.191954
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "aciddrop": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552615.092343
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "odda": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552615.7442744
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "quercus": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "值班中",
+      "timestamp": 1778552613.718002
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "virtuosa": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552616.195565
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "perfumer": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "值班中",
+      "timestamp": 1778552613.528827
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "durin": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552614.936492
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "eyjafjalla": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552614.1076016
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "contrail": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552613.0016618
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "beanstalk": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552612.237737
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "vendela": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "值班中",
+      "timestamp": 1778552612.5342438
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "minimalist": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552616.567033
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "scene": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552620.723941
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "skadi": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552616.9753008
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "ninecoloreddeer": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552620.6928425
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "grain_buds": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552619.9118156
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "nightingale": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "值班中",
+      "timestamp": 1778552620.6443286
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "april": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552617.4572906
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "harold": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "值班中",
+      "timestamp": 1778552618.9426963
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "firewatch": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552617.847036
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "chiave": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552620.9582746
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "poncirus": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552620.9873257
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "outcast": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552620.8475916
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "leizi": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552621.0369165
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "greyy": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552620.9088497
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "blue_poison": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552621.0969183
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "liskarm": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552621.206613
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "la_pluma": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552621.1745896
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "necrass": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552621.2689168
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "lessing": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552621.1105618
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "miss_christine": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552621.2383187
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "valarqvin": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552621.3182652
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "ashlock": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552621.1240716
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "saileach": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552621.2830327
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "brigid": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552621.363591
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "caper": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552621.3771677
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "tuye": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "值班中",
+      "timestamp": 1778552621.4241388
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "shining": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "值班中",
+      "timestamp": 1778552621.4869204
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "confess-47": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552621.4096344
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "courier": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552621.532921
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "lucilla": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552621.4381576
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "jessica": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552621.5194004
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "waai_fu": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552621.6292093
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "glaucus": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552621.5813296
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "sand_reckoner": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552621.472862
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "thrm-ex": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552621.5943775
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "mizuki": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552621.5464346
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "lava": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552621.641795
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "nowell": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "值班中",
+      "timestamp": 1778552621.6896083
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "verdant": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552621.7324915
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "stainless": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552621.6547828
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "myrtle": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552621.7676864
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "ansel": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "值班中",
+      "timestamp": 1778552621.7171686
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "stormeye": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552621.7450223
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "noir_corne": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552621.9214568
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "misery": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552621.855012
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "laios": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552621.8420022
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "proviso": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552621.8690884
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "mint": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552621.8286283
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "ash": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552621.9625864
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "snow_hunter": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552622.0062656
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "yun_qingping": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552621.9495766
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "mudrock": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552621.9360063
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "matsukiri": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552621.9917386
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "cuora": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552622.057524
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "dobermann": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552622.071899
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "heidi": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552622.034892
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "ines": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552622.0203063
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "papyrus": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552622.0844514
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "exusiai": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552621.97516
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "santalla": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552622.1111243
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "windscoot": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552622.0975296
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "ptilopsis": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "值班中",
+      "timestamp": 1778552622.2625945
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "titi": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552622.1550827
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "castle-3": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552622.2341309
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "warmy": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552622.2063475
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "totter": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552622.1682336
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "typhon": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552622.1933496
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "dur-nar": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552622.2490504
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "ulpianus": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552622.2195435
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "toddifons": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552622.1807828
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "vulpisfoglia": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552622.352695
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "yu": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552622.3381703
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "catherine": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552622.3806827
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "archetto": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552622.2752657
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "skybox": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552622.3261695
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "saria": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552622.288264
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "hibiscus": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "值班中",
+      "timestamp": 1778552622.4635444
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "phantom": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552622.4500506
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "czerny": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552622.4067166
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "asbestos": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552622.420737
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "blacknight": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552622.3932076
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "ayerscarpe": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552622.3677237
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "spot": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552622.5379534
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "terra_research_commission": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552622.5249426
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "saga": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552622.49978
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "breeze": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "值班中",
+      "timestamp": 1778552622.5123596
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "touch": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "值班中",
+      "timestamp": 1778552622.6040015
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "blitz": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552622.5505085
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "catapult": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552622.5909662
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "cнегyрочка": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552622.617553
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "tippi": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552622.6582248
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "whislash": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552622.6446855
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "bellone": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552622.632103
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "horn": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552622.7274601
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "qiubai": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552622.7137206
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "civilight_eterna": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552622.7406983
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "gavial": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "值班中",
+      "timestamp": 1778552622.7547114
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "cardigan": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552622.7667646
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "suzuran": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552622.8490033
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "роса": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552622.823016
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "mantra": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552622.8354738
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "blaze": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552622.8998106
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "hoederer": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552622.78032
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "mr_nothing": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552622.912811
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "lin": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552623.0228446
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "nearl": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552622.9621553
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "rangers": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552622.9253297
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "shu": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552622.885177
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "lancet-2": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "值班中",
+      "timestamp": 1778552623.0359159
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "wind_chimes": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552623.0504794
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "executor": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552623.0098321
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "click": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552623.0634878
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "windflit": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552623.1350818
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "hadiya": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552623.0765226
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "mountain": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552623.1486032
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "bassline": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552623.161117
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "sussurro": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "值班中",
+      "timestamp": 1778552623.1175697
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "podenco": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552623.1937869
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "viviana": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552623.2728739
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "ju": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552623.2075207
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "lappland": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552623.2422419
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "silverash": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552623.3224294
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "carnelian": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552623.286922
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "beeswax": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552623.3807693
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "mlynar": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552623.3349464
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "skyfire": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552623.3952792
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "lumen": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "值班中",
+      "timestamp": 1778552623.3686314
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "kroos": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552623.4087958
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "ifrit": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552623.4586444
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "roberta": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552623.4444916
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "franka": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552623.47221
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "gladiia": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552623.523828
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "tachanka": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552623.5398512
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "hellagur": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552623.5531666
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "hung": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552623.5689442
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "platinum": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552623.6173642
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "jade_silver": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552623.7082639
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "almond": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552623.662046
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "lemuen": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552623.6485453
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "nasti": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552623.6937866
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "jieyun": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552623.7408907
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "wanqing": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552623.7879226
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "justice_knight": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552623.8024921
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "ceylon": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "值班中",
+      "timestamp": 1778552623.8283007
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "chongyue": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552623.8156593
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "vigna": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552623.8427875
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "ray": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552623.9098678
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "crownslayer": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778545423.8439438
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "aak": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "值班中",
+      "timestamp": 1778552623.926271
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "morgan": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552623.9541802
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "leonhardt": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552623.9835274
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "entelechia": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552623.941653
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "mostima": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552623.9704723
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "jackie": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552624.031426
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "bubble": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552624.017884
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "estelle": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552624.0792332
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "dorothy": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552624.093131
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "arene": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552624.0666566
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "magallan": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778545424.1441712
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "lunacub": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552624.1430013
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "cement": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552624.1560743
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "feater": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552624.1879687
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "yahata_umiri": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552624.2807379
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "mechanist": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552624.238254
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "senshi": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552624.2010596
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "irene": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552624.3089228
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "frostleaf": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552624.3369586
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "lee": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552624.295408
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "pramanix": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552624.3229702
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "raidian": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552624.3903964
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "antor": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "值班中",
+      "timestamp": 1778552624.4038336
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "enforcer": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552624.4458306
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "веточки": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552624.4308116
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "dusk": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552624.4162874
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "hoolheyak": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552624.5006068
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "friston-3": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552624.5142403
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "nian": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552624.6103797
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "aosta": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552624.5720224
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "astgenne": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552624.5587137
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "misumi_uika": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552624.622891
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "kestrel": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552624.5288048
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "diamante": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552624.6708393
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "beehunter": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552624.685363
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "humus": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552624.6573226
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "aroma": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552624.6993885
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "pepe": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552624.715913
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "yūtenji_nyamu": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778545424.716965
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "frost": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552624.7667825
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "erato": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552624.7823124
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "matterhorn": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552624.813525
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "insider": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552624.8924031
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "penance": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552624.8400016
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "eunectes": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "工作中",
+      "timestamp": 1778552624.8264947
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "bryophyta": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552624.8540182
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "whitesmith": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552624.9064105
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "surtr": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552624.9383636
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "ela": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552624.950876
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "sora": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552624.9830954
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "skadi_the_corrupting_heart": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552624.995677
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "muelsyse": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552625.0097725
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "steward": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552625.0755365
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "alanna": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552625.1025217
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "passenger": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552625.024253
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "thorns": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778545425.0200007
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "andreana": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552625.0884676
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "highmore": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552625.1486526
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "midnight": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552625.1351078
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "позёмка": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552625.1205778
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "bison": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552625.1631756
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "cairn": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552625.201124
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "ascalon": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552625.2152276
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "ethan": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552625.2279203
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "mitm": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552625.2643435
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "marcille": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552625.3382869
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "rose_salt": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "值班中",
+      "timestamp": 1778552625.2906024
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "sharp": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552625.2770524
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "manticore": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552625.3243077
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "purestream": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "值班中",
+      "timestamp": 1778552625.3518398
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "зима": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552625.3781197
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "silence": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "值班中",
+      "timestamp": 1778552625.4047685
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "shaw": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552625.392782
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "pudding": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "工作中",
+      "timestamp": 1778552625.4623098
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "adnachiel": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552625.3653986
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "gnosis": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552625.4488106
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "pallas": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552625.476009
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "narantuya": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552625.490267
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "may": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552625.5042894
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "flint": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552625.5321012
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "goldenglow": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552625.572729
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "reed": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552625.5449507
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "medic": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "值班中",
+      "timestamp": 1778552625.5174913
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "conviction": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552625.6017525
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "coldshot": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552625.5585148
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "underflow": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778545425.5633492
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "indra": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552625.635207
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "dagda": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552625.6477997
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "sideroca": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552625.6764145
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "orchid": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552625.691786
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "fiammetta": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552625.6643133
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "mon3tr": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552625.7189558
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "degenbrecher": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552625.7053852
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "blemishine": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552625.771766
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "qanipalaat": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552625.7852976
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "scout": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552625.758416
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "doc": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "值班中",
+      "timestamp": 1778552625.7988732
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "shamare": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552625.8144724
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "scavenger": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552625.843647
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "nightmare": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "值班中",
+      "timestamp": 1778552625.830056
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "vigil": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552625.884271
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "kafka": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552625.8696833
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "tsukinogi": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552625.8561525
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "tomimi": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552625.9574711
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "matoimaru": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552625.929172
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "siege": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552625.8988314
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "meteor": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552625.9429278
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "nymph": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552625.9706163
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "honeyberry": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "值班中",
+      "timestamp": 1778552625.9831834
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "ace": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552626.0249293
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "kazemaru": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552626.0525715
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "harmonie": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552625.9977596
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "shirayuki": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552626.012363
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "delphine": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552626.0652258
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "greythroat": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552626.0379288
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "wild_mane": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552626.1169176
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "popukar": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552626.0803025
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "wulfenite": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552626.131074
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "grani": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552626.1754699
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "iris": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552626.1465805
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "wakaba_mutsumi": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552626.2035854
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "togawa_sakiko": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552626.2184675
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "figurino": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552626.160096
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "iana": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552626.1905782
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "taraxacum": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "值班中",
+      "timestamp": 1778552626.2329884
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "melantha": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552626.2630227
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "priestess": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552626.2761014
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "corroserum": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552626.2906303
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "gracebearer": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552626.2485085
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "flametail": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552626.3048081
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "deepcolor": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552626.3183446
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "sesa": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552626.331893
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "rope": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552626.3715916
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "cantabile": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552626.3464622
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "myrrh": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "值班中",
+      "timestamp": 1778552626.388134
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "zuo_le": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552626.3600104
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "mousse": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552626.4017053
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "utage": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552626.4142764
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "gravel": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552626.4289193
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "jaye": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552626.4885406
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "fartooth": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552626.5021317
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "elysium": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552626.4745228
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "wang": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552626.461444
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "bibeak": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552626.5291252
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "haze": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552626.5155532
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "ebenholz": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552626.5426838
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "гум": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552626.5562077
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "ripresa": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552626.5833719
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "projekt_red": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552626.6331477
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "warfarin": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "值班中",
+      "timestamp": 1778552626.6187081
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "surrender_arms": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552626.5702798
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "heavyrain": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552626.645717
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "folinic": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "值班中",
+      "timestamp": 1778552626.6592467
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "vermeil": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552626.6728113
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "astesia": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552626.6878614
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "истина": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552626.703527
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "yato": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552626.748605
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "rockrock": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552626.716562
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "plume": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552626.7330778
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "chilchuck": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552626.7807808
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "mayer": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552626.7631247
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "tin_man": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552626.8190453
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "quartz": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552626.832564
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "luo_xiaohei": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552626.8461194
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "u_official": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552626.8727946
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "fang": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552626.8591893
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "varkáris": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552626.8864682
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "kichisei": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552626.915614
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "earthspirit": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552626.9000359
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "pinecone": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552626.974663
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "beagle": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552626.9595695
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "vanilla": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552626.9928648
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "surfer": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552627.0339634
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "pith": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552627.0073774
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "absinthe": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552627.020388
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "provence": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552627.060286
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "tecno": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552627.047059
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "shalem": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552627.074339
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "akkord": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552627.1019218
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "12f": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552627.0883496
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "philae": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552627.1144304
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "indigo": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552627.1547492
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "whisperain": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "值班中",
+      "timestamp": 1778552627.1274896
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "mulberry": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "值班中",
+      "timestamp": 1778552627.1840465
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "chestnut": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "值班中",
+      "timestamp": 1778552627.1407309
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "wisadel": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552627.168273
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "logos": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552627.2282033
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "kirara": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552627.2001317
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "broca": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552627.2447293
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "robin": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552627.260249
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "rosmontis": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552627.3044462
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "tequila": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552627.2878969
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "vulcan": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552627.2748978
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "puzzle": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552627.320998
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "kjera": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552627.34806
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "bena": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552627.3815575
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "ling": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552627.3345165
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "schwarz": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552627.4131417
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "haruka": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552627.4916115
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "paprika": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "值班中",
+      "timestamp": 1778552627.4442844
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "weedy": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552627.553687
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "meteorite": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552627.6005068
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "xingzhu": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552627.613077
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "phonor-0": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552627.6477096
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "gitano": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552627.681753
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "flamebringer": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552627.7164352
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "spuria": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552627.7454839
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "лето": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552627.78161
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "croissant": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552627.7679923
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "cliffheart": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552627.816676
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "melanite": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552627.8639593
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "lutonada": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552627.8779879
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "cutter": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552627.8359241
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "aurora": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552627.90602
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "snowsant": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552627.850451
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "sankta_miksaparato": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552627.9335754
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "fuze": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552627.9480908
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "texas": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552627.8925118
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "savage": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "空闲中",
+      "timestamp": 1778552627.9756365
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  },
+  "bobbing": {
+    "hidden_attrs": {
+      "respect": 0,
+      "intimacy": 0,
+      "reliability": 0,
+      "shared_values": 0
+    },
+    "trust_history": [],
+    "cooldown_until": 0,
+    "last_trigger_time": 0,
+    "trust": 0,
+    "mood": "平静",
+    "sync_info": {
+      "text": "值班中",
+      "timestamp": 1778552627.9625988
+    },
+    "auto_update_call": false,
+    "last_reply_time": 0
+  }
+}

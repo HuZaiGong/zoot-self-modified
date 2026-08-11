@@ -1,0 +1,976 @@
+{
+  "schema_version": 1,
+  "generated_at": 1786068336,
+  "reviewed_at": 1786068336,
+  "characters": {
+    "d_d_d": {
+      "character_id": "d_d_d",
+      "variants": [
+        {
+          "file": "d_d_d.webp",
+          "primary": true,
+          "sha256": "60a72be8e054c9708b872c5df358bae4782858bd5c25cc9648c9faa25d7fe976",
+          "width": 256,
+          "height": 256
+        }
+      ],
+      "source_status": "packaged",
+      "review_status": "reviewed"
+    },
+    "emmengarde": {
+      "character_id": "emmengarde",
+      "variants": [
+        {
+          "file": "emmengarde.webp",
+          "primary": true,
+          "sha256": "eaa4a2eecae0ee19711d6b9a479fda16b0bdc1ebcab8d2f27b46533b2735d884",
+          "width": 256,
+          "height": 256
+        }
+      ],
+      "source_status": "packaged",
+      "review_status": "reviewed"
+    },
+    "vanya": {
+      "character_id": "vanya",
+      "variants": [
+        {
+          "file": "vanya.webp",
+          "primary": true,
+          "sha256": "075e8ece95dbea3d12685a54d43122b5beab871f0466232f60b5863eacdaefd2",
+          "width": 256,
+          "height": 256
+        }
+      ],
+      "source_status": "packaged",
+      "review_status": "reviewed"
+    },
+    "wululu": {
+      "character_id": "wululu",
+      "variants": [
+        {
+          "file": "wululu.webp",
+          "primary": true,
+          "sha256": "d95551c39e7213a867bc9d45cab23f19d2e42bc8fedd2b6081f0a41d5086d56e",
+          "width": 256,
+          "height": 256
+        }
+      ],
+      "source_status": "packaged",
+      "review_status": "reviewed"
+    },
+    "nine": {
+      "character_id": "nine",
+      "variants": [
+        {
+          "file": "nine.webp",
+          "primary": true,
+          "sha256": "a559201aeaef696e6138c813ebea8b61aff0f49aa22f9ba779c273c18c8df34a",
+          "width": 256,
+          "height": 256
+        }
+      ],
+      "source_status": "packaged",
+      "review_status": "reviewed"
+    },
+    "adams_shwayya": {
+      "character_id": "adams_shwayya",
+      "variants": [],
+      "source_status": "placeholder",
+      "review_status": "reviewed"
+    },
+    "evangelista_xi": {
+      "character_id": "evangelista_xi",
+      "variants": [
+        {
+          "file": "evangelista_xi.webp",
+          "primary": true,
+          "sha256": "cabee1ff462d81e0564c823814d6183f34194dd4079cbb6fa7b2320fb8e3123f",
+          "width": 256,
+          "height": 256
+        }
+      ],
+      "source_status": "packaged",
+      "review_status": "reviewed"
+    },
+    "kristen": {
+      "character_id": "kristen",
+      "variants": [
+        {
+          "file": "kristen.webp",
+          "primary": true,
+          "sha256": "792648da88b47fa37e9bef417405428c97b1557b2dcae6e98773802f698c929c",
+          "width": 256,
+          "height": 256
+        }
+      ],
+      "source_status": "packaged",
+      "review_status": "reviewed"
+    },
+    "kroki_stone": {
+      "character_id": "kroki_stone",
+      "variants": [
+        {
+          "file": "kroki_stone.webp",
+          "primary": true,
+          "sha256": "dc735e3e71371d702b93b9ac54d607d4f47242f12e6da004cbc2090d16035219",
+          "width": 256,
+          "height": 256
+        }
+      ],
+      "source_status": "packaged",
+      "review_status": "reviewed"
+    },
+    "cliff": {
+      "character_id": "cliff",
+      "variants": [
+        {
+          "file": "cliff.webp",
+          "primary": true,
+          "sha256": "844abb271cccc223f5e026318ecb927aed5e5762d4a6ecffe11d26785841bc4a",
+          "width": 256,
+          "height": 256
+        }
+      ],
+      "source_status": "packaged",
+      "review_status": "reviewed"
+    },
+    "kachi_shuguang": {
+      "character_id": "kachi_shuguang",
+      "variants": [
+        {
+          "file": "kachi_shuguang.webp",
+          "primary": true,
+          "sha256": "66e7c2ba2a0b23520222e4edbf110d9d9923ad292bcb3ac760b35741f6c521c7",
+          "width": 256,
+          "height": 256
+        }
+      ],
+      "source_status": "packaged",
+      "review_status": "reviewed"
+    },
+    "ersula": {
+      "character_id": "ersula",
+      "variants": [
+        {
+          "file": "ersula.webp",
+          "primary": true,
+          "sha256": "581232539014f74078d85d632cef3639ea272888c37b87633a3d6c2750fb92ff",
+          "width": 256,
+          "height": 256
+        }
+      ],
+      "source_status": "packaged",
+      "review_status": "reviewed"
+    },
+    "transformers": {
+      "character_id": "transformers",
+      "variants": [
+        {
+          "file": "transformers.webp",
+          "primary": true,
+          "sha256": "f198e80a78b5f6ceedb7f38bea85cb286a5cd21551c267bc2842621e43c53443",
+          "width": 256,
+          "height": 256
+        }
+      ],
+      "source_status": "packaged",
+      "review_status": "reviewed"
+    },
+    "cannot": {
+      "character_id": "cannot",
+      "variants": [
+        {
+          "file": "cannot.webp",
+          "primary": true,
+          "sha256": "d7067cbca66da55544b7c4ff1f38c1665b3b8ae1710b2839d29fe6d897f78c50",
+          "width": 256,
+          "height": 256
+        }
+      ],
+      "source_status": "packaged",
+      "review_status": "reviewed"
+    },
+    "talulah": {
+      "character_id": "talulah",
+      "variants": [
+        {
+          "file": "talulah.webp",
+          "primary": true,
+          "sha256": "66b2664fd85e4af60b2a1c54746676550667adc12c74e0069ce9becdc0a9c4ba",
+          "width": 256,
+          "height": 256
+        },
+        {
+          "file": "talulah_2.webp",
+          "primary": false,
+          "sha256": "4612f5163d20444f683580b7bc957563a1b07f9c4e324659a7497854e8f49bec",
+          "width": 256,
+          "height": 256
+        }
+      ],
+      "source_status": "packaged",
+      "review_status": "reviewed"
+    },
+    "cecilia": {
+      "character_id": "cecilia",
+      "variants": [
+        {
+          "file": "cecilia.webp",
+          "primary": true,
+          "sha256": "ffd6f33554426d0370da5dca4495cdd9736bd3a7a7aa4a36bbe82ca5fc1672e8",
+          "width": 256,
+          "height": 256
+        }
+      ],
+      "source_status": "packaged",
+      "review_status": "reviewed"
+    },
+    "dolly": {
+      "character_id": "dolly",
+      "variants": [
+        {
+          "file": "dolly.webp",
+          "primary": true,
+          "sha256": "c6e3809f109eb4e11ab939a4a020f2978e6e92ccd113299be866cedc0f740238",
+          "width": 256,
+          "height": 256
+        }
+      ],
+      "source_status": "packaged",
+      "review_status": "reviewed"
+    },
+    "big_mouth_mobu": {
+      "character_id": "big_mouth_mobu",
+      "variants": [
+        {
+          "file": "big_mouth_mobu.webp",
+          "primary": true,
+          "sha256": "865a1ca98cae335ddbc119fbdac556e77d239da3d873762f77205030d79e8560",
+          "width": 256,
+          "height": 256
+        }
+      ],
+      "source_status": "packaged",
+      "review_status": "reviewed"
+    },
+    "great_emperor": {
+      "character_id": "great_emperor",
+      "variants": [
+        {
+          "file": "great_emperor.webp",
+          "primary": true,
+          "sha256": "9febb4bf520f392eab721c93f568b9076c9eb3cc07b8177f547720ce59c907e3",
+          "width": 256,
+          "height": 256
+        }
+      ],
+      "source_status": "packaged",
+      "review_status": "reviewed"
+    },
+    "chief_priest": {
+      "character_id": "chief_priest",
+      "variants": [
+        {
+          "file": "chief_priest.webp",
+          "primary": true,
+          "sha256": "1b6a04626f078ae75a107b4da616d25ab860d7f88e49b907b861435084724bf8",
+          "width": 256,
+          "height": 256
+        }
+      ],
+      "source_status": "packaged",
+      "review_status": "reviewed"
+    },
+    "big_bob": {
+      "character_id": "big_bob",
+      "variants": [
+        {
+          "file": "big_bob.webp",
+          "primary": true,
+          "sha256": "e671f15949287c7c86f6ad7aa963210a2e8489fecd801d5e6a736d3d6170edfe",
+          "width": 256,
+          "height": 256
+        }
+      ],
+      "source_status": "packaged",
+      "review_status": "reviewed"
+    },
+    "sunvalley_liaison_officer": {
+      "character_id": "sunvalley_liaison_officer",
+      "variants": [],
+      "source_status": "placeholder",
+      "review_status": "reviewed"
+    },
+    "duke_of_wellington": {
+      "character_id": "duke_of_wellington",
+      "variants": [
+        {
+          "file": "duke_of_wellington.webp",
+          "primary": true,
+          "sha256": "afd7c87793850d707ee58ef9286783a4938fb5675a570f2e7c2262902025c93e",
+          "width": 256,
+          "height": 256
+        }
+      ],
+      "source_status": "packaged",
+      "review_status": "reviewed"
+    },
+    "nezzsalem": {
+      "character_id": "nezzsalem",
+      "variants": [
+        {
+          "file": "nezzsalem.webp",
+          "primary": true,
+          "sha256": "63cbe3ab643323ef3282f1859d421f47f01d48384eab22fcf5425fcccb70f52b",
+          "width": 256,
+          "height": 256
+        }
+      ],
+      "source_status": "packaged",
+      "review_status": "reviewed"
+    },
+    "ning_ciqiu": {
+      "character_id": "ning_ciqiu",
+      "variants": [
+        {
+          "file": "ning_ciqiu.webp",
+          "primary": true,
+          "sha256": "69562b136d4214898b1537c8cda2f4812e78c89e3cc38bee01203d07822e33e4",
+          "width": 256,
+          "height": 256
+        }
+      ],
+      "source_status": "packaged",
+      "review_status": "reviewed"
+    },
+    "andoain": {
+      "character_id": "andoain",
+      "variants": [
+        {
+          "file": "andoain.webp",
+          "primary": true,
+          "sha256": "635828ed5d4d56dd7e49fedd798bd0d7ff93db0dde7dc2b96d82010ee775a304",
+          "width": 256,
+          "height": 256
+        },
+        {
+          "file": "andoain_2.webp",
+          "primary": false,
+          "sha256": "54ea6ce572faddad1ebd39fa23ac605f77916458f20c34eeedd6bd92298eaac9",
+          "width": 256,
+          "height": 256
+        },
+        {
+          "file": "andoain_3.webp",
+          "primary": false,
+          "sha256": "4594d2e689663ef825c0bd60e07499f2fd2b007422439f380d7e0253a80a1f46",
+          "width": 256,
+          "height": 256
+        }
+      ],
+      "source_status": "packaged",
+      "review_status": "reviewed"
+    },
+    "titus": {
+      "character_id": "titus",
+      "variants": [
+        {
+          "file": "titus.webp",
+          "primary": true,
+          "sha256": "c14f8608207acdf1c2d7bde13cece2919766765593e50bc981db50d97c429456",
+          "width": 256,
+          "height": 256
+        }
+      ],
+      "source_status": "packaged",
+      "review_status": "reviewed"
+    },
+    "hilda": {
+      "character_id": "hilda",
+      "variants": [
+        {
+          "file": "hilda.webp",
+          "primary": true,
+          "sha256": "611d75d776a4a9f1c30247bca5a9874c4dcd4db9fe11f37021971a6dadc7df95",
+          "width": 256,
+          "height": 256
+        },
+        {
+          "file": "hilda_2.webp",
+          "primary": false,
+          "sha256": "685356bde3bd2ed3a4c0cb0ef49959b1acd92f5aa58ba93800930d0c98931e33",
+          "width": 256,
+          "height": 256
+        },
+        {
+          "file": "hilda_3.webp",
+          "primary": false,
+          "sha256": "e9bfcf80c33f7cdf854588815a5514e5b644f2a44cdeeb23854b0fe8d4e4c0a1",
+          "width": 256,
+          "height": 256
+        }
+      ],
+      "source_status": "packaged",
+      "review_status": "reviewed"
+    },
+    "parvis": {
+      "character_id": "parvis",
+      "variants": [
+        {
+          "file": "parvis.webp",
+          "primary": true,
+          "sha256": "360262da46d623a9c4f4b05835ec7af8354bddb06a21a5ffe5c7f6d71b212af0",
+          "width": 256,
+          "height": 256
+        }
+      ],
+      "source_status": "packaged",
+      "review_status": "reviewed"
+    },
+    "fremont": {
+      "character_id": "fremont",
+      "variants": [
+        {
+          "file": "fremont.webp",
+          "primary": true,
+          "sha256": "270ae18213d0567777e7ca1dbaf468e333ba6dca16afd6ee0d2bbe4fb098556a",
+          "width": 256,
+          "height": 256
+        },
+        {
+          "file": "fremont_2.webp",
+          "primary": false,
+          "sha256": "189bd707ac45331d7f796b7462e6185b31e1e4e3f3a5391734ae77e57231215a",
+          "width": 256,
+          "height": 256
+        }
+      ],
+      "source_status": "packaged",
+      "review_status": "reviewed"
+    },
+    "zarro": {
+      "character_id": "zarro",
+      "variants": [
+        {
+          "file": "zarro.webp",
+          "primary": true,
+          "sha256": "7052045f0e917da760ad8b537bc6af927529a3f987c8d051f3965816815a5a4b",
+          "width": 256,
+          "height": 256
+        }
+      ],
+      "source_status": "packaged",
+      "review_status": "reviewed"
+    },
+    "fumizuki": {
+      "character_id": "fumizuki",
+      "variants": [
+        {
+          "file": "fumizuki.webp",
+          "primary": true,
+          "sha256": "bca3ee42ffaa8bd6b3ace915a1177a7be7c43b4652e327ea3064732e960a8389",
+          "width": 256,
+          "height": 256
+        }
+      ],
+      "source_status": "packaged",
+      "review_status": "reviewed"
+    },
+    "ferdinand": {
+      "character_id": "ferdinand",
+      "variants": [
+        {
+          "file": "ferdinand.webp",
+          "primary": true,
+          "sha256": "7793efa343fc19bc7b16e5436f542fc00ab712732449f71bed5f6da01625cb8a",
+          "width": 256,
+          "height": 256
+        },
+        {
+          "file": "ferdinand_2.webp",
+          "primary": false,
+          "sha256": "20d98a38f7f35807f6f74681bb906660c9f570798ac31b92bdc2ccbf7783a330",
+          "width": 256,
+          "height": 256
+        }
+      ],
+      "source_status": "packaged",
+      "review_status": "reviewed"
+    },
+    "yi": {
+      "character_id": "yi",
+      "variants": [
+        {
+          "file": "yi.webp",
+          "primary": true,
+          "sha256": "86270db99e6443cf12cbea003caf09804ca7ca145d9ce78d5b9f6a7eab6b14a4",
+          "width": 256,
+          "height": 256
+        }
+      ],
+      "source_status": "packaged",
+      "review_status": "reviewed"
+    },
+    "manfred": {
+      "character_id": "manfred",
+      "variants": [
+        {
+          "file": "manfred.webp",
+          "primary": true,
+          "sha256": "925d26f8b7750a4bcfd1f6750e382d7e6b3584ef91ca5faee523adfe12d12409",
+          "width": 256,
+          "height": 256
+        }
+      ],
+      "source_status": "packaged",
+      "review_status": "reviewed"
+    },
+    "duqarael": {
+      "character_id": "duqarael",
+      "variants": [
+        {
+          "file": "duqarael.webp",
+          "primary": true,
+          "sha256": "efc75a5d1d6ee80a18e6f2d165f2d7a2c0e586695408d656a34d2d9198a10427",
+          "width": 256,
+          "height": 256
+        }
+      ],
+      "source_status": "packaged",
+      "review_status": "reviewed"
+    },
+    "du_yaoye": {
+      "character_id": "du_yaoye",
+      "variants": [
+        {
+          "file": "du_yaoye.webp",
+          "primary": true,
+          "sha256": "23dc96ee2c819170ecc39b00bfcc70d4f98f2fafb540bbf78296e64f8882d9b3",
+          "width": 256,
+          "height": 256
+        }
+      ],
+      "source_status": "packaged",
+      "review_status": "reviewed"
+    },
+    "jesselton": {
+      "character_id": "jesselton",
+      "variants": [
+        {
+          "file": "jesselton.webp",
+          "primary": true,
+          "sha256": "37ac9ce50953fb8b6f70a52dadd246a3d5b180c58b16e493219cc25d0b1b43c9",
+          "width": 256,
+          "height": 256
+        },
+        {
+          "file": "jesselton_2.webp",
+          "primary": false,
+          "sha256": "bd9bfd3d51acba088e3546dca899032a3ff82bb75ace8826fcc14a46ac138492",
+          "width": 256,
+          "height": 256
+        },
+        {
+          "file": "jesselton_3.webp",
+          "primary": false,
+          "sha256": "a307f132d4e2afdef44ac1e52db96bdd8570e780feb3e28762dc401306c3b3a6",
+          "width": 256,
+          "height": 256
+        }
+      ],
+      "source_status": "packaged",
+      "review_status": "reviewed"
+    },
+    "liang": {
+      "character_id": "liang",
+      "variants": [
+        {
+          "file": "liang.webp",
+          "primary": true,
+          "sha256": "c7293161e52edc55116f3173fb4628b7e418d962d1914ed3018e2ec07f7fc723",
+          "width": 256,
+          "height": 256
+        }
+      ],
+      "source_status": "packaged",
+      "review_status": "reviewed"
+    },
+    "liang_xun": {
+      "character_id": "liang_xun",
+      "variants": [
+        {
+          "file": "liang_xun.webp",
+          "primary": true,
+          "sha256": "a9e8fa89f99be1e987c636639e6b465e5005e4ba59efcead6fc8c58bc9c8f174",
+          "width": 256,
+          "height": 256
+        }
+      ],
+      "source_status": "packaged",
+      "review_status": "reviewed"
+    },
+    "mephisto": {
+      "character_id": "mephisto",
+      "variants": [
+        {
+          "file": "mephisto.webp",
+          "primary": true,
+          "sha256": "d027cd90ff22be90691c7d40ab164bcc76f5f3a357776ee4b785ecd9da9e5b2e",
+          "width": 256,
+          "height": 256
+        }
+      ],
+      "source_status": "packaged",
+      "review_status": "reviewed"
+    },
+    "faust": {
+      "character_id": "faust",
+      "variants": [
+        {
+          "file": "faust.webp",
+          "primary": true,
+          "sha256": "c111771b440444d5e5343bdf61bb64d781ad9432714c270729c0af7ab575db24",
+          "width": 256,
+          "height": 256
+        }
+      ],
+      "source_status": "packaged",
+      "review_status": "reviewed"
+    },
+    "patriot": {
+      "character_id": "patriot",
+      "variants": [
+        {
+          "file": "patriot.webp",
+          "primary": true,
+          "sha256": "df543226c778edf1b6c42e0bc6a52b3935c5a741668ccbeed52e6bd96805ef13",
+          "width": 256,
+          "height": 256
+        }
+      ],
+      "source_status": "packaged",
+      "review_status": "reviewed"
+    },
+    "matina": {
+      "character_id": "matina",
+      "variants": [
+        {
+          "file": "matina.webp",
+          "primary": true,
+          "sha256": "ef93cd4133bb3964ccf72c754f08756ec2015e2b25f59918e78d10624e4048c5",
+          "width": 256,
+          "height": 256
+        }
+      ],
+      "source_status": "packaged",
+      "review_status": "reviewed"
+    },
+    "greda": {
+      "character_id": "greda",
+      "variants": [
+        {
+          "file": "greda.webp",
+          "primary": true,
+          "sha256": "949f8ed9f9abc48e56fbd47b1f69b3090cc554c042a6201955d48de24bb2337b",
+          "width": 256,
+          "height": 256
+        },
+        {
+          "file": "greda_2.webp",
+          "primary": false,
+          "sha256": "0558944c7c3bc1fb0062ede652eb3b4f0092d887482ead68d50aec1645755759",
+          "width": 256,
+          "height": 256
+        }
+      ],
+      "source_status": "packaged",
+      "review_status": "reviewed"
+    },
+    "crushbone": {
+      "character_id": "crushbone",
+      "variants": [
+        {
+          "file": "crushbone.webp",
+          "primary": true,
+          "sha256": "555382812dd8f69caad761a9903c5991c87fca248cd7095aee71b15ab3425cb2",
+          "width": 256,
+          "height": 256
+        }
+      ],
+      "source_status": "packaged",
+      "review_status": "reviewed"
+    },
+    "koscic": {
+      "character_id": "koscic",
+      "variants": [
+        {
+          "file": "koscic.webp",
+          "primary": true,
+          "sha256": "2b516ed3d9f21c0a01c5ab27c6ae636080e7e5d65207e5339a2c9e591e476da7",
+          "width": 256,
+          "height": 256
+        },
+        {
+          "file": "koscic_2.webp",
+          "primary": false,
+          "sha256": "aeb20921c2204041e2682ffe349ce69f9017202920cdf61ee09512b7340aab87",
+          "width": 256,
+          "height": 256
+        }
+      ],
+      "source_status": "packaged",
+      "review_status": "reviewed"
+    },
+    "micha": {
+      "character_id": "micha",
+      "variants": [
+        {
+          "file": "micha.webp",
+          "primary": true,
+          "sha256": "69bbe5c89e4c0f02d52e87889729320bc6b3adde50e471b0b310d10dcada2f66",
+          "width": 256,
+          "height": 256
+        }
+      ],
+      "source_status": "packaged",
+      "review_status": "reviewed"
+    },
+    "ji": {
+      "character_id": "ji",
+      "variants": [
+        {
+          "file": "ji.webp",
+          "primary": true,
+          "sha256": "c02cfa932ebfb2c0d6b5c19cc273f2985990c6f0a142a17a9f7873b77a2798c0",
+          "width": 256,
+          "height": 256
+        }
+      ],
+      "source_status": "packaged",
+      "review_status": "reviewed"
+    },
+    "roy": {
+      "character_id": "roy",
+      "variants": [
+        {
+          "file": "roy.webp",
+          "primary": true,
+          "sha256": "f35855e47d2d789f180dd150cd9c632bf1a3ff94eb94fc98b861de91d133ab6b",
+          "width": 256,
+          "height": 256
+        }
+      ],
+      "source_status": "packaged",
+      "review_status": "reviewed"
+    },
+    "yechi_geen": {
+      "character_id": "yechi_geen",
+      "variants": [
+        {
+          "file": "yechi_geen.webp",
+          "primary": true,
+          "sha256": "17973c173469b321b4e3c3dff89c2aaca8b4254ec97929cd1acf0bd4073c8619",
+          "width": 256,
+          "height": 256
+        }
+      ],
+      "source_status": "packaged",
+      "review_status": "reviewed"
+    },
+    "lattatosi": {
+      "character_id": "lattatosi",
+      "variants": [
+        {
+          "file": "lattatosi.webp",
+          "primary": true,
+          "sha256": "92492b4e026483abbfd9b2c04146e34dd923cd611d064e11eb002524ff817072",
+          "width": 256,
+          "height": 256
+        }
+      ],
+      "source_status": "packaged",
+      "review_status": "reviewed"
+    },
+    "lamaelen": {
+      "character_id": "lamaelen",
+      "variants": [
+        {
+          "file": "lamaelen.webp",
+          "primary": true,
+          "sha256": "feafc7bd4835023b7ffe6edfa5b653e6168e77de93403b6b9919d36434831f90",
+          "width": 256,
+          "height": 256
+        }
+      ],
+      "source_status": "packaged",
+      "review_status": "reviewed"
+    },
+    "mandela": {
+      "character_id": "mandela",
+      "variants": [
+        {
+          "file": "mandela.webp",
+          "primary": true,
+          "sha256": "0cb4aa0c73f4daf62b83420cf403ff53d9109780d359ad2d5dda1a38f71efe33",
+          "width": 256,
+          "height": 256
+        }
+      ],
+      "source_status": "packaged",
+      "review_status": "reviewed"
+    },
+    "dikaiopolis": {
+      "character_id": "dikaiopolis",
+      "variants": [
+        {
+          "file": "dikaiopolis.webp",
+          "primary": true,
+          "sha256": "1468c5548826ace66c6129f7a1b6208ca3b36e6208959b524a45fd0b48747760",
+          "width": 256,
+          "height": 256
+        }
+      ],
+      "source_status": "packaged",
+      "review_status": "reviewed"
+    },
+    "countess_of_sicily": {
+      "character_id": "countess_of_sicily",
+      "variants": [
+        {
+          "file": "countess_of_sicily.webp",
+          "primary": true,
+          "sha256": "15b58aabf3ee98a7cd0d86327e2dbfc94ef96c700bea70897bdf7109772dc7ba",
+          "width": 256,
+          "height": 256
+        }
+      ],
+      "source_status": "packaged",
+      "review_status": "reviewed"
+    },
+    "herr_zonelun": {
+      "character_id": "herr_zonelun",
+      "variants": [
+        {
+          "file": "herr_zonelun.webp",
+          "primary": true,
+          "sha256": "7493497c8645ee44db40bb74f677c54140fedbf5cee4d5e534abd0632acb4242",
+          "width": 256,
+          "height": 256
+        }
+      ],
+      "source_status": "packaged",
+      "review_status": "reviewed"
+    },
+    "alina": {
+      "character_id": "alina",
+      "variants": [
+        {
+          "file": "alina.webp",
+          "primary": true,
+          "sha256": "ad08cb0e9cdffcc05211e048972a1327e52f70923b85073d15d1f9e366684b12",
+          "width": 256,
+          "height": 256
+        }
+      ],
+      "source_status": "packaged",
+      "review_status": "reviewed"
+    },
+    "agneil": {
+      "character_id": "agneil",
+      "variants": [
+        {
+          "file": "agneil.webp",
+          "primary": true,
+          "sha256": "0cd06c11e32cc72bd958a0e53c6377cf96235ceb08cc99df3683c36807c7aeb2",
+          "width": 256,
+          "height": 256
+        }
+      ],
+      "source_status": "packaged",
+      "review_status": "reviewed"
+    },
+    "aloise": {
+      "character_id": "aloise",
+      "variants": [
+        {
+          "file": "aloise.webp",
+          "primary": true,
+          "sha256": "9f57d8a8335a941d0b679883b10ecc47d3e7f737eea86c0c81e7b1992deb1ff9",
+          "width": 256,
+          "height": 256
+        }
+      ],
+      "source_status": "packaged",
+      "review_status": "reviewed"
+    },
+    "raelkin": {
+      "character_id": "raelkin",
+      "variants": [
+        {
+          "file": "raelkin.webp",
+          "primary": true,
+          "sha256": "a815624ebd920cfe961505c557d49a2fd66e850ab1440d64776a1c002671fc08",
+          "width": 256,
+          "height": 256
+        }
+      ],
+      "source_status": "packaged",
+      "review_status": "reviewed"
+    },
+    "red_npc": {
+      "character_id": "red_npc",
+      "variants": [],
+      "source_status": "placeholder",
+      "review_status": "reviewed"
+    },
+    "jie": {
+      "character_id": "jie",
+      "variants": [],
+      "source_status": "placeholder",
+      "review_status": "reviewed"
+    },
+    "wei_yenwu": {
+      "character_id": "wei_yenwu",
+      "variants": [
+        {
+          "file": "wei_yenwu.webp",
+          "primary": true,
+          "sha256": "3e8a893f4a0e1c70eb2db6e1f01198fb9e87fb62ae558fa1743aa314c20c60f4",
+          "width": 256,
+          "height": 256
+        }
+      ],
+      "source_status": "packaged",
+      "review_status": "reviewed"
+    },
+    "deborah_silver_coin": {
+      "character_id": "deborah_silver_coin",
+      "variants": [
+        {
+          "file": "deborah_silver_coin.webp",
+          "primary": true,
+          "sha256": "3fe7e7cad5167e95bd9716bc24e7c939a0dc6a71c937073c03f09b85584368fb",
+          "width": 256,
+          "height": 256
+        }
+      ],
+      "source_status": "packaged",
+      "review_status": "reviewed"
+    },
+    "rat_king": {
+      "character_id": "rat_king",
+      "variants": [
+        {
+          "file": "rat_king.webp",
+          "primary": true,
+          "sha256": "29669b9b5df01a3a79a9e9268e997b32aadf5589f920c534a96664b7e647e46f",
+          "width": 256,
+          "height": 256
+        }
+      ],
+      "source_status": "packaged",
+      "review_status": "reviewed"
+    }
+  }
+}

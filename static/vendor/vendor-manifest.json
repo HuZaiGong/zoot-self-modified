@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "packages": [
+    {
+      "name": "cropperjs",
+      "version": "1.6.2",
+      "license": "MIT",
+      "source": "https://www.npmjs.com/package/cropperjs/v/1.6.2",
+      "files": {
+        "cropper-1.6.2.min.css": "23679f552ce73499f817de22b5dcdd9e1e5a1e50cd9d77e34bbd31bf65a85186",
+        "cropper-1.6.2.min.js": "6290a3fa581b17ccf4692cf3ec617a74ae65de88d9140c72d492ae9b47707efb"
+      }
+    },
+    {
+      "name": "chart.js",
+      "version": "4.4.9",
+      "license": "MIT",
+      "source": "https://www.npmjs.com/package/chart.js/v/4.4.9",
+      "files": {
+        "chart-4.4.9.umd.js": "de315773454b6076b63990bfa05ce5155a37f71992c87d7bb5f9a2ea698697ef"
+      }
+    },
+    {
+      "name": "vis-network",
+      "version": "9.1.9",
+      "license": "Apache-2.0 OR MIT",
+      "source": "https://www.npmjs.com/package/vis-network/v/9.1.9",
+      "files": {
+        "vis-network-9.1.9.min.js": "f53f833ddb9bf97efe856bb0637d4fe88f39e39999c7e94a4b8afc8de8a1a2e5"
+      }
+    },
+    {
+      "name": "wordcloud",
+      "version": "1.2.3",
+      "license": "MIT",
+      "source": "https://www.npmjs.com/package/wordcloud/v/1.2.3",
+      "files": {
+        "wordcloud2-1.2.3.js": "16b95eca0167fc82399e62ad2066b0adf0b48bf10287e3d2aab5e043532d0f94"
+      }
+    },
+    {
+      "name": "html2canvas",
+      "version": "1.4.1",
+      "license": "MIT",
+      "source": "https://www.npmjs.com/package/html2canvas/v/1.4.1",
+      "files": {
+        "html2canvas-1.4.1.min.js": "e87e550794322e574a1fda0c1549a3c70dae5a93d9113417a429016838eab8cb"
+      }
+    },
+    {
+      "name": "three",
+      "version": "0.128.0",
+      "license": "MIT",
+      "source": "https://www.npmjs.com/package/three/v/0.128.0",
+      "files": {
+        "three-0.128.0.module.js": "af527c374b56b8688737a42d7fcea7cb8aaeb57a4e3c6da98b4dffd55bcc3514"
+      }
+    }
+  ]
+}

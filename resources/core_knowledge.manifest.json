@@ -1,0 +1,22 @@
+{
+  "resource": "core_knowledge",
+  "schema_version": 2,
+  "vector_protocol_version": 3,
+  "vector_model_sha256": "18a6f289d88c20b6f845419019de3f331de10236d922c9b3b376b851c4986e0a",
+  "vector_space_id": "zoot:bge-small-zh-v1.5:512:cls:v3:e39a353393d4ab2d",
+  "vector_model_id": "BAAI/bge-small-zh-v1.5",
+  "vector_pooling": "cls",
+  "vector_normalization": "l2",
+  "sha256": "4eb8429415be07bcec1ba0d2a9332317efdba91555f30edb08976bab74399407",
+  "size": 62373888,
+  "knowledge_records": 34297,
+  "word_vector_records": 651,
+  "source_embedding_dimensions": [
+    512
+  ],
+  "word_vector_dimensions": [
+    384
+  ],
+  "reused_embeddings": 0,
+  "encoded_embeddings": 34297
+}

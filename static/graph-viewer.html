@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ZOOT! 知识图谱查看器</title>
+    <link rel="stylesheet" href="/static/css/graph-viewer.css?v=20260810-100-0854">
+    <script src="/static/js/graph-viewer.js?v=20260810-100-0854" defer></script>
+</head>
+<body>
+    <!-- 加载提示 -->
+    <div id="loading"><div class="spinner"></div>加载中...</div>
+
+    <!-- 主容器 -->
+    <div id="graph-container">
+        <canvas id="bg-canvas"></canvas>
+    </div>
+
+    <!-- 返回按钮 -->
+    <!--
+    <button id="back-btn">
+        <img src="/static/images/img_arrow.png" alt="返回"> 返回
+    </button>
+    -->
+
+    <!-- 缩放控件 -->
+    <div id="zoom-controls">
+        <button class="zoom-btn" id="zoom-in" title="放大 (Ctrl++)">+</button>
+        <button class="zoom-btn" id="zoom-out" title="缩小 (Ctrl+-)">−</button>
+        <button class="zoom-btn" id="zoom-reset" title="重置 (Ctrl+0)">⟲</button>
+        <div class="zoom-level" id="zoom-level">100%</div>
+    </div>
+
+    <!-- 搜索框（下部居中） -->
+    <div id="search-container">
+        <input type="text" id="search-input" placeholder="搜索干员...">
+        <div id="search-results" class="search-results hidden"></div>
+    </div>
+
+    <!-- 信息面板 -->
+    <div id="info-layer">
+        <button class="info-close" id="info-close">✕</button>
+        <button class="info-edit" id="info-edit" title="编辑此条目">✎</button>
+        <div class="info-title" id="info-title">干员信息</div>
+        <div class="info-content" id="info-content">点击元素查看详情</div>
+    </div>
+
+    <!-- 固定文本控件层 -->
+    <div id="ui-overlay">
+        <!-- 左上角 -->
+        <div id="top-left-text">
+            <div class="line1">BOOTINSYSTEM</div>
+            <div class="line2">[ZOOTV0164]</div>
+        </div>
+        <!-- 左下角 -->
+        <div id="bottom-left-text">RhodesIsland Pharmaceutical Inc.</div>
+        <!-- 右下角 -->
+        <div id="bottom-right-text">
+            <div class="line1">ARCHIVES AGENT. <span id="agent-id">—</span></div>
+            <div class="line2">YOUR VISIT WILL NOT BE RECORDED IN THE NORMAL ACCESS LOG. ROOT</div>
+            <div class="line3"><span id="datetime-display">—</span></div>
+        </div>
+    </div>
+</body>
+</html>

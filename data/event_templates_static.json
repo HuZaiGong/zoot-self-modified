@@ -1,0 +1,45 @@
+{
+  "templates": [
+    {
+      "id": "birthday_default",
+      "category": "birthday",
+      "trigger": "birthday",
+      "title": "{operator}的生日",
+      "description": "今天是{operator}的生日，{operator}希望和博士一起庆祝。",
+      "actions": [
+        {"type": "create_todo", "title": "祝福{operator}生日快乐", "priority": "high"},
+        {"type": "send_message", "operator": "{operator}", "content": "博士，今天是我的生日哦！"}
+      ],
+      "cooldown": 86400,
+      "weight": 100
+    },
+    {
+      "id": "festival_new_year",
+      "category": "event",
+      "trigger": "date",
+      "date": "01-01",
+      "title": "新年祝福",
+      "description": "新年到了，干员们纷纷送来祝福。",
+      "actions": [
+        {"type": "send_system_message", "content": "【新年快乐】罗德岛全体干员祝博士新年快乐！"},
+        {"type": "create_todo", "title": "新年愿望清单", "priority": "medium"}
+      ],
+      "cooldown": 86400,
+      "weight": 100
+    },
+    {
+      "id": "operator_trust_up",
+      "category": "event",
+      "trigger": "trust",
+      "threshold": 150,
+      "title": "{operator}的信赖提升",
+      "description": "{operator}对博士的信赖已经达到了新的高度。",
+      "actions": [
+        {"type": "send_message", "operator": "{operator}", "content": "博士，感谢你一直以来的信任。"},
+        {"type": "create_todo", "title": "与{operator}的约定", "priority": "low"}
+      ],
+      "cooldown": 0,
+      "weight": 50
+    }
+  ]
+}

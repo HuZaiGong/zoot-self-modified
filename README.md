@@ -74,9 +74,15 @@ start.bat
 ### Linux / macOS
 
 ```bash
-python3 -m venv venv
-venv/bin/pip install -r requirements.txt
 ./start.sh
+```
+
+`start.sh` 会自动完成环境准备：校验 Python 3.13（缺失时经 `uv` 自动安装）、创建/修复 `venv`、安装依赖，然后启动。手动方式：
+
+```bash
+python3.13 -m venv venv
+venv/bin/pip install -r requirements.txt
+./start.sh 55000 --no-browser   # 端口 + 额外参数直接透传给 launch.py
 ```
 
 启动流程：

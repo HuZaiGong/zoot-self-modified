@@ -52,6 +52,77 @@ BOOTSTRAP_URL = "http://127.0.0.1:{port}/__local/bootstrap?token={token}&next=%2
 REQUIRED_PYTHON = (3, 13)
 
 
+def _install_posix_shims() -> None:
+    """为 Windows 补充后端用到的 POSIX 接口（os.statvfs 等）。"""
+    if hasattr(os, "statvfs"):
+        return
+    import shutil
+
+    class _StatvfsResult:
+        def __init__(self, free_bytes: int):
+            self.f_frsize = 1
+            self.f_bavail = free_bytes
+
+    def _statvfs(path) -> _StatvfsResult:
+        return _StatvfsResult(shutil.disk_usage(path).free)
+
+    os.statvfs = _statvfs
+
+
+def _ensure_runtime_schema() -> None:
+    """补齐原版遗漏的运行时建表（首次安装时相关接口会 500）。"""
+    import sqlite3
+
+    from app.utils.writable import get_writable_path
+
+    try:
+        conn = sqlite3.connect(get_writable_path("stats.db"))
+        try:
+            conn.execute(
+                "CREATE TABLE IF NOT EXISTS mood_history ("
+                "id INTEGER PRIMARY KEY AUTOINCREMENT,"
+                "operator_id TEXT NOT NULL,"
+                "mood TEXT,"
+                "mood_value REAL,"
+                "timestamp REAL,"
+                "conversation_round INTEGER DEFAULT 0)"
+            )
+            conn.commit()
+        finally:
+            conn.close()
+    except Exception:
+        pass
+
+
+def _populate_operator_catalog_ids() -> None:
+    """补全 main.pyc 中从未赋值的 _operator_catalog_ids 全局变量。"""
+    try:
+        from pathlib import Path
+
+        from app.services import builtin_character_catalog
+
+        catalog_dir = Path(app_main.__file__).resolve().parent.parent / "operators" / "compiled"
+        app_main._operator_catalog_ids = set(
+            builtin_character_catalog.catalog_ids(catalog_dir)
+        )
+    except Exception:
+        app_main._operator_catalog_ids = set()
+
+
+def _install_builtin_shims() -> None:
+    """补齐 pyc 后端缺失的内置名。
+
+    main.pyc 的 chat_continue 在兜底分支调用 random.choice(...)，
+    但模块级从未 import random，会抛 NameError。把 random 注入
+    builtins 后，LOAD_GLOBAL 会回退到 builtins 解析成功。
+    """
+    import builtins
+    import random
+
+    if not hasattr(builtins, "random"):
+        builtins.random = random
+
+
 def load_app():
     """延迟加载后端；解释器版本不兼容时给出可操作的错误提示。"""
     global app_main
@@ -66,6 +137,8 @@ def load_app():
         )
         raise SystemExit(1)
     try:
+        _install_posix_shims()
+        _install_builtin_shims()
         import app.main
     except (ImportError, ValueError) as exc:
         message = str(exc).lower()
@@ -78,6 +151,8 @@ def load_app():
             raise SystemExit(1) from exc
         raise
     app_main = app.main
+    _ensure_runtime_schema()
+    _populate_operator_catalog_ids()
     return app_main
 
 

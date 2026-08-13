@@ -123,6 +123,51 @@ def _install_builtin_shims() -> None:
         builtins.random = random
 
 
+def _apply_proxy_settings() -> None:
+    """把 ZOOT 专用代理变量转发为标准 httpx 环境变量。
+
+    ZOOT_HTTP_PROXY / ZOOT_HTTPS_PROXY（或通用 ZOOT_PROXY）在导入后端
+    前生效，云端服务、知识图谱、模型调用等 httpx 客户端会自动读取
+    HTTP_PROXY / HTTPS_PROXY。
+    """
+    http_proxy = os.getenv("ZOOT_HTTP_PROXY") or os.getenv("ZOOT_PROXY") or ""
+    https_proxy = os.getenv("ZOOT_HTTPS_PROXY") or os.getenv("ZOOT_PROXY") or ""
+    if http_proxy:
+        os.environ.setdefault("HTTP_PROXY", http_proxy)
+    if https_proxy:
+        os.environ.setdefault("HTTPS_PROXY", https_proxy)
+
+
+def _install_api_error_handlers(app) -> None:
+    """注册原版未处理的业务异常到合理的 HTTP 状态码。
+
+    * /dynamics/* 的非数字 ID 会抛 ValueError -> 422（路由为 str 类型但
+      处理器内 int() 转换，FastAPI 无法在参数层拦截）
+    * 未配置多模态服务档案时的 CapabilityRouteError -> 400（原版 500）
+    """
+    from fastapi.responses import JSONResponse
+
+    async def _dynamics_value_error_handler(request, exc):
+        if request.url.path.startswith("/dynamics/"):
+            return JSONResponse(
+                status_code=422, content={"detail": "无效的动态 ID 格式"}
+            )
+        return JSONResponse(status_code=500, content={"detail": str(exc)})
+
+    async def _capability_route_error_handler(request, exc):
+        return JSONResponse(status_code=400, content={"detail": str(exc)})
+
+    app.add_exception_handler(ValueError, _dynamics_value_error_handler)
+    try:
+        from app.services.api_connection_profiles import CapabilityRouteError
+
+        app.add_exception_handler(
+            CapabilityRouteError, _capability_route_error_handler
+        )
+    except ImportError:
+        pass
+
+
 def load_app():
     """延迟加载后端；解释器版本不兼容时给出可操作的错误提示。"""
     global app_main
@@ -137,6 +182,7 @@ def load_app():
         )
         raise SystemExit(1)
     try:
+        _apply_proxy_settings()
         _install_posix_shims()
         _install_builtin_shims()
         import app.main
@@ -153,6 +199,7 @@ def load_app():
     app_main = app.main
     _ensure_runtime_schema()
     _populate_operator_catalog_ids()
+    _install_api_error_handlers(app_main.app)
     return app_main
 
 

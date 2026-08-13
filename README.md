@@ -124,7 +124,7 @@ python launch.py --data-dir ~/zoot-data # 覆盖数据目录（等价 ZOOT_DATA_
 | `ZOOT_DEV_MODE=0\|1` | 开发入口开关（免会话仅限 `localhost:8000` 非 GET；源码运行默认开启） |
 | `ZOOT_LAN_SYNC_ENABLED=0\|1` | 强制关闭/开启 LAN 同步面 |
 | `ZOOT_ENABLE_LEGACY_SYNC=1` | 重新启用旧版 `/sync/` 接口（默认 404） |
-| `HTTP_PROXY` / `HTTPS_PROXY` | 代理（云端服务、知识图谱、模型调用经 httpx 默认读取） |
+| `HTTP_PROXY` / `HTTPS_PROXY` | 代理（云端服务、知识图谱、模型调用经 httpx 默认读取）；也可用 `ZOOT_HTTP_PROXY` / `ZOOT_HTTPS_PROXY`（或通用 `ZOOT_PROXY`），launch.py 会转发为标准变量 |
 
 ## 会话与安全
 
@@ -174,6 +174,8 @@ python launch.py --data-dir ~/zoot-data # 覆盖数据目录（等价 ZOOT_DATA_
 - `builtins.random` 注入：`chat_continue` 兜底分支调用 `random.choice` 但模块从未 import random（NameError）
 - 运行时建表：首次安装即建 `stats.db` 的 `mood_history` 表（原版只在写情绪时才建，读取接口先 500）
 - `_operator_catalog_ids` 补全：从 `operators/compiled` 目录加载内置角色 ID（原版全局变量从未赋值，联络接口 NameError）
+- API 错误映射：`/dynamics/*` 非数字 ID 的 `ValueError` → 422；多模态服务档案未配置的 `CapabilityRouteError` → 400（原版均返回 500）
+- 代理转发：`ZOOT_HTTP_PROXY` / `ZOOT_HTTPS_PROXY`（或 `ZOOT_PROXY`）自动转为标准代理环境变量，供 httpx 客户端使用
 - 其他：UTF-8 输出兜底（GBK 控制台）、pythonw 无控制台崩溃修复、单实例检测、Python 版本护栏
 
 ## 与 Android 版的差异
@@ -191,9 +193,10 @@ python launch.py --data-dir ~/zoot-data # 覆盖数据目录（等价 ZOOT_DATA_
 
 - 后台主动发言、系统通知等 Android 专属能力不可用
 - 向量检索、NLP 状态跟踪默认关闭（`.env` 中开启）
-- `/api/cloud/*` 与知识图谱依赖服务端直连外网：无代理的网络环境会超时，设 `HTTP_PROXY`/`HTTPS_PROXY` 即可（httpx 默认读取）
+- 云端远程能力（远程配置、遥测、知识图谱）需要可达的外网：无代理的网络环境会降级失败（单请求 5 秒超时，接口返回错误而非挂起），设 `HTTP_PROXY` / `ZOOT_HTTP_PROXY` 即可恢复
 - 未配置 API 密钥时，聊天与 AI 事件生成不可用（前端 API 设置页或 `.env` 配置）
 - 控制矩阵、更新检查等界面已按 PC 平台渲染（`/api/version/local` 返回 `platform: pc`）
+- 首次调用衣柜目录、助手审批等接口较慢（冷缓存构建），后续请求正常
 
 ## 免责声明
 

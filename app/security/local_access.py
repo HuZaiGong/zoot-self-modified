@@ -244,6 +244,16 @@ class LocalAccessMiddleware:
             headers.get("x-zoot-local-internal", "")
         )
 
+        if (
+            loopback
+            and not authenticated
+            and not is_public
+            and path == "/"
+            and str(scope.get("method") or "GET").upper() in {"GET", "HEAD"}
+        ):
+            await self._redirect_to_bootstrap(scope, send)
+            return
+
         if not is_public and not authenticated and not development_entry:
             await self._reject(scope_type, send, 401, "local session required")
             return
@@ -258,6 +268,42 @@ class LocalAccessMiddleware:
             send,
             establish_development_session=development_entry and not authenticated,
         )
+
+    async def _redirect_to_bootstrap(self, scope: Dict[str, object], send) -> None:
+        """Auto-login for a plain loopback visit to ``/``.
+
+        Lets ``http://127.0.0.1:<port>/`` land on the home page without the
+        launcher: the server issues a fresh single-use bootstrap token and
+        redirects through ``/__local/bootstrap``, which swaps it for the
+        ``zoot_local_session`` cookie. Non-loopback clients never reach this
+        branch, so the LAN surface stays gated as before.
+        """
+        from urllib.parse import quote
+
+        token = self.policy.issue_bootstrap_token()
+        next_path = quote("/static/index.html", safe="")
+        headers = _headers(scope)
+        scheme = str(scope.get("scheme") or "http")
+        host = headers.get("host", "")
+        base = f"{scheme}://{host}"
+        location = (
+            f"{base}/__local/bootstrap?token={token}&next={next_path}"
+        )
+        body = b""
+        await send(
+            {
+                "type": "http.response.start",
+                "status": 302,
+                "headers": [
+                    (b"location", location.encode("ascii")),
+                    (b"content-length", b"0"),
+                    (b"x-content-type-options", b"nosniff"),
+                    (b"referrer-policy", b"no-referrer"),
+                    (b"x-frame-options", b"SAMEORIGIN"),
+                ],
+            }
+        )
+        await send({"type": "http.response.body", "body": body})
 
     def _is_development_entry(
         self, scope: Dict[str, object], headers: Dict[str, str], path: str

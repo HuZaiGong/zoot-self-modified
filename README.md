@@ -45,6 +45,7 @@ run/
 
 | 依赖 | 版本 |
 |---|---|
+| uv | 最新（环境准备工具：装 Python / 建 venv / 装依赖） |
 | Python | 3.13.x（字节码与之严格绑定；启动器会对其他版本给出明确提示） |
 | fastapi | >=0.95.2（已验证 0.125） |
 | pydantic | >=1.10.26,<2（后端为 v1 API，勿升级到 v2） |
@@ -56,18 +57,26 @@ run/
 
 ### 依赖版本策略
 
-- 依赖统一使用 `>=` 区间声明，**pip 可以随时升级**、依赖可以安装更高的兼容版本；只有存在破坏性 API 变更的 `pydantic`（v2）与 `openai`（1.x）设置了上界。
+- 依赖统一使用 `>=` 区间声明，**可随时升级到更高的兼容版本**（uv / pip 均可解析）；只有存在破坏性 API 变更的 `pydantic`（v2）与 `openai`（1.x）设置了上界。
 - 平台专属依赖通过 environment marker 声明（`pywin32; sys_platform == 'win32'`），Linux/macOS 不会安装。
 - 其余：httpx、aiohttp、websockets、pypinyin、jieba、pypdf、Pillow 等（见 `requirements.txt`）。
 - Python 解释器本身是唯一的硬约束：后端以 3.13 字节码发布，请用 3.13.x 创建虚拟环境（含后续补丁版本）；`launch.py` 会在解释器不兼容时给出明确提示，而不是莫名崩溃。
 
 ## 快速开始
 
+环境准备统一使用 [uv](https://docs.astral.sh/uv/)（未安装时脚本会提示/自动安装）。
+
 ### Windows
 
 ```bat
-python -m venv venv
-venv\Scripts\pip install -r requirements.txt
+start.bat
+```
+
+`start.bat` 自动完成：探测 Python（无 3.13 时经 `uv python install 3.13` 安装）→ 创建仓库内 `venv` → 用 `uv pip install` 装依赖 → 启动。手动方式：
+
+```bat
+uv venv venv --python 3.13
+uv pip install --python venv\Scripts\python.exe -r requirements.txt
 start.bat
 ```
 
@@ -77,11 +86,11 @@ start.bat
 ./start.sh
 ```
 
-`start.sh` 会自动完成环境准备：校验 Python 3.13（缺失时经 `uv` 自动安装）、创建/修复 `venv`、安装依赖，然后启动。手动方式：
+`start.sh` 自动完成：校验 Python 3.13（缺失时经 `uv` 自动安装）→ `uv venv` 创建/修复 `venv` → `uv pip install` 装依赖 → 启动。手动方式：
 
 ```bash
-python3.13 -m venv venv
-venv/bin/pip install -r requirements.txt
+uv venv venv --python 3.13
+uv pip install --python venv/bin/python -r requirements.txt
 ./start.sh 55000 --no-browser   # 端口 + 额外参数直接透传给 launch.py
 ```
 

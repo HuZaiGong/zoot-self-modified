@@ -1,9 +1,15 @@
 logs/
 venv/
 __pycache__/
+*.pyc.bak
 bootstrap_token.txt
 cookies.txt
+port.txt
 server.log
 server_err.log
 *.log
 session_token.txt
+
+# 运行时数据（首次启动自动重建）
+memories.db
+stats.db

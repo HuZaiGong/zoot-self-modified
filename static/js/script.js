@@ -205,6 +205,8 @@
 let appVersion = '0.0.0';
 let currentAppVersion = '0.0.0';
 let currentFrontendVersion = '0.0.0';
+// 后端上报的运行时平台（'pc' / 'android'），由 /api/version/local 更新
+let currentPlatform = 'pc';
 
 // 同步协议版本（必须与 PC 端 shared/sync/protocol.py 中的 SYNC_PROTOCOL_VERSION 一致）
 const SYNC_PROTOCOL_VERSION = "1.0";
@@ -2054,6 +2056,7 @@ window.firstRunCoordinator = {
             console.warn('[首次运行] 读取后端状态失败，使用本地完成缓存', error);
         }
         currentAppVersion = localData.app_version || currentAppVersion;
+        currentPlatform = String(localData.platform || currentPlatform);
         const resetId = String(localData.setup_wizard_reset_id || backendState?.reset_generation || '');
         const consumedResetId = localStorage.getItem('setupWizardConsumedResetId') || '';
         const forcedReset = Boolean(localData.force_setup_wizard_reset && resetId && resetId !== consumedResetId);
@@ -2289,6 +2292,7 @@ async function saveWizardSettings() {
     const localData = await localRes.json();
     // 更新全局变量
     currentAppVersion = localData.app_version;
+    currentPlatform = String(localData.platform || currentPlatform);
     await window.firstRunCoordinator.complete();
     return true;
 }
@@ -3478,7 +3482,7 @@ const CloudAPI = {
      * @param {string} frontendVersion - 当前前端版本
      * @param {string} grayCode - 灰度码（可选）
      */
-    checkUpdate(platform = 'android', version, frontendVersion, grayCode = null) {
+    checkUpdate(platform = 'pc', version, frontendVersion, grayCode = null) {
         const params = new URLSearchParams({
             platform,
             version: version || '0.0.0',
@@ -3601,8 +3605,9 @@ async function loadVersionInfo() {
         const data = await res.json();
         currentAppVersion = data.app_version || '0.0.0';
         currentFrontendVersion = data.frontend_version || '0.0.0';
+        currentPlatform = String(data.platform || 'pc');
         appVersion = currentAppVersion; // 兼容旧引用
-        console.log('[版本] 加载成功:', currentAppVersion, currentFrontendVersion);
+        console.log('[版本] 加载成功:', currentAppVersion, currentFrontendVersion, currentPlatform);
         return data;
     } catch (e) {
         console.warn('[版本] 加载失败，使用默认值:', e);
@@ -4722,9 +4727,8 @@ function selectAndroidUpdateArtifact(data) {
     return data;
 }
 
-async function checkForUpdates(silent = false, platform = 'android') {
+async function checkForUpdates(silent = false, platform = null) {
     console.log('[更新调试] === checkForUpdates 开始 ===');
-    console.log('[更新调试] silent:', silent, 'platform:', platform);
     if (isCheckingUpdate) return null;
     isCheckingUpdate = true;
 
@@ -4742,14 +4746,17 @@ async function checkForUpdates(silent = false, platform = 'android') {
         // 更新全局变量
         currentAppVersion = localData.app_version;
         currentFrontendVersion = localData.frontend_version;
+        currentPlatform = String(localData.platform || currentPlatform || 'pc');
         appVersion = currentAppVersion;
+        const effectivePlatform = String(platform || currentPlatform || 'pc');
+        console.log('[更新调试] platform:', effectivePlatform);
 
         const grayRes = await fetch('/api/cloud/gray/status');
         const grayData = await grayRes.json();
         const grayCode = grayData.enabled ? grayData.code : null;
 
         const data = selectAndroidUpdateArtifact(await CloudAPI.checkUpdate(
-            platform,
+            effectivePlatform,
             localData.app_version,
             localData.frontend_version,
             grayCode
@@ -32022,6 +32029,7 @@ async function submitFeedback() {
                 const data = await res.json();
                 version = data.app_version || '0.0.0';
                 currentAppVersion = version; // 更新全局变量
+                currentPlatform = String(data.platform || currentPlatform);
             }
         } catch (e) {
             console.warn('[反馈] 重新获取版本失败:', e);
@@ -41697,7 +41705,7 @@ const SystemCenterUI = (() => {
         if (
             document.hidden
             || systemViewMode !== 'matrix'
-            || root?.dataset.matrixPlatform === 'android'
+            || (root?.dataset.matrixPlatform || currentPlatform) === 'android'
             || !systemCenterPageActive
             || !updateMatrixClock()
         ) {
@@ -41737,7 +41745,7 @@ const SystemCenterUI = (() => {
         }
         const layout = matrixLayout(
             matrixItems(),
-            root.dataset.matrixPlatform || 'android',
+            root.dataset.matrixPlatform || currentPlatform || 'pc',
         );
         if (selectedMatrixKey && !layout.items.some(item => item.key === selectedMatrixKey)) {
             selectedMatrixKey = null;

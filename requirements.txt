@@ -1,17 +1,20 @@
-fastapi==0.95.2
-pydantic==1.10.26
-uvicorn==0.52.1
-openai==0.28.0
-python-dotenv==1.2.2
-pypinyin==0.55.0
-jieba==0.42.1
-pypdf==6.15.0
-httpx==0.28.1
-aiohttp==3.14.3
-websockets==17.0.1
-requests==2.34.2
-pillow==11.0.0
-python-multipart==0.0.32
-pywin32
+# 后端字节码为 Python 3.13 编译、pydantic v1 API、openai 0.x API。
+# 各依赖允许升级到更高的兼容版本；上界仅在存在破坏性 API 变更时设置。
+fastapi>=0.95.2
+pydantic>=1.10.26,<2
+uvicorn>=0.52.1
+openai>=0.28.0,<1.0
+python-dotenv>=1.2.2
+pypinyin>=0.55.0
+jieba>=0.42.1
+pypdf>=6.15.0
+httpx>=0.28.1,<1.0
+aiohttp>=3.14.3
+websockets>=17.0.1
+requests>=2.34.2
+pillow>=11.0.0
+python-multipart>=0.0.32
+cryptography>=43
 numpy
 onnxruntime
+pywin32; sys_platform == 'win32'

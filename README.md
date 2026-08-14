@@ -29,11 +29,13 @@ run/
 ├── requirements.txt   # Python 依赖（>= 区间 + 平台 marker）
 ├── tools/
 │   ├── patch_main_pyc.py      # 主字节码补丁：platform=pc、lifespan LOAD_NAME 修复
-│   └── patch_timeline_pyc.py  # 时间线字节码补丁：fork_points 绑定数不匹配
+│   ├── patch_timeline_pyc.py  # 时间线字节码补丁：fork_points 绑定数不匹配
+│   └── build_plugin_package.py # 插件打包（输出 .zoot-plugin）
 ├── app/               # 后端（.pyc + 平台模块源码覆盖，见下文清单）
 ├── static/            # Web 前端
 ├── operators/         # 干员配置与角色数据
 ├── data/              # 初始数据（事件、时间线等）
+├── plugins/           # 可导入的插件包（含 custom-embedding-model，见「插件系统」）
 ├── resources/
 │   ├── core_knowledge.db        # 向量知识库（62MB，34,297 条）
 │   └── vector_model/            # ONNX 嵌入模型
@@ -176,7 +178,27 @@ python launch.py --data-dir ~/zoot-data # 覆盖数据目录（等价 ZOOT_DATA_
 - `_operator_catalog_ids` 补全：从 `operators/compiled` 目录加载内置角色 ID（原版全局变量从未赋值，联络接口 NameError）
 - API 错误映射：`/dynamics/*` 非数字 ID 的 `ValueError` → 422；多模态服务档案未配置的 `CapabilityRouteError` → 400（原版均返回 500）
 - 代理转发：`ZOOT_HTTP_PROXY` / `ZOOT_HTTPS_PROXY`（或 `ZOOT_PROXY`）自动转为标准代理环境变量，供 httpx 客户端使用
+- 可信插件运行时接线：原版 `PluginRuntime` 从未注入 `trusted_adapter`，`trusted_python` 插件无法执行；launch.py 现注入 `_TrustedPluginAdapter`（加载 `plugin.py`、调度 `on_activate/on_deactivate/handle`，异常打印 traceback 到 stderr），使插件可真正运行，见「插件系统」
 - 其他：UTF-8 输出兜底（GBK 控制台）、pythonw 无控制台崩溃修复、单实例检测、Python 版本护栏
+
+## 插件系统
+
+ZOOT 自带 Manifest v2 插件系统（插件管理页 + `/api/plugins/*` 接口），但 Android
+原版**没有把 `trusted_python` 执行器接到插件运行时上**——插件安装后无法真正执行。
+本版已接线（见上「启动器运行时修复」），插件可完整使用。
+
+- 插件包格式：`.zoot-plugin`（内容为 zip，含 `manifest.json` + 入口脚本）
+- 安装流程：安全预检 → 权限授予 → 安装；**安装后默认禁用**，需手动启用；
+  启用状态持久化（此后每次启动自动恢复启用）
+- 权限模型：`storage:plugin`（低风险）与 `system:trusted_python`（critical，
+  **非沙箱**，等于完全后端代码执行权）
+- 内置插件：
+
+| 插件 | 说明 |
+|---|---|
+| `custom-embedding-model` | 记忆向量化切换到任意 OpenAI 兼容 `/embeddings` 服务（Ollama / LM Studio / vLLM 等），替代内置 BGE ONNX；独立向量空间、自动维度探测、可自动重建索引 |
+
+打包、导入、配置与插件开发约定见 [plugins/README.md](plugins/README.md)。
 
 ## 与 Android 版的差异
 
@@ -188,6 +210,7 @@ python launch.py --data-dir ~/zoot-data # 覆盖数据目录（等价 ZOOT_DATA_
 | 密钥存储 | Android Keystore | Windows DPAPI / 其他平台 XChaCha20-Poly1305 |
 | 平台标识 | `android` | `pc` |
 | 更新通道 | APK 下载 | PC 更新通道 |
+| 插件运行 | 可安装但 trusted_python 未接线，无法执行 | 已注入 `_TrustedPluginAdapter`，插件可运行 |
 
 ## 已知限制
 

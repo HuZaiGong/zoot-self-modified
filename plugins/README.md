@@ -1,8 +1,12 @@
 # 插件目录
 
 这里放可直接安装的 ZOOT 插件包（Manifest v2）。每个子目录一个插件，用
-`python tools/build_plugin_package.py <插件名>` 打成 `plugins/<插件名>.zip`，
-再通过插件管理页或 `POST /api/plugins/install` 安装。
+`python tools/build_plugin_package.py <插件名>` 打成
+`plugins/<插件名>.zoot-plugin`，再通过插件管理页（安装本地插件）或
+`POST /api/plugins/install` 导入。
+
+导入后插件默认为禁用状态（status=disabled），不会自动启动；
+需在插件管理页手动启用。
 
 ## custom-embedding-model
 
@@ -21,8 +25,8 @@
 python tools\build_plugin_package.py custom-embedding-model
 ```
 
-然后在插件管理页上传 `plugins\custom-embedding-model.zip`，授予
-`storage:plugin`、`system:trusted_python` 权限后安装启用。
+然后在插件管理页上传 `plugins\custom-embedding-model.zoot-plugin`，授予
+`storage:plugin`、`system:trusted_python` 权限后安装（默认为禁用，需手动启用）。
 
 ### 配置
 

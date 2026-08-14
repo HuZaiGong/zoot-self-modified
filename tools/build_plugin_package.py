@@ -1,9 +1,10 @@
-"""把 plugins/<name> 打成可安装的插件包（zip），供插件管理页/安装接口使用。
+"""把 plugins/<name> 打成可安装的插件包，供插件管理页/安装接口使用。
 
+ZOOT 约定插件包扩展名为 .zoot-plugin（内容为 zip，安装接口不校验后缀）。
 用法：
     python tools/build_plugin_package.py [插件名]
 
-默认打包 custom-embedding-model，输出 plugins/<name>.zip。
+默认打包 custom-embedding-model，输出 plugins/<name>.zoot-plugin。
 """
 
 from __future__ import annotations
@@ -22,7 +23,7 @@ def main(argv):
     if not (source / "manifest.json").is_file():
         raise SystemExit(f"{source} 缺少 manifest.json")
 
-    output = root / "plugins" / f"{name}.zip"
+    output = root / "plugins" / f"{name}.zoot-plugin"
     count = 0
     with zipfile.ZipFile(output, "w", zipfile.ZIP_DEFLATED) as archive:
         for path in sorted(source.rglob("*")):

@@ -356,7 +356,10 @@
         const dirtyLabel = draft.dirty ? '<span class="api-profile-dirty">有未保存更改</span>' : '';
         const capabilityProbe = capability === 'image_generation'
             ? `<button type="button" class="secondary-action-btn" data-action="probe-capability" ${disabled}>${probeBusy ? '正在探测图片生成…' : '保存并探测图片生成（可能计费）'}</button>`
-            : `<button type="button" class="secondary-action-btn" data-action="probe-capability" ${disabled}>${probeBusy ? '正在验证…' : '验证当前能力'}</button>`;
+            : `<button type="button" class="secondary-action-btn" data-action="probe-capability" ${disabled}>${probeBusy ? '正在验证…' : capability === 'chat' ? '验证Chat模型（可能计费）' : '验证当前能力'}</button>`;
+        const clineModelHint = draft.service_id === 'cline' || /api\.cline\.bot/i.test(draft.api_base)
+            ? '<small class="settings-help-text">Cline模型ID必须保留 provider/model 格式，例如 deepseek/deepseek-chat。</small>'
+            : '';
         root.innerHTML = `
             <section class="multimodal-config-card" data-profile-editor>
                 <div class="multimodal-card-title"><div><strong>${escapeHtml(CAPABILITIES[capability].label)}</strong><small>${escapeHtml(CAPABILITIES[capability].description)}</small></div><span class="status-text">${escapeHtml(statusText(profile))}</span></div>
@@ -375,6 +378,7 @@
                 <label class="multimodal-field"><span>API密钥</span><input class="api-key-input" type="password" autocomplete="new-password" data-field="api_key" placeholder="${draft.has_api_key ? '已安全保存；留空保持不变' : '请输入API密钥'}"></label>
                 ${dynamicFields(draft)}
                 <label class="multimodal-field"><span>${escapeHtml(CAPABILITIES[capability].label)}模型</span><input class="api-key-input" data-field="model" value="${escapeHtml(draft.model)}" placeholder="填写或获取当前能力的模型ID"></label>
+                ${clineModelHint}
                 ${generationDefaultFields(draft)}
                 <div class="api-profile-primary-actions">
                     <button type="button" class="multimodal-save-btn" data-action="save" ${disabled}>保存配置</button>
@@ -722,7 +726,7 @@
         const startedAt = Date.now();
         let timer = 0;
         if (mode === 'capability' && capability === 'image_generation') {
-            if (!window.confirm('将先保存当前图片生成配置，再生成最小测试图片。该操作可能产生费用，是否继续？')) return;
+            if (!await requestProjectConfirmation('确认能力探测', '将先保存当前图片生成配置，再生成最小测试图片。该操作可能产生费用，是否继续？')) return;
             setProbeOperation(capability, { phase: 'saving', message: '正在保存图片生成配置…', startedAt });
             try {
                 profile = await saveWorkspace(capability, root, true);
@@ -734,6 +738,9 @@
             throw new Error('请先保存当前配置');
         } else if (currentDraft(capability).dirty && mode === 'capability') {
             throw new Error('请先保存当前能力的模型和配置，再执行能力验证');
+        }
+        if (mode === 'capability' && capability === 'chat') {
+            if (!await requestProjectConfirmation('确认Chat模型探测', '将发送一条最小测试消息验证当前模型，可能产生少量费用。是否继续？')) return;
         }
         setProbeOperation(capability, {
             phase: capability === 'image_generation' ? 'submitting' : 'waiting',
@@ -750,7 +757,7 @@
         }
         try {
             const body = { mode, capability };
-            if (mode === 'capability' && capability === 'image_generation') body.allow_charge = true;
+            if (mode === 'capability' && ['chat', 'image_generation'].includes(capability)) body.allow_charge = true;
             const payload = await request(`/api-connections/profiles/${encodeURIComponent(profile.profile_id)}/probe`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -799,7 +806,7 @@
 
     async function deleteProfile(capability) {
         const profile = selectedProfile(capability);
-        if (!profile || !window.confirm(`删除配置“${profile.display_name}”？`)) return;
+        if (!profile || !await requestProjectConfirmation('删除API配置', `确定删除配置“${profile.display_name}”吗？`)) return;
         await request(`/api-connections/profiles/${encodeURIComponent(profile.profile_id)}`, { method: 'DELETE' });
         state.selected[capability] = '';
         state.drafts.delete(profileKey(capability, profile.profile_id));

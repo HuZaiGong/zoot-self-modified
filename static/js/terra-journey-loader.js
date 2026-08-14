@@ -6,7 +6,7 @@
         if (document.querySelector('link[data-terra-journey-style]')) return;
         const link = document.createElement('link');
         link.rel = 'stylesheet';
-        link.href = 'css/terra-journey.css?v=20260810-100-0865';
+        link.href = 'css/terra-journey.css?v=20260811-100-0868';
         link.dataset.terraJourneyStyle = 'true';
         document.head.appendChild(link);
     }
@@ -28,7 +28,7 @@
         if (!loading) {
             loading = new Promise((resolve, reject) => {
                 const script = document.createElement('script');
-                script.src = 'js/terra-journey.js?v=20260810-100-0865';
+                script.src = 'js/terra-journey.js?v=20260811-100-0868';
                 script.async = true;
                 script.onload = resolve;
                 script.onerror = () => reject(new Error('泰拉寻旅模块加载失败'));

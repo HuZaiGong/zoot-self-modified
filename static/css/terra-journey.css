@@ -560,13 +560,49 @@
 }
 
 .journey-turn-action {
-    color: var(--accent-color);
-    font-weight: 700;
+    align-items: baseline;
+    color: var(--text-secondary);
+    display: flex;
+    font-size: 12px;
+    font-weight: 400;
+    gap: 8px;
+    line-height: 1.55;
+    margin-bottom: 8px;
+}
+
+.journey-turn-action small {
+    color: inherit;
+    flex: 0 0 auto;
+    font-size: 11px;
+}
+
+.journey-turn-action span {
+    min-width: 0;
 }
 
 .journey-turn-narrative {
+    color: var(--text-color);
+    font-size: 16px;
     line-height: 1.75;
     white-space: pre-wrap;
+}
+
+.journey-opening {
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+}
+
+.journey-opening > small {
+    color: var(--text-secondary);
+    display: block;
+    font-size: 11px;
+    line-height: 1.5;
+    margin: 0 0 9px;
+}
+
+.journey-opening > small:last-child {
+    margin: 10px 0 0;
 }
 
 .journey-polish-badge {
@@ -1590,10 +1626,10 @@
 /* Terra Journey visual director */
 .journey-inline-visual {
     align-items: center;
-    background: color-mix(in srgb, var(--bg-secondary, #f4f5f5) 82%, transparent);
+    background: color-mix(in srgb, var(--card-bg) 92%, var(--bg-color) 8%);
     border: 1px solid color-mix(in srgb, var(--accent-color, #4a9c8b) 30%, transparent);
     border-radius: 14px;
-    color: inherit;
+    color: var(--text-color);
     display: grid;
     gap: 10px;
     grid-template-columns: 64px minmax(0, 1fr) 16px;
@@ -1601,6 +1637,11 @@
     padding: 8px;
     text-align: left;
     width: 100%;
+}
+
+.journey-inline-visual strong {
+    color: var(--text-color);
+    font-size: 13px;
 }
 
 .journey-inline-visual-preview {
@@ -1630,6 +1671,74 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+}
+
+.dark-mode .journey-inline-visual {
+    background: color-mix(in srgb, var(--card-bg) 90%, #111722 10%);
+    border-color: color-mix(in srgb, var(--journey-accent) 48%, transparent);
+}
+
+.journey-polish-card {
+    background: color-mix(in srgb, var(--card-bg) 94%, transparent);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    margin-top: 14px;
+    overflow: hidden;
+}
+
+.journey-polish-card > summary {
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+    min-height: 58px;
+    padding: 10px 14px;
+}
+
+.journey-polish-card > summary::-webkit-details-marker {
+    display: none;
+}
+
+.journey-polish-card > summary > span:first-child {
+    display: grid;
+    gap: 3px;
+}
+
+.journey-polish-card > summary small,
+.journey-route-health small {
+    color: var(--text-secondary);
+    font-size: 11px;
+    line-height: 1.45;
+}
+
+.journey-polish-card-body {
+    border-top: 1px solid var(--border-color);
+    padding: 12px 14px 14px;
+}
+
+.journey-polish-switch {
+    align-items: center;
+    display: inline-flex;
+    flex: 0 0 auto;
+}
+
+.journey-polish-switch input {
+    accent-color: var(--journey-accent);
+    height: 20px;
+    width: 36px;
+}
+
+.journey-route-health {
+    align-items: flex-start;
+    display: flex;
+    gap: 8px;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.journey-route-health .warning {
+    color: var(--warning-color);
 }
 
 .journey-visual-help {

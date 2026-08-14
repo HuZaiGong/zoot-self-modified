@@ -6,14 +6,25 @@ import hashlib
 import json
 import os
 import sys
+import threading
 from pathlib import Path
 from typing import Dict, Optional
 
 from .writable import get_writable_path
 
+_android_asset_lock = threading.RLock()
+_refreshed_android_manifests: set[str] = set()
+
 
 def bundled_resource_path(filename: str) -> Optional[Path]:
     relative = Path(filename)
+    is_manifest = relative.name == "manifest.json" or relative.name.endswith(
+        ".manifest.json"
+    )
+    if hasattr(sys, "getandroidapilevel") and is_manifest:
+        refreshed = _copy_android_asset(relative.as_posix())
+        if refreshed is not None:
+            return refreshed
     candidates: list[Path] = []
     override = os.getenv("ZOOT_RESOURCE_ROOT", "").strip()
     if override:
@@ -62,33 +73,53 @@ def verify_resource(path: Path, manifest: Dict[str, object]) -> bool:
 
 
 def _copy_android_asset(filename: str) -> Optional[Path]:
-    target = Path(get_writable_path(f"resources/{filename}"))
-    manifest_name = filename.replace(".db", ".manifest.json")
-    manifest = load_resource_manifest(manifest_name) if filename.endswith(".db") else {}
-    if target.is_file() and verify_resource(target, manifest):
-        return target
-    target.parent.mkdir(parents=True, exist_ok=True)
-    temporary = target.with_suffix(".tmp")
-    try:
-        from java import jclass
-
-        python = jclass("com.chaquo.python.Python")
-        application = python.getPlatform().getApplication()
-        stream = application.getAssets().open(filename)
+    with _android_asset_lock:
+        target = Path(get_writable_path(f"resources/{filename}"))
+        resource_name = Path(filename).name
+        is_manifest = resource_name == "manifest.json" or resource_name.endswith(
+            ".manifest.json"
+        )
+        if is_manifest:
+            if filename in _refreshed_android_manifests and target.is_file():
+                return target
+            manifest: Dict[str, object] = {}
+        else:
+            manifest_name = filename.replace(".db", ".manifest.json")
+            manifest = (
+                load_resource_manifest(manifest_name)
+                if filename.endswith(".db")
+                else {}
+            )
+            if target.is_file() and verify_resource(target, manifest):
+                return target
+        target.parent.mkdir(parents=True, exist_ok=True)
+        temporary = target.with_name(f"{target.name}.tmp")
         try:
-            with temporary.open("wb") as output:
-                buffer = bytearray(1048576)
-                while True:
-                    count = stream.read(buffer)
-                    if count == -1:
-                        break
-                    output.write(bytes(buffer[:count]))
-        finally:
-            stream.close()
-        if manifest and not verify_resource(temporary, manifest):
-            raise ValueError(f"Bundled resource checksum mismatch: {filename}")
-        os.replace(temporary, target)
-        return target
-    except Exception:
-        temporary.unlink(missing_ok=True)
-        return None
+            from java import jclass
+
+            python = jclass("com.chaquo.python.Python")
+            application = python.getPlatform().getApplication()
+            stream = application.getAssets().open(filename)
+            try:
+                with temporary.open("wb") as output:
+                    buffer = bytearray(1048576)
+                    while True:
+                        count = stream.read(buffer)
+                        if count == -1:
+                            break
+                        output.write(bytes(buffer[:count]))
+            finally:
+                stream.close()
+            if is_manifest:
+                payload = json.loads(temporary.read_text(encoding="utf-8"))
+                if not isinstance(payload, dict):
+                    raise ValueError(f"Bundled manifest is invalid: {filename}")
+            elif manifest and not verify_resource(temporary, manifest):
+                raise ValueError(f"Bundled resource checksum mismatch: {filename}")
+            os.replace(temporary, target)
+            if is_manifest:
+                _refreshed_android_manifests.add(filename)
+            return target
+        except Exception:
+            temporary.unlink(missing_ok=True)
+            return None

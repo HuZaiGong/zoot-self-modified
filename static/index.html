@@ -37,7 +37,7 @@
             root.setProperty('--zoot-safe-left', `${Math.max(0, Number(state.safe_left || 0))}px`);
         })();
     </script>
-    <link rel="stylesheet" href="css/style.css?v=20260810-100-0866">
+    <link rel="stylesheet" href="css/style.css?v=20260811-100-0875">
     <link rel="stylesheet" href="css/finance-operations.css?v=20260724-100-0705">
     <link href="vendor/cropper-1.6.2.min.css" rel="stylesheet">
     <script src="vendor/chart-4.4.9.umd.js"></script>
@@ -309,13 +309,21 @@
                     </button>
                     <h2 id="whitelist-page-title">编辑白名单</h2>
                 </div>
-                <div class="auto-whitelist-container" style="height: calc(100% - 56px); display: flex; flex-direction: column;">
+                <div class="auto-whitelist-container">
                     <div class="search-bar">
                         <input type="text" id="whitelist-page-search" placeholder="搜索干员...">
                     </div>
-                    <div id="whitelist-page-list" class="contact-list" style="flex: 1; overflow-y: auto;"></div>
-                    <div class="whitelist-page-footer" style="padding: 12px; margin-bottom: 36px;">
-                        <button id="whitelist-page-save" class="btn-primary" style="width: 100%;">保存并返回</button>
+                    <div class="whitelist-selection-toolbar">
+                        <span id="whitelist-selected-count">已选 0 项</span>
+                        <button type="button" id="whitelist-select-filtered">全选筛选结果</button>
+                        <button type="button" id="whitelist-clear-selection">清空</button>
+                    </div>
+                    <div class="whitelist-list-shell">
+                        <div id="whitelist-page-list" class="contact-list whitelist-page-list"></div>
+                        <nav id="whitelist-page-index" class="whitelist-page-index" aria-label="白名单首字母索引"></nav>
+                    </div>
+                    <div class="whitelist-page-footer">
+                        <button id="whitelist-page-save" class="btn-primary">保存并返回</button>
                     </div>
                 </div>
             </div>
@@ -328,13 +336,70 @@
                     </button>
                     <h2>编辑群聊白名单</h2>
                 </div>
-                <div class="auto-whitelist-container" style="height: calc(100% - 56px); display: flex; flex-direction: column;">
+                <div class="auto-whitelist-container">
                     <div class="search-bar">
                         <input type="text" id="group-whitelist-search" placeholder="搜索群聊...">
                     </div>
-                    <div id="group-whitelist-list" class="contact-list" style="flex: 1; overflow-y: auto;"></div>
-                    <div class="whitelist-page-footer" style="padding: 12px; margin-bottom: 36px;">
-                        <button id="group-whitelist-page-save" class="btn-primary" style="width: 100%;">保存并返回</button>
+                    <div class="whitelist-selection-toolbar">
+                        <span id="group-whitelist-selected-count">已选 0 项</span>
+                        <button type="button" id="group-whitelist-select-filtered">全选筛选结果</button>
+                        <button type="button" id="group-whitelist-clear-selection">清空</button>
+                    </div>
+                    <div id="group-whitelist-list" class="contact-list whitelist-page-list"></div>
+                    <div class="whitelist-page-footer">
+                        <button id="group-whitelist-page-save" class="btn-primary">保存并返回</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 外勤参与干员批量选择页 -->
+            <div id="page-ops-participant-select" class="page ops-operator-select-page">
+                <div class="page-header">
+                    <button class="back-btn" onclick="cancelOpsDispatchSelection()">
+                        <img src="/static/images/img_arrow.png" alt="返回" style="width: 20px;">
+                    </button>
+                    <h2>选择参与干员</h2>
+                </div>
+                <div class="ops-selector-container">
+                    <div class="search-bar">
+                        <input type="search" id="ops-participant-selector-search" placeholder="搜索干员名称或ID">
+                    </div>
+                    <div class="ops-selector-toolbar">
+                        <span id="ops-participant-selector-count">已选 0/12</span>
+                        <button type="button" id="ops-participant-selector-select-visible">全选当前结果</button>
+                        <button type="button" id="ops-participant-selector-clear">清空</button>
+                    </div>
+                    <div class="ops-selector-list-shell">
+                        <div id="ops-participant-selector-list" class="contact-list ops-selector-list"></div>
+                        <nav id="ops-participant-selector-index" class="ops-selector-index" aria-label="参与干员首字母索引"></nav>
+                    </div>
+                    <div class="ops-selector-footer">
+                        <button type="button" id="ops-participant-selector-confirm" class="btn-primary">确认参与干员</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 外勤队长单选页 -->
+            <div id="page-ops-leader-select" class="page ops-operator-select-page">
+                <div class="page-header">
+                    <button class="back-btn" onclick="cancelOpsDispatchSelection()">
+                        <img src="/static/images/img_arrow.png" alt="返回" style="width: 20px;">
+                    </button>
+                    <h2>选择队长</h2>
+                </div>
+                <div class="ops-selector-container">
+                    <div class="search-bar">
+                        <input type="search" id="ops-leader-selector-search" placeholder="从已选参与干员中搜索">
+                    </div>
+                    <div class="ops-selector-toolbar">
+                        <span id="ops-leader-selector-count">尚未选择队长</span>
+                    </div>
+                    <div class="ops-selector-list-shell">
+                        <div id="ops-leader-selector-list" class="contact-list ops-selector-list"></div>
+                        <nav id="ops-leader-selector-index" class="ops-selector-index" aria-label="队长首字母索引"></nav>
+                    </div>
+                    <div class="ops-selector-footer">
+                        <button type="button" id="ops-leader-selector-confirm" class="btn-primary">确认队长</button>
                     </div>
                 </div>
             </div>
@@ -5080,8 +5145,6 @@
                     <div class="finance-actions">
                         <button class="finance-action-btn" id="finance-pharmacy-btn"><span data-zoot-icon="pharmacy"></span> 制药生产</button>
                         <button class="finance-action-btn" id="finance-stock-btn"><span data-zoot-icon="trend"></span> 股票交易</button>
-                        <button class="finance-action-btn" id="finance-borrow-btn"><span data-zoot-icon="bank"></span> 向杰西卡借钱</button>
-                        <button class="finance-action-btn" id="finance-repay-btn"><span data-zoot-icon="wallet"></span> 偿还债务</button>
                     </div>
 
                     <!-- 交易历史 -->
@@ -6018,6 +6081,43 @@
             </div>
         </div>
 
+        <!-- 动态统一分享面板 -->
+        <div id="dynamic-share-bottom-sheet" class="bottom-sheet hidden">
+            <div class="bottom-sheet-overlay" data-dynamic-share-action="close"></div>
+            <div class="bottom-sheet-content dynamic-share-sheet">
+                <div class="bottom-sheet-header">转发动态</div>
+                <div id="dynamic-share-preview" class="dynamic-share-preview"></div>
+                <div class="dynamic-share-mode-row">
+                    <button type="button" class="dynamic-share-mode active" data-dynamic-share-mode="chat">转发给聊天</button>
+                    <button type="button" class="dynamic-share-mode" data-dynamic-share-mode="dynamic">转发为动态</button>
+                </div>
+                <div id="dynamic-share-chat-fields">
+                    <input id="dynamic-share-search" class="extension-form-control" type="search" placeholder="搜索联系人或群聊">
+                    <div id="dynamic-share-categories" class="dynamic-share-categories" role="tablist"></div>
+                    <div id="dynamic-share-target-list" class="dynamic-share-target-list"></div>
+                    <div id="dynamic-share-selected" class="dynamic-share-selected">请选择一个转发对象</div>
+                </div>
+                <label class="extension-form-field">附言（可选）<textarea id="dynamic-share-note" class="extension-form-control" rows="3" maxlength="500" placeholder="写点什么…"></textarea></label>
+                <div class="extension-sheet-actions">
+                    <button type="button" id="dynamic-share-confirm" class="btn-primary">发送</button>
+                    <button type="button" class="bottom-sheet-close" data-dynamic-share-action="close">取消</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 扩展功能统一操作面板 -->
+        <div id="extension-operation-bottom-sheet" class="bottom-sheet hidden">
+            <div class="bottom-sheet-overlay" data-extension-operation-action="close"></div>
+            <div class="bottom-sheet-content extension-operation-sheet">
+                <div id="extension-operation-title" class="bottom-sheet-header">扩展操作</div>
+                <div id="extension-operation-body" class="extension-operation-body"></div>
+                <div class="extension-sheet-actions">
+                    <button type="button" id="extension-operation-confirm" class="btn-primary">确认</button>
+                    <button type="button" class="bottom-sheet-close" data-extension-operation-action="close">取消</button>
+                </div>
+            </div>
+        </div>
+
         <!-- 位置半页框 -->
         <div id="location-bottom-sheet" class="bottom-sheet hidden">
             <div class="bottom-sheet-overlay"></div>
@@ -6053,7 +6153,7 @@
             <div class="bottom-sheet-overlay" onclick="closeBottomSheet('ops-task-create-bottom-sheet')"></div>
             <div class="bottom-sheet-content">
                 <div class="bottom-sheet-header">建立派遣任务</div>
-                <div class="ops-form-note">先建立事件来源，再从“待处理”中选择干员与处理风格。任务启动后会生成执行结点、过程日志和最终结算。</div>
+                <div class="ops-form-note">第一步建立事件，成功后会立即进入第二步安排队伍。取消派遣不会删除已经建立的待处理任务。</div>
                 <div class="ops-source-tabs">
                     <button class="ops-source-tab active" data-source="user">用户设定事件</button>
                     <button class="ops-source-tab" data-source="generated">自生成事件</button>
@@ -6082,9 +6182,9 @@
                     <label class="ops-form-field">选择尚未提交的任务事件<select id="ops-source-event"><option value="">暂无可用事件</option></select></label>
                     <div id="ops-source-preview" class="ops-source-preview">选择事件后将在这里显示来源摘要。</div>
                 </div>
-                <div style="display:flex;gap:10px;margin-top:16px;">
-                    <button id="ops-create-confirm" class="btn-primary" style="flex:1;">建立待处理任务</button>
-                    <button class="bottom-sheet-close" onclick="closeBottomSheet('ops-task-create-bottom-sheet')" style="flex:1;background:#6c757d;">取消</button>
+                <div class="extension-sheet-actions">
+                    <button id="ops-create-confirm" class="btn-primary">建立并安排队伍</button>
+                    <button class="bottom-sheet-close" onclick="closeBottomSheet('ops-task-create-bottom-sheet')">取消</button>
                 </div>
             </div>
         </div>
@@ -6109,9 +6209,9 @@
                 <div id="task-dispatch-body">
                     <!-- 动态渲染 -->
                 </div>
-                <div style="display: flex; gap: 10px; margin-top: 16px;">
-                    <button id="task-dispatch-confirm" class="btn-primary" style="flex:1;">确认派遣</button>
-                    <button class="bottom-sheet-close" onclick="closeBottomSheet('task-dispatch-bottom-sheet')" style="flex:1; background:#6c757d;">取消</button>
+                <div class="extension-sheet-actions">
+                    <button id="task-dispatch-confirm" class="btn-primary">确认派遣</button>
+                    <button class="bottom-sheet-close" onclick="closeBottomSheet('task-dispatch-bottom-sheet')">稍后派遣</button>
                 </div>
             </div>
         </div>
@@ -6121,23 +6221,14 @@
             <div class="bottom-sheet-overlay"></div>
             <div class="bottom-sheet-content">
                 <div class="bottom-sheet-header" id="wh-op-title">物品操作</div>
-                <div id="wh-op-body">
-                    <div style="margin-bottom:12px;">
-                        <label style="display:block;margin-bottom:4px;">物品名称/ID</label>
-                        <input type="text" id="wh-op-item-id" placeholder="输入物品ID（如 源石）" style="width:100%;padding:8px;border-radius:8px;border:1px solid var(--border-color);background:var(--bg-color);color:var(--text-color);">
-                    </div>
-                    <div style="margin-bottom:12px;">
-                        <label style="display:block;margin-bottom:4px;">数量</label>
-                        <input type="number" id="wh-op-quantity" value="1" min="1" style="width:100%;padding:8px;border-radius:8px;border:1px solid var(--border-color);background:var(--bg-color);color:var(--text-color);">
-                    </div>
-                    <div style="margin-bottom:12px;">
-                        <label style="display:block;margin-bottom:4px;">原因</label>
-                        <input type="text" id="wh-op-reason" placeholder="操作原因（可选）" style="width:100%;padding:8px;border-radius:8px;border:1px solid var(--border-color);background:var(--bg-color);color:var(--text-color);">
-                    </div>
+                <div id="wh-op-body" class="extension-operation-body">
+                    <label class="extension-form-field">物品名称/ID<input class="extension-form-control" type="text" id="wh-op-item-id" placeholder="输入物品ID（如 源石）"></label>
+                    <label class="extension-form-field">数量<input class="extension-form-control" type="number" id="wh-op-quantity" value="1" min="1"></label>
+                    <label class="extension-form-field">原因<input class="extension-form-control" type="text" id="wh-op-reason" placeholder="操作原因（可选）"></label>
                 </div>
-                <div style="display: flex; gap: 10px; margin-top: 16px;">
-                    <button id="wh-op-confirm" class="btn-primary" style="flex:1;">确认</button>
-                    <button class="bottom-sheet-close" onclick="closeBottomSheet('wh-operation-sheet')" style="flex:1; background:#6c757d;">取消</button>
+                <div class="extension-sheet-actions">
+                    <button id="wh-op-confirm" class="btn-primary">确认</button>
+                    <button class="bottom-sheet-close" onclick="closeBottomSheet('wh-operation-sheet')">取消</button>
                 </div>
             </div>
         </div>
@@ -6691,16 +6782,16 @@
 
     <script src="js/app-runtime.js?v=20260809-100-0836"></script>
     <script src="js/device-preferences.js?v=20260807-100-0815"></script>
-    <script src="js/script.js?v=20260810-100-0866"></script>
-    <script src="js/terra-journey-loader.js?v=20260810-100-0865"></script>
+    <script src="js/script.js?v=20260811-100-0875"></script>
+    <script src="js/terra-journey-loader.js?v=20260811-100-0868"></script>
     <script src="js/preset-importer.js?v=20260807-100-0813"></script>
-    <script src="js/procurement.js?v=20260803-100-0799"></script>
+    <script src="js/procurement.js?v=20260811-100-0873"></script>
     <script src="js/doctor-ai.js?v=20260810-100-0866"></script>
     <script src="js/field-reports.js?v=20260810-100-0858"></script>
-    <script src="js/api-connections-ui.js?v=20260809-100-0836"></script>
-    <script src="js/timeline.js?v=20260810-100-0863"></script>
+    <script src="js/api-connections-ui.js?v=20260811-100-0874"></script>
+    <script src="js/timeline.js?v=20260811-100-0874"></script>
     <script src="js/story-graph-workbench.js?v=20260807-100-0813"></script>
-    <script src="js/image-workspace.js?v=20260810-100-0863"></script>
+    <script src="js/image-workspace.js?v=20260811-100-0874"></script>
     <script src="js/cloud-service.js?v=20260728-100-0741"></script>
     <script src="js/plugin-runtime.js?v=20260727-100-0738"></script>
     <script src="js/finance-operations.js?v=20260807-100-0817"></script>

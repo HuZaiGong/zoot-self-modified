@@ -884,6 +884,51 @@
       "craft_recipe": null,
       "usage": ["医疗", "急救"],
       "source": ["罗德岛医疗部", "关卡掉落"]
+    },
+    "story_sami_stele": {
+      "id": "story_sami_stele",
+      "name": "萨米石碑",
+      "description": "一块来历不明的萨米石碑，保留着通往某段跑团故事的线索。",
+      "category": "故事钥匙",
+      "subcategory": "跑团凭证",
+      "stackable": true,
+      "max_stack": 999,
+      "craftable": false,
+      "craft_recipe": null,
+      "usage": ["解锁跑团故事"],
+      "source": ["兑换中心"],
+      "story_hook_id": "terra_rpg:sami_stele",
+      "handler_status": "reserved",
+      "image_ref": null
+    },
+    "black_market_any_item_voucher": {
+      "id": "black_market_any_item_voucher",
+      "name": "黑市任意物品兑换券",
+      "description": "可在采购部今日黑市免费兑换任意一件商品。",
+      "category": "兑换凭证",
+      "subcategory": "黑市兑换券",
+      "stackable": true,
+      "max_stack": 999,
+      "craftable": false,
+      "craft_recipe": null,
+      "usage": ["今日黑市任意物品兑换"],
+      "source": ["兑换中心"],
+      "redeem_scope": "black_market_catalog",
+      "image_ref": null
+    },
+    "mysterious_supplier_business_card": {
+      "id": "mysterious_supplier_business_card",
+      "name": "神秘供应商的名片",
+      "description": "一张没有留下可靠联络方式的供应商名片。",
+      "category": "特殊凭证",
+      "subcategory": "收藏凭证",
+      "stackable": true,
+      "max_stack": 999,
+      "craftable": false,
+      "craft_recipe": null,
+      "usage": ["收藏", "后续内容凭证"],
+      "source": ["兑换中心"],
+      "image_ref": null
     }
   }
 }

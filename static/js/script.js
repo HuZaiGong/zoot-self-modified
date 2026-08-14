@@ -411,6 +411,75 @@ const SWIPE_THRESHOLD = 50;
 
 // 聊天列表局部更新
 let chatListUpdateScheduled = false;
+const CHAT_LIST_INITIAL_RENDER_COUNT = 40;
+const CHAT_LIST_APPEND_COUNT = 30;
+const CHAT_LIST_REFRESH_TTL_MS = 30000;
+const CHAT_LIST_SEARCH_DEBOUNCE_MS = 120;
+let chatListRenderLimit = CHAT_LIST_INITIAL_RENDER_COUNT;
+let chatListLoadObserver = null;
+let chatListFallbackBound = false;
+let chatListSearchTimer = null;
+let chatListSearchRestoreState = null;
+
+function resetChatListWindow() {
+    chatListRenderLimit = CHAT_LIST_INITIAL_RENDER_COUNT;
+}
+
+function extendChatListWindow() {
+    chatListRenderLimit += CHAT_LIST_APPEND_COUNT;
+    scheduleChatListRender();
+}
+
+function bindChatListLoadSentinel() {
+    const sentinel = document.getElementById('chat-list-load-sentinel');
+    const root = document.querySelector('#page-chat-list .chat-scroll-wrapper');
+    chatListLoadObserver?.disconnect();
+    chatListLoadObserver = null;
+    if (!sentinel || !root) return;
+    if ('IntersectionObserver' in window) {
+        chatListLoadObserver = new IntersectionObserver(entries => {
+            if (entries.some(entry => entry.isIntersecting)) extendChatListWindow();
+        }, {root, rootMargin: '600px 0px', threshold: 0});
+        chatListLoadObserver.observe(sentinel);
+        return;
+    }
+    if (!chatListFallbackBound) {
+        chatListFallbackBound = true;
+        root.addEventListener('scroll', () => {
+            if (root.scrollHeight - root.scrollTop - root.clientHeight < 600 &&
+                document.getElementById('chat-list-load-sentinel')) {
+                extendChatListWindow();
+            }
+        }, {passive: true});
+    }
+}
+
+function applyChatListSearchQuery(keyword) {
+    const nextQuery = String(keyword || '').trim();
+    const hadQuery = Boolean(chatSearchQuery);
+    const hasQuery = Boolean(nextQuery);
+    const scrollRoot = document.querySelector('#page-chat-list .chat-scroll-wrapper');
+    if (!hadQuery && hasQuery) {
+        chatListSearchRestoreState = {
+            renderLimit: chatListRenderLimit,
+            scrollTop: Number(scrollRoot?.scrollTop || 0)
+        };
+    }
+    chatSearchQuery = nextQuery;
+    if (hadQuery && !hasQuery && chatListSearchRestoreState) {
+        const restore = chatListSearchRestoreState;
+        chatListSearchRestoreState = null;
+        chatListRenderLimit = Math.max(CHAT_LIST_INITIAL_RENDER_COUNT, restore.renderLimit || 0);
+        renderChatList();
+        requestAnimationFrame(() => {
+            if (scrollRoot) scrollRoot.scrollTop = restore.scrollTop;
+        });
+        return;
+    }
+    resetChatListWindow();
+    renderChatList();
+}
+
 function scheduleChatListRender() {
     if (chatListUpdateScheduled) return;
     chatListUpdateScheduled = true;
@@ -549,7 +618,7 @@ const TYPING_TIMEOUT = 120000;
 let currentPage = 'chat-list';
 
 // API
-let currentModel = 'deepseek-chat';
+let currentModel = 'deepseek-v4-flash';
 let currentApiField = null;
 
 // 调试模式状态
@@ -1409,31 +1478,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    document.addEventListener('click', (e) => {
-        // 右滑操作区由专用处理器负责；绝不能继续触发聊天项跳转。
-        if (e.target.closest('.chat-item-actions')) return;
-        const chatItem = e.target.closest('.chat-item');
-        if (!chatItem) return;
-        if (chatItem.dataset.justSwiped === 'true' || chatItem.classList.contains('swiped')) {
-            chatItem.dataset.justSwiped = '';
-            return;
-        }
-        const chatId = chatItem.dataset.chatId;
-        const chatType = chatItem.dataset.chatType;
-        if (chatType === 'private') {
-            openChat('private', chatId, getChatTargetIdentity(chatId));
-        } else if (chatType === 'group') {
-            currentGroupId = chatId;
-            currentOperatorId = null;
-            const group = groups[chatId];
-            const titleEl = document.getElementById('chat-title');
-            if (titleEl) titleEl.textContent = group ? group.name : chatId;
-            loadGroupHistory(chatId);
-            saveCurrentChat();
-            showPage('chat-detail');
-        }
-    });
-
     console.log('[DOMContentLoaded] 通用开关与交互绑定完成');
 
     // ====================================================================
@@ -1447,17 +1491,11 @@ document.addEventListener('DOMContentLoaded', function() {
         // 输入事件：过滤/高亮，并控制清除按钮显示
         const handleSearchInput = (e) => {
             const keyword = e.target.value;
-            if (keyword && keyword.trim() !== '') {
-                // 有关键字：筛选并高亮
-                chatSearchQuery = keyword;
-                renderChatList();
-                if (clearSearchBtn) clearSearchBtn.style.display = 'flex';
-            } else {
-                // 清空：重置搜索状态，显示全部聊天
-                chatSearchQuery = '';
-                renderChatList();
-                if (clearSearchBtn) clearSearchBtn.style.display = 'none';
-            }
+            if (clearSearchBtn) clearSearchBtn.style.display = keyword.trim() ? 'flex' : 'none';
+            clearTimeout(chatListSearchTimer);
+            chatListSearchTimer = setTimeout(() => {
+                applyChatListSearchQuery(keyword);
+            }, CHAT_LIST_SEARCH_DEBOUNCE_MS);
         };
         chatSearchInput.removeEventListener('input', window._chatSearchHandler);
         window._chatSearchHandler = handleSearchInput;
@@ -1469,8 +1507,8 @@ document.addEventListener('DOMContentLoaded', function() {
         clearSearchBtn.addEventListener('click', () => {
             if (chatSearchInput) {
                 chatSearchInput.value = '';
-                chatSearchQuery = '';
-                renderChatList();
+                clearTimeout(chatListSearchTimer);
+                applyChatListSearchQuery('');
                 clearSearchBtn.style.display = 'none';
                 // 可选：让输入框获得焦点
                 chatSearchInput.focus();
@@ -1486,6 +1524,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (filter) {
                 console.log('点击过滤标签:', filter);
                 chatFilter = filter;
+                resetChatListWindow();
                 document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
                 tab.classList.add('active');
                 renderChatList();
@@ -1976,6 +2015,10 @@ document.addEventListener('DOMContentLoaded', function() {
         // 聊天项点击
         const chatItem = e.target.closest('.chat-item');
         if (!chatItem) return;
+        if (chatItem.dataset.justSwiped === 'true' || chatItem.classList.contains('swiped')) {
+            chatItem.dataset.justSwiped = '';
+            return;
+        }
         const chatId = chatItem.dataset.chatId;
         const chatType = chatItem.dataset.chatType;
         if (chatType === 'private') {
@@ -3145,6 +3188,42 @@ function showConfirmDialog(title, message, onConfirm, onCancel = null) {
 
 function requestProjectConfirmation(title, message) {
     return new Promise(resolve => showConfirmDialog(title, message, () => resolve(true), () => resolve(false)));
+}
+
+function providerFailurePresentation(payload, fallbackMessage = '模型服务暂时不可用') {
+    const error = payload && typeof payload.error === 'object' ? payload.error : {};
+    const detail = payload?.detail;
+    const baseMessage = typeof detail === 'object'
+        ? (detail.message || detail.error || fallbackMessage)
+        : (String(detail || payload?.message || fallbackMessage));
+    const context = [
+        error.provider ? `服务：${error.provider}` : '',
+        error.model ? `模型：${error.model}` : '',
+        error.upstream_request_id ? `上游请求ID：${error.upstream_request_id}` : '',
+        error.request_id ? `本地请求ID：${error.request_id}` : ''
+    ].filter(Boolean).join('；');
+    return {
+        message: context ? `${baseMessage}（${context}）` : baseMessage,
+        action: String(error.action || ''),
+        retryable: Boolean(error.retryable)
+    };
+}
+
+async function presentProviderFailure(payload, fallbackMessage) {
+    const failure = providerFailurePresentation(payload, fallbackMessage);
+    if (failure.action === 'open_api_settings') {
+        const shouldOpen = await requestProjectConfirmation(
+            'API配置需要检查',
+            `${failure.message}\n\n是否打开API设置？`
+        );
+        if (shouldOpen) showPage('settings-api');
+        return;
+    }
+    showTemporaryToast(
+        failure.retryable ? `${failure.message}，可以稍后重试` : failure.message,
+        5200,
+        'error'
+    );
 }
 
 function requestProjectTextInput(title, initialValue = '') {
@@ -10928,41 +11007,86 @@ function consumePendingSendCommand(command) {
 }
 
 // ========== 9.2.聊天列表本地缓存 ==========
-// 保存聊天列表到本地存储
-function saveChatsToLocalStorage() {
+const CHAT_LIST_CACHE_LIMIT = 60;
+const CHAT_LIST_CACHE_WRITE_DELAY_MS = 300;
+let chatListCacheWriteTimer = null;
+
+function getChatListCachePersonaId() {
+    return String(window.currentPersonaId || currentPersonaId || 'doctor');
+}
+
+function getChatListCacheKey(personaId = getChatListCachePersonaId()) {
+    return `cachedChatsV3:${encodeURIComponent(String(personaId || 'doctor'))}`;
+}
+
+function compactChatsForLocalStorage() {
+    const pinned = chats.filter(chat => chat.isPinned);
+    const pinnedKeys = new Set(pinned.map(chat => `${chat.type}:${chat.id}`));
+    const recent = chats
+        .filter(chat => !pinnedKeys.has(`${chat.type}:${chat.id}`))
+        .sort((a, b) => Number(b.lastTime || 0) - Number(a.lastTime || 0))
+        .slice(0, CHAT_LIST_CACHE_LIMIT);
+    return [...pinned, ...recent].map(chat => ({
+        id: chat.id,
+        type: chat.type,
+        name: chat.name,
+        lastMsg: chat.lastMsg,
+        lastTime: chat.lastTime,
+        avatar: chat.avatar,
+        role_type: chat.role_type,
+        game_namespace: chat.game_namespace,
+        engine_state: chat.engine_state,
+        contact_available: chat.contact_available,
+        contact_status: chat.contact_status,
+        avatar_ref: chat.avatar_ref,
+        avatar_url: chat.avatar_url,
+        actor_id: chat.actor_id,
+        actor_kind: chat.actor_kind,
+        profile_id: chat.profile_id,
+        conversation_id: chat.conversation_id,
+        conversation_key: chat.conversation_key,
+        instance_status: chat.instance_status,
+        ai_label: chat.ai_label,
+        messageCount: Number(chat.messageCount || 0),
+        isPinned: Boolean(chat.isPinned),
+        lastNonAssistantMsg: chat.lastNonAssistantMsg,
+        lastNonAssistantSender: chat.lastNonAssistantSender
+    }));
+}
+
+function flushChatsToLocalStorage() {
+    clearTimeout(chatListCacheWriteTimer);
+    chatListCacheWriteTimer = null;
     try {
-        // 只保存必要字段，避免存储过大，同时保留非助理消息信息
-        const toStore = chats.map(chat => ({
-            id: chat.id,
-            type: chat.type,
-            name: chat.name,
-            lastMsg: chat.lastMsg,
-            lastTime: chat.lastTime,
-            avatar: chat.avatar,
-            role_type: chat.role_type,
-            game_namespace: chat.game_namespace,
-            engine_state: chat.engine_state,
-            contact_available: chat.contact_available,
-            contact_status: chat.contact_status,
-            avatar_ref: chat.avatar_ref,
-            messageCount: Number(chat.messageCount || 0),
-            isPinned: chat.isPinned,
-            lastNonAssistantMsg: chat.lastNonAssistantMsg,
-            lastNonAssistantSender: chat.lastNonAssistantSender
-        }));
-        localStorage.setItem('cachedChats', JSON.stringify(toStore));
+        localStorage.setItem(getChatListCacheKey(), JSON.stringify(compactChatsForLocalStorage()));
     } catch (e) {
         console.error('保存聊天列表到本地失败', e);
     }
 }
 
+// 合并写入，避免每条新消息同步序列化整个列表。
+function saveChatsToLocalStorage(immediate = false) {
+    clearTimeout(chatListCacheWriteTimer);
+    if (immediate) {
+        flushChatsToLocalStorage();
+        return;
+    }
+    chatListCacheWriteTimer = setTimeout(flushChatsToLocalStorage, CHAT_LIST_CACHE_WRITE_DELAY_MS);
+}
+
 // 从本地存储加载聊天列表
 function loadChatsFromLocalStorage() {
     try {
-        const cached = localStorage.getItem('cachedChats');
+        const cacheKey = getChatListCacheKey();
+        const currentCache = localStorage.getItem(cacheKey);
+        const usingLegacyCache = !currentCache;
+        const cached = currentCache || localStorage.getItem('cachedChats');
         if (cached) {
             const parsed = JSON.parse(cached);
-            const normalizedChats = parsed.map(chat => ({
+            if (!Array.isArray(parsed)) return false;
+            const normalizedChats = parsed
+                .filter(chat => !usingLegacyCache || chat.role_type !== 'doctor_agent')
+                .map(chat => ({
                 ...chat,
                 // 确保字段完整
                 avatar: chat.type === 'private'
@@ -10973,19 +11097,29 @@ function loadChatsFromLocalStorage() {
                 messageCount: Number(chat.messageCount || 0),
                 lastNonAssistantMsg: chat.lastNonAssistantMsg,
                 lastNonAssistantSender: chat.lastNonAssistantSender
-            }));
+                }));
             cachedChatActivity.clear();
             normalizedChats.forEach(chat => {
                 cachedChatActivity.set(chatVisibilityKey(chat.id, chat.type), normalizeChatActivity(chat));
             });
             chats = normalizedChats.filter(chat => !shouldKeepChatHidden(chat));
+            resetChatListWindow();
             renderChatList();
             console.log(`从本地缓存加载了 ${chats.length} 个聊天项`);
+            if (usingLegacyCache) saveChatsToLocalStorage();
+            return true;
         }
     } catch (e) {
         console.error('加载本地聊天列表失败', e);
     }
+    return false;
 }
+
+document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'hidden' && chatListCacheWriteTimer) {
+        flushChatsToLocalStorage();
+    }
+});
 
 // ========== 9.3. 消息显示与聊天详情页 ==========
 let longPressTimer = null;
@@ -14071,17 +14205,9 @@ async function executeCurrentMessage(command) {
                 hideTypingIndicator(`private:${opId}`);
                 if (!recovery.userStored) {
                     window.chatMedia?.restore?.(attachmentSnapshot);
-                    const detail = typeof data.detail === 'object' ? data.detail.message : data.detail;
-                    showTemporaryToast(detail || '消息发送失败，请检查附件解析状态', 3600, 'error');
+                    void presentProviderFailure(data, '消息发送失败，请检查附件解析状态');
                 } else if (!recovery.hasReply) {
-                    const detail = typeof data.detail === 'object'
-                        ? (data.detail.message || data.detail.error || '')
-                        : String(data.detail || data.error || '');
-                    showTemporaryToast(
-                        detail ? `消息已保存，回复失败：${detail}` : '消息已经保存，但回复尚未完成',
-                        5200,
-                        'warning'
-                    );
+                    void presentProviderFailure(data, '消息已经保存，但回复尚未完成');
                 }
                 return;
             }
@@ -14573,7 +14699,7 @@ async function resendFailedMessage(content, chatType, chatId, originalTimestamp)
 
         if (!res.ok) {
             const errData = await res.json();
-            throw new Error(errData.detail || '发送失败');
+            throw new Error(providerFailurePresentation(errData, '发送失败').message);
         }
 
         const data = await res.json();
@@ -16201,86 +16327,108 @@ function openWhitelistSelector(type) {
     }
 }
 
+function updateWhitelistSelectionCount(container, targetId) {
+    const target = document.getElementById(targetId);
+    if (target) {
+        target.textContent = `已选 ${container.querySelectorAll('.whitelist-checkbox:checked').length} 项`;
+    }
+}
+
+function filterWhitelistRows(container, keyword) {
+    const normalized = String(keyword || '').trim().toLocaleLowerCase();
+    container.querySelectorAll('.whitelist-contact-row').forEach(row => {
+        const searchText = String(row.dataset.search || '').toLocaleLowerCase();
+        row.hidden = Boolean(normalized) && !searchText.includes(normalized);
+    });
+    container.querySelectorAll('.contact-letter').forEach(letter => {
+        let sibling = letter.nextElementSibling;
+        let visible = false;
+        while (sibling && sibling.classList.contains('whitelist-contact-row')) {
+            visible = visible || !sibling.hidden;
+            sibling = sibling.nextElementSibling;
+        }
+        letter.hidden = !visible;
+    });
+}
+
+function bindWhitelistToolbar(container, prefix, countTargetId) {
+    const refresh = () => updateWhitelistSelectionCount(container, countTargetId);
+    container.onchange = event => {
+        if (event.target.classList.contains('whitelist-checkbox')) refresh();
+    };
+    const selectFiltered = document.getElementById(`${prefix}-select-filtered`);
+    if (selectFiltered) {
+        selectFiltered.onclick = () => {
+            container.querySelectorAll('.whitelist-contact-row:not([hidden]) .whitelist-checkbox').forEach(input => { input.checked = true; });
+            refresh();
+        };
+    }
+    const clear = document.getElementById(`${prefix}-clear-selection`);
+    if (clear) {
+        clear.onclick = () => {
+            container.querySelectorAll('.whitelist-checkbox').forEach(input => { input.checked = false; });
+            refresh();
+        };
+    }
+    refresh();
+}
+
 function renderWhitelistPage(type = 'private') {
     const savedSet = new Set(window[`_${type}Whitelist`] || []);
-    let allOps = operators.filter(op => op.id !== 'priestess' && op.id !== 'doctor');
-
-    // 按拼音首字母分组
+    const allOps = operators.filter(op => op.id !== 'priestess' && op.id !== 'doctor');
     const grouped = {};
     allOps.forEach(op => {
-        let firstChar = op.pinyin_initial || '#';
-        if (!firstChar || !/[A-Z]/.test(firstChar)) firstChar = '#';
-        if (!grouped[firstChar]) grouped[firstChar] = [];
-        grouped[firstChar].push(op);
+        let firstChar = String(op.pinyin_initial || '#').toUpperCase();
+        if (!/^[A-Z]$/.test(firstChar)) firstChar = '#';
+        (grouped[firstChar] ||= []).push(op);
     });
-    const sortedLetters = Object.keys(grouped).sort((a, b) => {
-        if (a === '#') return 1;
-        if (b === '#') return -1;
-        return a.localeCompare(b);
-    });
-
+    const sortedLetters = Object.keys(grouped).sort((a, b) => a === '#' ? 1 : b === '#' ? -1 : a.localeCompare(b));
     const container = document.getElementById('whitelist-page-list');
-    if (!container) return;
+    const index = document.getElementById('whitelist-page-index');
+    if (!container || !index) return;
 
-    let html = '';
-    for (const letter of sortedLetters) {
-        html += `<div class="contact-letter" data-letter="${letter}">${letter}</div>`;
-        grouped[letter].forEach(op => {
-            const isChecked = savedSet.has(op.id);
-            html += `
-                <div class="contact-item" data-id="${op.id}" style="display: flex; justify-content: space-between; align-items: center;">
-                    <div style="display: flex; align-items: center;">
-                        <img src="${getOperatorAvatarUrl(op.id)}" class="contact-avatar" style="width: 40px; height: 40px; margin-right: 12px;" onerror="this.src='/static/avatars/default.webp'">
-                        <span class="contact-name">${escapeHtml(op.codename)}</span>
-                    </div>
-                    <input type="checkbox" class="whitelist-checkbox" value="${op.id}" ${isChecked ? 'checked' : ''}>
-                </div>
-            `;
-        });
-    }
-    container.innerHTML = html;
+    container.innerHTML = sortedLetters.map(letter => `
+        <div class="contact-letter" data-letter="${escapeHtml(letter)}">${escapeHtml(letter)}</div>
+        ${grouped[letter].map(op => `
+            <label class="contact-item whitelist-contact-row" data-id="${escapeHtml(String(op.id))}" data-search="${escapeHtml(`${op.codename || ''} ${op.id || ''}`)}">
+                <input type="checkbox" class="whitelist-checkbox" value="${escapeHtml(String(op.id))}" ${savedSet.has(op.id) ? 'checked' : ''}>
+                <img src="${getOperatorAvatarUrl(op.id)}" class="contact-avatar whitelist-contact-avatar" alt="" onerror="this.src='/static/avatars/default.webp'">
+                <span class="contact-name">${escapeHtml(op.codename)}</span>
+            </label>
+        `).join('')}
+    `).join('');
+    index.innerHTML = sortedLetters.map(letter => `<button type="button" data-letter="${escapeHtml(letter)}">${escapeHtml(letter)}</button>`).join('');
+    index.onclick = event => {
+        const button = event.target.closest('button[data-letter]');
+        const heading = button && [...container.querySelectorAll('.contact-letter')].find(item => item.dataset.letter === button.dataset.letter);
+        if (heading) heading.scrollIntoView({ block: 'start' });
+    };
 
     const searchInput = document.getElementById('whitelist-page-search');
     if (searchInput) {
+        searchInput.value = '';
         searchInput.oninput = () => {
-            const kw = searchInput.value.toLowerCase();
-            container.querySelectorAll('.contact-item').forEach(item => {
-                const name = item.querySelector('.contact-name').innerText.toLowerCase();
-                item.style.display = name.includes(kw) ? 'flex' : 'none';
-            });
-            // 隐藏没有可见项的分组字母
-            const letters = container.querySelectorAll('.contact-letter');
-            letters.forEach(letter => {
-                let nextItems = [];
-                let next = letter.nextElementSibling;
-                while (next && next.classList.contains('contact-item')) {
-                    nextItems.push(next);
-                    next = next.nextElementSibling;
-                }
-                const anyVisible = nextItems.some(item => item.style.display !== 'none');
-                letter.style.display = anyVisible ? 'block' : 'none';
-            });
+            filterWhitelistRows(container, searchInput.value);
+            index.hidden = Boolean(searchInput.value.trim());
         };
     }
+    bindWhitelistToolbar(container, 'whitelist', 'whitelist-selected-count');
 
     const saveBtn = document.getElementById('whitelist-page-save');
     if (saveBtn) {
-        const newBtn = saveBtn.cloneNode(true);
-        saveBtn.parentNode.replaceChild(newBtn, saveBtn);
-        newBtn.onclick = async () => {
-            const selected = Array.from(container.querySelectorAll('.whitelist-checkbox:checked')).map(cb => cb.value);
-            await saveAutoMessageWhitelistForType(type, selected);
-            goBack();
+        saveBtn.onclick = async () => {
+            const selected = Array.from(container.querySelectorAll('.whitelist-checkbox:checked'), input => input.value);
+            saveBtn.disabled = true;
+            try {
+                await saveAutoMessageWhitelistForType(type, selected);
+                goBack();
+            } catch (error) {
+                showTemporaryToast(`白名单保存失败：${error.message}`, 3500, 'error');
+            } finally {
+                saveBtn.disabled = false;
+            }
         };
     }
-
-    // 更新索引栏
-    setTimeout(() => {
-        const letters = sortedLetters;
-        const hasStar = false;
-        const hasCustom = false;
-        updateContactIndex(letters, hasStar, hasCustom);
-    }, 10);
 }
 
 function renderGroupWhitelistPage() {
@@ -16288,88 +16436,44 @@ function renderGroupWhitelistPage() {
     const savedSet = new Set(window._groupWhitelist || []);
     const container = document.getElementById('group-whitelist-list');
     if (!container) return;
-
-    let groupList = [];
-    for (const [groupId, group] of Object.entries(groups)) {
-        groupList.push({
-            id: groupId,
-            name: group.name || groupId,
-            avatar: group.avatar || '',
-            avatar_ref: group.avatar_ref || ''
-        });
+    const groupList = Object.entries(groups).map(([groupId, group]) => ({
+        id: groupId,
+        name: group.name || groupId,
+        avatar: group.avatar || '',
+        avatar_ref: group.avatar_ref || ''
+    }));
+    if (!groupList.length) {
+        container.innerHTML = '<div class="whitelist-empty">暂无群聊</div>';
+    } else {
+        container.innerHTML = groupList.map(group => `
+            <label class="contact-item whitelist-contact-row" data-id="${escapeHtml(String(group.id))}" data-search="${escapeHtml(`${group.name} ${group.id}`)}">
+                <input type="checkbox" class="whitelist-checkbox" value="${escapeHtml(String(group.id))}" ${savedSet.has(group.id) ? 'checked' : ''}>
+                <span class="group-avatar-inline">${getGroupAvatarHtml({ group_id: group.id, avatar: group.avatar, avatar_ref: group.avatar_ref })}</span>
+                <span class="contact-name">${escapeHtml(group.name)}</span>
+            </label>
+        `).join('');
     }
-    if (groupList.length === 0) {
-        container.innerHTML = '<div style="text-align:center; padding:20px;">暂无群聊</div>';
-        return;
-    }
-
-    // 按名称拼音首字母分组（可选，群组数量少，暂不分组，保持简单列表）
-    // 为了统一，这里也简单分组
-    const grouped = {};
-    groupList.forEach(group => {
-        let firstChar = group.name.charAt(0).toUpperCase();
-        if (!/[A-Z]/.test(firstChar)) firstChar = '#';
-        if (!grouped[firstChar]) grouped[firstChar] = [];
-        grouped[firstChar].push(group);
-    });
-    const sortedLetters = Object.keys(grouped).sort((a, b) => {
-        if (a === '#') return 1;
-        if (b === '#') return -1;
-        return a.localeCompare(b);
-    });
-
-    let html = '';
-    for (const letter of sortedLetters) {
-        html += `<div class="contact-letter" data-letter="${letter}">${letter}</div>`;
-        grouped[letter].forEach(group => {
-            html += `
-                <div class="contact-item" data-id="${group.id}" style="display: flex; justify-content: space-between; align-items: center;">
-                    <div style="display: flex; align-items: center;">
-                        <div class="group-avatar-inline">${getGroupAvatarHtml({ group_id: group.id, avatar: group.avatar, avatar_ref: group.avatar_ref })}</div>
-                        <span class="contact-name">${escapeHtml(group.name)}</span>
-                    </div>
-                    <input type="checkbox" class="whitelist-checkbox" value="${group.id}" ${savedSet.has(group.id) ? 'checked' : ''}>
-                </div>
-            `;
-        });
-    }
-    container.innerHTML = html;
-
     const searchInput = document.getElementById('group-whitelist-search');
     if (searchInput) {
-        searchInput.oninput = () => {
-            const kw = searchInput.value.toLowerCase();
-            container.querySelectorAll('.contact-item').forEach(item => {
-                const name = item.querySelector('.contact-name').innerText.toLowerCase();
-                item.style.display = name.includes(kw) ? 'flex' : 'none';
-            });
-            const letters = container.querySelectorAll('.contact-letter');
-            letters.forEach(letter => {
-                let nextItems = [];
-                let next = letter.nextElementSibling;
-                while (next && next.classList.contains('contact-item')) {
-                    nextItems.push(next);
-                    next = next.nextElementSibling;
-                }
-                const anyVisible = nextItems.some(item => item.style.display !== 'none');
-                letter.style.display = anyVisible ? 'block' : 'none';
-            });
-        };
+        searchInput.value = '';
+        searchInput.oninput = () => filterWhitelistRows(container, searchInput.value);
     }
-
+    bindWhitelistToolbar(container, 'group-whitelist', 'group-whitelist-selected-count');
     const saveBtn = document.getElementById('group-whitelist-page-save');
     if (saveBtn) {
-        const newBtn = saveBtn.cloneNode(true);
-        saveBtn.parentNode.replaceChild(newBtn, saveBtn);
-        newBtn.onclick = async () => {
-            const selected = Array.from(container.querySelectorAll('.whitelist-checkbox:checked')).map(cb => cb.value);
-            await saveAutoMessageWhitelistForType(type, selected);
-            goBack();
+        saveBtn.onclick = async () => {
+            const selected = Array.from(container.querySelectorAll('.whitelist-checkbox:checked'), input => input.value);
+            saveBtn.disabled = true;
+            try {
+                await saveAutoMessageWhitelistForType(type, selected);
+                goBack();
+            } catch (error) {
+                showTemporaryToast(`群聊白名单保存失败：${error.message}`, 3500, 'error');
+            } finally {
+                saveBtn.disabled = false;
+            }
         };
     }
-
-    // 群聊白名单页不需要索引栏
-    updateContactIndex([], false, false);
 }
 
 // ========== 16.6. 续写处理（触发一次自主发言） ==========
@@ -16429,7 +16533,7 @@ async function handleContinue() {
                 showTemporaryToast(`⏭️ ${data.message || '续写跳过'}`);
             }
         } else {
-            showTemporaryToast(`❌ 续写失败: ${data.detail || data.message || '未知错误'}`);
+            void presentProviderFailure(data, '续写失败');
         }
     } catch (err) {
         console.error('[续写] 请求失败:', err);
@@ -18582,7 +18686,7 @@ function initKeyboardObserver() {
 function renderChatList() {
     if (!chatListContainer) return;
 
-    let filtered = chats || [];
+    let filtered = [...(chats || [])];
 
     if (chatFilter === 'private') {
         filtered = filtered.filter(c => c.type === 'private');
@@ -18601,7 +18705,8 @@ function renderChatList() {
     }
 
     if (filtered.length === 0) {
-        chatListContainer.innerHTML = '<div class="empty-state">暂无聊天，点击下方联系人开始对话</div>';
+        chatListLoadObserver?.disconnect();
+        chatListContainer.innerHTML = '<div class="empty-state chat-list-empty-state">暂无聊天，点击下方联系人开始对话</div>';
         updateNavBadges();
         return;
     }
@@ -18613,13 +18718,16 @@ function renderChatList() {
         if (aStar !== bStar) return aStar ? -1 : 1;
         return (b.lastTime || 0) - (a.lastTime || 0);
     });
+    const pinnedCount = sorted.reduce((count, chat) => count + (chat.isPinned ? 1 : 0), 0);
+    const visibleCount = Math.min(sorted.length, Math.max(chatListRenderLimit, pinnedCount));
+    const renderedChats = sorted.slice(0, visibleCount);
 
     // 使用文档片段优化 DOM 更新
     const fragment = document.createDocumentFragment();
     const tempDiv = document.createElement('div');
 
     // 生成 HTML 字符串
-    const htmlString = sorted.map(chat => {
+    const htmlString = renderedChats.map((chat, renderedIndex) => {
         const timeStr = chat.lastTime ? formatChatListTimestamp(chat.lastTime) : '';
         const draftKey = getDraftKey(chat.type, chat.id);
         const draft = localStorage.getItem(draftKey);
@@ -18681,7 +18789,7 @@ function renderChatList() {
             const avatarUrl = chat.role_type === 'doctor_agent'
                 ? (chat.avatar_url || '/static/avatars/default.webp')
                 : getCharacterAvatarUrl(chat.id, chat.role_type || '');
-            avatarHtml = `<img src="${avatarUrl}" class="chat-avatar-img" alt="${chat.name}" onerror="this.onerror=null; this.src='/static/avatars/default.webp';">`;
+            avatarHtml = `<img src="${avatarUrl}" class="chat-avatar-img" alt="${chat.name}" loading="${renderedIndex < 8 ? 'eager' : 'lazy'}" decoding="async" onerror="this.onerror=null; this.src='/static/avatars/default.webp';">`;
             const op = operatorMap.get(chat.id);
             if (op) displayName = getDisplayNameSync(chat.id, op.codename);
         } else {
@@ -18703,7 +18811,7 @@ function renderChatList() {
         const isPriestessChat = chat.type === 'private' && String(chat.id) === 'priestess';
 
         return `
-            <div class="chat-item-wrapper">
+            <div class="chat-item-wrapper" data-chat-key="${escapeHtml(chatKey)}">
                 <div class="chat-item ${pinnedClass}${isPriestessChat ? ' priestess-related priestess-chat-list-item' : ''}" data-chat-id="${chat.id}" data-chat-type="${chat.type}" data-pinned="${chat.isPinned}"${isPriestessChat ? ' data-actor-id="priestess"' : ''} ${isSearchMatch ? 'data-search-match="true"' : ''}>
                     ${starGradientHtml}
                     <div class="chat-avatar-wrapper">
@@ -18725,17 +18833,33 @@ function renderChatList() {
                 </div>
             </div>
         `;
-    }).join('');
+    }).join('') + (visibleCount < sorted.length
+        ? '<div id="chat-list-load-sentinel" class="chat-list-load-sentinel" aria-hidden="true"></div>'
+        : '');
 
-    // 用文档片段填充
+    // 使用稳定会话键进行轻量DOM协调。未变化的头像和聊天项原位复用，只有
+    // 内容变化、新进入分片或排序变化的节点才更新，避免新消息导致整表重建。
     tempDiv.innerHTML = htmlString;
-    while (tempDiv.firstChild) {
-        fragment.appendChild(tempDiv.firstChild);
-    }
-    chatListContainer.innerHTML = '';
+    const existingNodes = new Map();
+    chatListContainer.querySelectorAll(':scope > .chat-item-wrapper').forEach(node => {
+        existingNodes.set(node.dataset.chatKey || '', node);
+    });
+    const desiredNodes = Array.from(tempDiv.children).map(candidate => {
+        if (!candidate.classList.contains('chat-item-wrapper')) return candidate;
+        const key = candidate.dataset.chatKey || '';
+        const existing = existingNodes.get(key);
+        if (!existing || existing.innerHTML !== candidate.innerHTML) return candidate;
+        existingNodes.delete(key);
+        return existing;
+    });
+    existingNodes.forEach(node => node.remove());
+    chatListContainer.querySelectorAll(':scope > .chat-list-empty-state').forEach(node => node.remove());
+    chatListContainer.querySelector('#chat-list-load-sentinel')?.remove();
+    desiredNodes.forEach(node => fragment.appendChild(node));
     chatListContainer.appendChild(fragment);
 
-    refreshOperatorTitleDecorations(chats.filter(chat => chat.type === 'private').map(chat => chat.id));
+    bindChatListLoadSentinel();
+    refreshOperatorTitleDecorations(renderedChats.filter(chat => chat.type === 'private').map(chat => chat.id));
     updateNavBadges();
 }
 
@@ -19005,7 +19129,8 @@ function updateChatListFromMessage(senderId, content, timestamp, chatType, group
         console.log(`[列表更新] 新增聊天项: ${chatName}, 发言人: ${lastSenderName}`);
     }
 
-    renderChatList();
+    scheduleChatListRender();
+    saveChatsToLocalStorage();
     updateNavBadges();
 }
 
@@ -31472,18 +31597,33 @@ function scheduleGroupConfigHydration(items) {
     }
 }
 
-// 加载聊天列表（带重试限制）
-async function loadChats(retryCount = 0, skipLocalCache = false) {
-    if (!skipLocalCache && chats.length === 0) {
-        loadChatsFromLocalStorage();
-    } else {
-        chats = []; // 强制刷新时清空旧数据，避免残留
-    }
+const chatListLoadState = {
+    personaId: '',
+    loadedAt: 0,
+    generation: 0,
+    promise: null,
+    controller: null,
+    hasAuthoritativeData: false,
+    etags: new Map()
+};
 
+async function loadChatsInternal(retryCount, skipLocalCache, personaId, generation, controller) {
     const MAX_RETRY = 3;
     try {
-        const personaId = window.currentPersonaId || currentPersonaId || 'doctor';
-        const res = await fetch(`/chats?persona_id=${encodeURIComponent(personaId)}`);
+        const headers = {};
+        const etag = chatListLoadState.etags.get(personaId);
+        if (etag && chatListLoadState.hasAuthoritativeData) headers['If-None-Match'] = etag;
+        const res = await fetch(`/chats?persona_id=${encodeURIComponent(personaId)}`, {
+            headers,
+            signal: controller.signal
+        });
+        if (generation !== chatListLoadState.generation || personaId !== chatListLoadState.personaId) {
+            return chats;
+        }
+        if (res.status === 304) {
+            chatListLoadState.loadedAt = Date.now();
+            return chats;
+        }
         if (res.ok) {
             const data = await res.json();
             if (data.length === 0 && retryCount < MAX_RETRY) {
@@ -31492,8 +31632,11 @@ async function loadChats(retryCount = 0, skipLocalCache = false) {
                     await fetch('/init_chats', { method: 'POST' });
                 }
                 await new Promise(resolve => setTimeout(resolve, 1000));
-                return loadChats(retryCount + 1);
+                return loadChatsInternal(retryCount + 1, skipLocalCache, personaId, generation, controller);
             }
+            const responseEtag = res.headers.get('ETag');
+            if (responseEtag) chatListLoadState.etags.set(personaId, responseEtag);
+            chatListLoadState.hasAuthoritativeData = true;
 
             // 合并未读计数
             const backendUnread = {};
@@ -31549,18 +31692,6 @@ async function loadChats(retryCount = 0, skipLocalCache = false) {
                 chat.isPinned = !!localPinned[key];
             });
 
-            // 补充本地特有聊天项（例如草稿生成的临时聊天）—— 仅在非强制刷新时保留
-            if (!skipLocalCache) {
-                const existingBackendKeys = new Set(newChats.map(chat => `${chat.type}:${chat.id}`));
-                for (const localChat of chats) {
-                    const key = `${localChat.type}:${localChat.id}`;
-                    if (!existingBackendKeys.has(key) && localChat.lastTime) {
-                        localChat.isPinned = !!localPinned[key];
-                        newChats.push(localChat);
-                    }
-                }
-            }
-
             // 构建后端聊天映射
             const backendChatMap = new Map();
             newChats.forEach(chat => backendChatMap.set(`${chat.type}:${chat.id}`, chat));
@@ -31577,9 +31708,6 @@ async function loadChats(retryCount = 0, skipLocalCache = false) {
                         backendChat.lastNonAssistantSender = chat.lastNonAssistantSender;
                     }
                     backendChatMap.set(key, backendChat);
-                } else {
-                    // 本地有但后端没有的聊天项（可能已被后端删除），保留
-                    backendChatMap.set(key, chat);
                 }
             });
 
@@ -31589,11 +31717,13 @@ async function loadChats(retryCount = 0, skipLocalCache = false) {
                 if (a.isPinned !== b.isPinned) return a.isPinned ? -1 : 1;
                 return (b.lastTime || 0) - (a.lastTime || 0);
             });
-            renderChatList();
+            if (retryCount === 0 && !skipLocalCache) resetChatListWindow();
+            scheduleChatListRender();
             saveChatsToLocalStorage();
+            chatListLoadState.loadedAt = Date.now();
 
-            // 首屏只建立群组骨架；完整配置在浏览器空闲后批量补齐，避免启动时
-            // N 个请求各自触发一次聊天列表重建。
+            // 列表接口已经提供名称和头像。完整群配置只在打开群聊时按需加载，
+            // 避免启动后为所有群组制造并发请求风暴。
             for (const item of data) {
                 if (item.type === 'group') {
                     if (!groups[item.id]) {
@@ -31612,30 +31742,65 @@ async function loadChats(retryCount = 0, skipLocalCache = false) {
                     }
                 }
             }
-            scheduleGroupConfigHydration(data);
+            return chats;
         } else {
             if (retryCount < MAX_RETRY) {
                 await new Promise(resolve => setTimeout(resolve, 1000));
-                return loadChats(retryCount + 1);
+                return loadChatsInternal(retryCount + 1, skipLocalCache, personaId, generation, controller);
             }
-            chats = [];
-            renderChatList();
-            saveChatsToLocalStorage();
+            if (chats.length === 0) scheduleChatListRender();
+            return chats;
         }
     } catch (e) {
+        if (e?.name === 'AbortError') return chats;
         console.error('加载聊天列表失败', e);
         if (retryCount < MAX_RETRY) {
             await new Promise(resolve => setTimeout(resolve, 1000));
-            return loadChats(retryCount + 1);
+            return loadChatsInternal(retryCount + 1, skipLocalCache, personaId, generation, controller);
         }
-        if (skipLocalCache) {
-            // 降级处理
-        } else {
-            chats = [];
-            renderChatList();
-            saveChatsToLocalStorage();
-        }
+        if (chats.length === 0) scheduleChatListRender();
+        return chats;
     }
+}
+
+// 加载聊天列表：同一人格复用在途请求，30秒内重复进入直接使用内存数据。
+async function loadChats(retryCount = 0, skipLocalCache = false) {
+    const personaId = String(window.currentPersonaId || currentPersonaId || 'doctor');
+    const now = Date.now();
+    const samePersona = chatListLoadState.personaId === personaId;
+    if (!skipLocalCache && samePersona && chats.length > 0 &&
+        now - chatListLoadState.loadedAt < CHAT_LIST_REFRESH_TTL_MS) {
+        scheduleChatListRender();
+        return chats;
+    }
+    if (!skipLocalCache && samePersona && chatListLoadState.promise) {
+        return chatListLoadState.promise;
+    }
+
+    if (!samePersona) {
+        chatListLoadState.controller?.abort();
+        chats = [];
+        resetChatListWindow();
+        chatListLoadState.loadedAt = 0;
+        chatListLoadState.hasAuthoritativeData = false;
+    } else if (skipLocalCache) {
+        chatListLoadState.controller?.abort();
+    }
+    chatListLoadState.personaId = personaId;
+    if (!skipLocalCache && chats.length === 0) loadChatsFromLocalStorage();
+
+    const generation = ++chatListLoadState.generation;
+    const controller = new AbortController();
+    chatListLoadState.controller = controller;
+    const promise = loadChatsInternal(retryCount, skipLocalCache, personaId, generation, controller)
+        .finally(() => {
+            if (generation === chatListLoadState.generation) {
+                chatListLoadState.promise = null;
+                chatListLoadState.controller = null;
+            }
+        });
+    chatListLoadState.promise = promise;
+    return promise;
 }
 
 function savePinnedState() {
@@ -31707,13 +31872,8 @@ async function dissolveGroup() {
             if (typeof window.group_sessions !== 'undefined' && window.group_sessions[currentGroupId]) {
                 delete window.group_sessions[currentGroupId];
             }
-            // 6. 清除本地存储中的缓存（cachedChats）
-            const cachedChats = localStorage.getItem('cachedChats');
-            if (cachedChats) {
-                let cached = JSON.parse(cachedChats);
-                cached = cached.filter(c => !(c.id === currentGroupId && c.type === 'group'));
-                localStorage.setItem('cachedChats', JSON.stringify(cached));
-            }
+            // 6. 合并写入当前人格的轻量聊天缓存。
+            saveChatsToLocalStorage(true);
             // 7. 强制刷新聊天列表（跳过本地缓存）
             await loadChats(0, true);
             // 8. 如果当前正在该群聊页面，返回聊天列表
@@ -36813,12 +36973,16 @@ async function renderDynamics() {
 async function dynamicMenuHandler(e) {
     e.stopPropagation();
     const id = e.currentTarget.dataset.id;
-    if (confirm('确定删除这条动态吗？')) {
+    const confirmed = await requestProjectConfirmation(
+        '删除动态',
+        '确定删除这条动态吗？此操作不会删除已经转发到聊天中的消息。'
+    );
+    if (confirmed) {
         try {
             await deleteDynamic(id);
             await renderDynamics();
         } catch (err) {
-            alert('删除失败：' + err.message);
+            showTemporaryToast(`删除失败：${err.message}`, 3500, 'error');
         }
     }
 }
@@ -36916,7 +37080,7 @@ async function submitDynamic() {
         closePostDynamicSheet();
         document.getElementById('dynamic-content').value = '';
     } catch (err) {
-        alert('发布失败：' + err.message);
+        showTemporaryToast(`发布失败：${err.message}`, 3500, 'error');
     } finally {
         submitBtn.disabled = false;
         submitBtn.textContent = '发布';
@@ -36957,118 +37121,199 @@ async function submitComment() {
             }
         }
     } catch (err) {
-        alert('评论失败：' + err.message);
+        showTemporaryToast(`评论失败：${err.message}`, 3500, 'error');
     } finally {
         submitBtn.disabled = false;
         submitBtn.textContent = '发送';
     }
 }
 
-// 转发
+let dynamicShareState = null;
+
+function dynamicShareRoleLabel(roleType) {
+    if (roleType === 'character') return '对外联络';
+    if (roleType === 'endfield_character') return '塔卫二';
+    if (roleType === 'group') return '群聊';
+    return '罗德岛';
+}
+
+function buildDynamicShareTargets() {
+    const privateTargets = operators
+        .filter(item => item.id && !['doctor', 'priestess'].includes(item.id))
+        .map(item => {
+            const roleType = getCharacterRoleType(item.id, item.role_type);
+            return {
+                id: String(item.id),
+                name: item.codename || item.name || item.id,
+                targetType: 'private',
+                roleType,
+                avatar: getCharacterAvatarUrl(item.id, roleType),
+                category: roleType === 'character' ? 'external' : roleType === 'endfield_character' ? 'endfield' : 'operator'
+            };
+        });
+    const groupTargets = Object.entries(groups).map(([groupId, group]) => ({
+        id: String(groupId),
+        name: group.name || groupId,
+        targetType: 'group',
+        roleType: 'group',
+        avatarHtml: getGroupAvatarHtml({ group_id: groupId, avatar: group.avatar, avatar_ref: group.avatar_ref }),
+        category: 'group'
+    }));
+    return [...privateTargets, ...groupTargets];
+}
+
+function renderDynamicShareTargets() {
+    if (!dynamicShareState) return;
+    const list = document.getElementById('dynamic-share-target-list');
+    const selectedSummary = document.getElementById('dynamic-share-selected');
+    if (!list || !selectedSummary) return;
+    const keyword = dynamicShareState.keyword.toLocaleLowerCase();
+    const visible = dynamicShareState.targets.filter(target => {
+        const categoryMatches = dynamicShareState.category === 'all' || target.category === dynamicShareState.category;
+        return categoryMatches && (!keyword || `${target.name} ${target.id}`.toLocaleLowerCase().includes(keyword));
+    });
+    list.innerHTML = visible.length ? visible.map(target => `
+        <button type="button" class="dynamic-share-target${dynamicShareState.selected?.id === target.id && dynamicShareState.selected?.targetType === target.targetType ? ' selected' : ''}" data-target-id="${escapeHtml(target.id)}" data-target-type="${target.targetType}">
+            <span class="dynamic-share-target-avatar">${target.avatarHtml || `<img src="${escapeHtml(target.avatar)}" alt="" onerror="this.src='/static/avatars/default.webp'">`}</span>
+            <span class="dynamic-share-target-copy"><strong>${escapeHtml(target.name)}</strong><small>${dynamicShareRoleLabel(target.roleType)}</small></span>
+            <span class="dynamic-share-target-check" aria-hidden="true">${ZootIcons.html('check')}</span>
+        </button>
+    `).join('') : '<div class="dynamic-share-empty">没有匹配的聊天对象</div>';
+    const selected = dynamicShareState.selected;
+    selectedSummary.textContent = selected ? `将发送给：${selected.name} · ${dynamicShareRoleLabel(selected.roleType)}` : '请选择一个转发对象';
+}
+
+function closeDynamicSharePanel() {
+    closeBottomSheet('dynamic-share-bottom-sheet');
+    dynamicShareState = null;
+}
+
+async function openShareToChatPicker(dynamicId, preview = {}) {
+    const sheet = document.getElementById('dynamic-share-bottom-sheet');
+    if (!sheet) return;
+    dynamicShareState = {
+        dynamicId: String(dynamicId),
+        author: preview.author || '',
+        content: preview.content || '',
+        mode: 'chat',
+        category: 'all',
+        keyword: '',
+        selected: null,
+        targets: buildDynamicShareTargets()
+    };
+    document.getElementById('dynamic-share-preview').innerHTML = `<strong>${escapeHtml(dynamicShareState.author || '动态')}</strong><p>${escapeHtml(dynamicShareState.content)}</p>`;
+    document.getElementById('dynamic-share-note').value = '';
+    document.getElementById('dynamic-share-search').value = '';
+    const categories = [['all', '全部'], ['operator', '罗德岛'], ['external', '对外联络'], ['endfield', '塔卫二'], ['group', '群聊']];
+    document.getElementById('dynamic-share-categories').innerHTML = categories.map(([id, label]) => `<button type="button" class="dynamic-share-category${id === 'all' ? ' active' : ''}" data-category="${id}">${label}</button>`).join('');
+    sheet.querySelectorAll('[data-dynamic-share-mode]').forEach(button => button.classList.toggle('active', button.dataset.dynamicShareMode === 'chat'));
+    document.getElementById('dynamic-share-chat-fields').hidden = false;
+    renderDynamicShareTargets();
+    openBottomSheet('dynamic-share-bottom-sheet');
+}
+
+async function submitDynamicShare() {
+    if (!dynamicShareState) return;
+    const confirmButton = document.getElementById('dynamic-share-confirm');
+    const note = document.getElementById('dynamic-share-note').value.trim();
+    confirmButton.disabled = true;
+    try {
+        if (dynamicShareState.mode === 'dynamic') {
+            const prefix = note ? `${note}\n\n` : '';
+            await postDynamic(`${prefix}转发 @${dynamicShareState.author} 的动态：${dynamicShareState.content}`);
+            await renderDynamics();
+            closeDynamicSharePanel();
+            showTemporaryToast('已转发为动态', 2500, 'success');
+            return;
+        }
+        const target = dynamicShareState.selected;
+        if (!target) {
+            showTemporaryToast('请选择一个转发对象', 2500, 'error');
+            return;
+        }
+        const response = await fetch('/dynamics/share_to_chat', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                dynamic_id: dynamicShareState.dynamicId,
+                target_type: target.targetType,
+                target_id: target.id,
+                target_role_type: target.roleType,
+                persona_id: window.currentPersonaId || currentPersonaId || 'doctor',
+                client_request_id: window.crypto?.randomUUID?.() || `dynamic-share-${Date.now()}-${Math.random()}`,
+                forward_text: note
+            })
+        });
+        const payload = await response.json().catch(() => ({}));
+        if (!response.ok) throw new Error(payload.detail?.message || payload.detail || `HTTP ${response.status}`);
+        closeDynamicSharePanel();
+        if (target.targetType === 'group') {
+            currentGroupId = target.id;
+            currentOperatorId = null;
+            await loadGroupHistory(target.id);
+        } else {
+            currentOperatorId = target.id;
+            currentGroupId = null;
+            await loadPrivateHistory(target.id);
+        }
+        saveCurrentChat();
+        showPage('chat-detail');
+        showTemporaryToast(`已转发给${target.name}`, 2500, 'success');
+    } catch (error) {
+        showTemporaryToast(`转发失败：${error.message}`, 4000, 'error');
+    } finally {
+        confirmButton.disabled = false;
+    }
+}
+
 async function shareHandler(e) {
     e.stopPropagation();
-    const dynamicId = e.currentTarget.dataset.id;
     const card = e.currentTarget.closest('.dynamic-card');
-    const originalContent = card.querySelector('.dynamic-content').innerText;
-    const author = card.querySelector('.dynamic-author-name').innerText;
-
-    // 弹出选择菜单
-    const action = await new Promise((resolve) => {
-        const sheet = document.createElement('div');
-        sheet.className = 'bottom-sheet show';
-        sheet.innerHTML = `
-            <div class="bottom-sheet-overlay"></div>
-            <div class="bottom-sheet-content">
-                <div style="padding: 20px; text-align: center;">分享动态</div>
-                <button data-action="dynamic" style="width:100%; padding:12px;">转发为动态</button>
-                <button data-action="chat" style="width:100%; padding:12px;">转发给干员</button>
-                <button data-action="cancel" style="width:100%; padding:12px;">取消</button>
-            </div>
-        `;
-        document.body.appendChild(sheet);
-        const handleClick = (e) => {
-            const action = e.target.dataset.action;
-            if (action) resolve(action);
-            sheet.remove();
-        };
-        sheet.addEventListener('click', handleClick);
+    await openShareToChatPicker(e.currentTarget.dataset.id, {
+        content: card?.querySelector('.dynamic-content')?.innerText || '',
+        author: card?.querySelector('.dynamic-author-name')?.innerText || ''
     });
-
-    if (action === 'dynamic') {
-        const customText = prompt('请输入转发语（可不填）：', '');
-        const finalContent = customText ? `${customText}\n\n转发 @${author} 的动态：${originalContent}` : `转发 @${author} 的动态：${originalContent}`;
-        await postDynamic(finalContent);
-        await renderDynamics();
-        alert('已转发为动态');
-    } else if (action === 'chat') {
-        await openShareToChatPicker(dynamicId);
-    }
 }
 
-async function openShareToChatPicker(dynamicId) {
-    // 获取干员列表（排除博士）
-    const ops = operators.filter(op => op.id !== 'doctor');
-    if (ops.length === 0) {
-        alert('没有可分享的干员');
-        return;
-    }
-    // 构建半页框选择列表
-    const sheet = document.createElement('div');
-    sheet.className = 'bottom-sheet show';
-    const listHtml = ops.map(op => `
-        <div class="contact-item" data-operator-id="${op.id}" style="padding: 12px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid var(--border-color);">
-            <img src="${getOperatorAvatarUrl(op.id)}" class="contact-avatar" style="width: 40px; height: 40px; border-radius: 50%;">
-            <span>${op.codename}</span>
-        </div>
-    `).join('');
-    sheet.innerHTML = `
-        <div class="bottom-sheet-overlay"></div>
-        <div class="bottom-sheet-content" style="max-height: 70vh;">
-            <div class="bottom-sheet-header">选择分享对象</div>
-            <div style="max-height: 60vh; overflow-y: auto;">${listHtml}</div>
-            <button class="bottom-sheet-close" style="margin-top: 12px;">取消</button>
-        </div>
-    `;
-    document.body.appendChild(sheet);
-    // 选择干员
-    const selected = await new Promise((resolve) => {
-        const items = sheet.querySelectorAll('.contact-item');
-        items.forEach(item => {
-            item.addEventListener('click', () => {
-                const opId = item.dataset.operatorId;
-                resolve(opId);
-                sheet.remove();
-            });
-        });
-        sheet.querySelector('.bottom-sheet-close').addEventListener('click', () => {
-            resolve(null);
-            sheet.remove();
-        });
-    });
-    if (selected) {
-        try {
-            const res = await fetch('/dynamics/share_to_chat', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ dynamic_id: dynamicId, target_operator_id: selected, persona_id: window.currentPersonaId || currentPersonaId || 'doctor' })
-            });
-            if (res.ok) {
-                alert('已分享给干员');
-                // 跳转到与该干员的私聊页
-                currentOperatorId = selected;
-                currentGroupId = null;
-                await loadPrivateHistory(selected);
-                saveCurrentChat();
-                showPage('chat-detail');
-            } else {
-                alert('分享失败');
-            }
-        } catch (err) {
-            console.error(err);
-            alert('分享失败');
+function bindDynamicSharePanel() {
+    const sheet = document.getElementById('dynamic-share-bottom-sheet');
+    if (!sheet || sheet.dataset.bound === 'true') return;
+    sheet.dataset.bound = 'true';
+    sheet.addEventListener('click', event => {
+        if (event.target.closest('[data-dynamic-share-action="close"]')) {
+            closeDynamicSharePanel();
+            return;
         }
-    }
+        const mode = event.target.closest('[data-dynamic-share-mode]');
+        if (mode && dynamicShareState) {
+            dynamicShareState.mode = mode.dataset.dynamicShareMode;
+            sheet.querySelectorAll('[data-dynamic-share-mode]').forEach(button => button.classList.toggle('active', button === mode));
+            document.getElementById('dynamic-share-chat-fields').hidden = dynamicShareState.mode !== 'chat';
+            document.getElementById('dynamic-share-confirm').textContent = dynamicShareState.mode === 'chat' ? '发送' : '发布';
+            return;
+        }
+        const category = event.target.closest('[data-category]');
+        if (category && dynamicShareState) {
+            dynamicShareState.category = category.dataset.category;
+            sheet.querySelectorAll('[data-category]').forEach(button => button.classList.toggle('active', button === category));
+            renderDynamicShareTargets();
+            return;
+        }
+        const targetButton = event.target.closest('.dynamic-share-target');
+        if (targetButton && dynamicShareState) {
+            dynamicShareState.selected = dynamicShareState.targets.find(target => target.id === targetButton.dataset.targetId && target.targetType === targetButton.dataset.targetType) || null;
+            renderDynamicShareTargets();
+        }
+    });
+    document.getElementById('dynamic-share-search').addEventListener('input', event => {
+        if (!dynamicShareState) return;
+        dynamicShareState.keyword = event.target.value.trim();
+        renderDynamicShareTargets();
+    });
+    document.getElementById('dynamic-share-confirm').addEventListener('click', submitDynamicShare);
 }
+
+bindDynamicSharePanel();
 
 async function resetNewDynamicFlag() {
     try {
@@ -38286,7 +38531,7 @@ async function loadFinanceHistory(append = false) {
                 'maintenance': '维护', 'pharmacy_production': '制药生产',
                 'pharmacy_sale': '药品出售', 'stock_buy': '买入股票',
                 'stock_sell': '卖出股票', 'jessica_loan_easter_egg': 'Jessica 彩蛋',
-                'transfer': '转账'
+                'transfer': '转账', 'initial_funding': '初始运营资金'
             };
             const categoryLabel = categoryMap[tx.category] || tx.category || '其他';
             return `
@@ -38324,117 +38569,99 @@ function formatFinance(amount) {
 
 // ========== 财务部操作函数 ==========
 
+function extensionApiError(payload, fallback) {
+    const detail = payload?.detail;
+    return typeof detail === 'string' ? detail : (detail?.message || payload?.message || fallback);
+}
+
+function closeExtensionOperationSheet() {
+    closeBottomSheet('extension-operation-bottom-sheet');
+}
+
+function openExtensionOperationSheet({ title, bodyHtml, confirmLabel = '确认', onConfirm }) {
+    const sheet = document.getElementById('extension-operation-bottom-sheet');
+    const titleNode = document.getElementById('extension-operation-title');
+    const body = document.getElementById('extension-operation-body');
+    const confirmButton = document.getElementById('extension-operation-confirm');
+    if (!sheet || !titleNode || !body || !confirmButton) return null;
+    titleNode.textContent = title;
+    body.innerHTML = bodyHtml;
+    confirmButton.textContent = confirmLabel;
+    confirmButton.disabled = false;
+    confirmButton.onclick = async () => {
+        if (confirmButton.disabled) return;
+        confirmButton.disabled = true;
+        try {
+            const shouldClose = await onConfirm(body);
+            if (shouldClose !== false) closeExtensionOperationSheet();
+        } catch (error) {
+            showTemporaryToast(error.message || '操作失败', 4000, 'error');
+        } finally {
+            confirmButton.disabled = false;
+        }
+    };
+    if (sheet.dataset.bound !== 'true') {
+        sheet.dataset.bound = 'true';
+        sheet.addEventListener('click', event => {
+            if (event.target.closest('[data-extension-operation-action="close"]')) closeExtensionOperationSheet();
+        });
+    }
+    openBottomSheet('extension-operation-bottom-sheet');
+    return body;
+}
+
 // 制药生产
 async function financePharmacy() {
-    const drugType = prompt('请输入药品类型（源石技艺抑制剂/通用医疗包/急救药剂/营养剂）或留空随机：');
-    try {
-        const res = await fetch('/finance/pharmacy', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ drug_type: drugType || undefined })
-        });
-        if (!res.ok) {
-            const err = await res.json();
-            alert('制药失败: ' + err.detail);
-            return;
-        }
-        const data = await res.json();
-        alert(`制药完成！\n成本: ${data.cost}\n售价: ${data.sell_price}\n利润: ${data.profit}\n药品: ${data.drug_type}`);
-        loadFinanceOverview();
-    } catch (e) {
-        alert('操作失败: ' + e.message);
-    }
+    return openPharmacyModal();
 }
 
 // 股票交易
 async function financeStock() {
-    const action = confirm('点击确定买入，取消则卖出');
-    const ticker = prompt('请输入股票代码（RHODES/KJERAG/LUNG/URSUS/VICTORIA）或留空随机：');
-    const amount = prompt('请输入交易数量（股）或留空随机：');
-    try {
-        const res = await fetch('/finance/stock/trade', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                ticker: ticker || undefined,
-                buy: action,
-                amount: amount ? parseInt(amount) : undefined
-            })
-        });
-        if (!res.ok) {
-            const err = await res.json();
-            alert('交易失败: ' + err.detail);
-            return;
+    const body = openExtensionOperationSheet({
+        title: '股票交易',
+        confirmLabel: '确认交易',
+        bodyHtml: `
+            <div class="extension-segmented" role="radiogroup" aria-label="交易方向">
+                <label><input type="radio" name="stock-action" value="buy" checked><span>买入</span></label>
+                <label><input type="radio" name="stock-action" value="sell"><span>卖出</span></label>
+            </div>
+            <label class="extension-form-field">股票代码<select id="extension-stock-ticker" class="extension-form-control"><option value="RHODES">RHODES</option><option value="KJERAG">KJERAG</option><option value="LUNG">LUNG</option><option value="URSUS">URSUS</option><option value="VICTORIA">VICTORIA</option></select></label>
+            <label class="extension-form-field">交易数量<input id="extension-stock-amount" class="extension-form-control" type="number" min="1" step="1" value="1"></label>
+            <div class="extension-result-summary">交易按服务端实时价格结算，提交前不会扣款。</div>
+        `,
+        onConfirm: async form => {
+            const amount = Number(form.querySelector('#extension-stock-amount').value);
+            if (!Number.isInteger(amount) || amount < 1) {
+                showTemporaryToast('交易数量必须为正整数', 3000, 'error');
+                return false;
+            }
+            const res = await fetch('/finance/stock/trade', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    ticker: form.querySelector('#extension-stock-ticker').value,
+                    buy: form.querySelector('input[name="stock-action"]:checked').value === 'buy',
+                    amount
+                })
+            });
+            const data = await res.json().catch(() => ({}));
+            if (!res.ok) throw new Error(extensionApiError(data, '交易失败'));
+            await loadFinanceOverview();
+            showTemporaryToast(`${data.action === 'stock_buy' ? '买入' : '卖出'}成功：${data.ticker} × ${data.shares}`, 3500, 'success');
+            return true;
         }
-        const data = await res.json();
-        const actionLabel = data.action === 'stock_buy' ? '买入' : '卖出';
-        alert(`${actionLabel}成功！\n股票: ${data.ticker}\n数量: ${data.shares}\n价格: ${data.price}\n总额: ${data.total}`);
-        loadFinanceOverview();
-    } catch (e) {
-        alert('操作失败: ' + e.message);
-    }
+    });
+    return body;
 }
 
-// 向杰西卡借钱
+// 旧借款入口已从界面移除，仅保留兼容函数避免旧缓存报错。
 async function financeBorrow() {
-    const amount = prompt('请输入借款金额（100-1000）或留空随机：');
-    try {
-        const res = await fetch('/finance/borrow', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ amount: amount ? parseInt(amount) : undefined })
-        });
-        if (!res.ok) {
-            const err = await res.json();
-            alert('借款失败: ' + err.detail);
-            return;
-        }
-        const data = await res.json();
-        alert(`借款成功！\n金额: ${data.amount}\n债权人: ${data.creditor}\n利率: ${(data.interest_rate * 100).toFixed(1)}%\n当前余额: ${data.balance_after}`);
-        loadFinanceOverview();
-    } catch (e) {
-        alert('操作失败: ' + e.message);
-    }
+    showTemporaryToast('旧借款功能已停止支持', 3000, 'info');
 }
 
-// 偿还债务
+// 旧还款入口已从界面移除，仅保留兼容函数避免旧缓存报错。
 async function financeRepay() {
-    try {
-        // 先获取债务列表
-        const res = await fetch('/finance/debts');
-        if (!res.ok) throw new Error('获取债务失败');
-        const debts = await res.json();
-        if (debts.length === 0) {
-            alert('没有需要偿还的债务！');
-            return;
-        }
-        const debtList = debts.map((d, i) =>
-            `${i+1}. 债权人: ${d.creditor}, 本金: ${d.amount}, 利率: ${(d.interest_rate * 100).toFixed(1)}%`
-        ).join('\n');
-        const choice = prompt(`请选择要偿还的债务序号：\n${debtList}`);
-        if (choice === null) return;
-        const idx = parseInt(choice) - 1;
-        if (idx < 0 || idx >= debts.length) {
-            alert('无效选择');
-            return;
-        }
-        const debtId = debts[idx].id;
-        const repayRes = await fetch('/finance/repay', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ debt_id: debtId })
-        });
-        if (!repayRes.ok) {
-            const err = await repayRes.json();
-            alert('偿还失败: ' + err.detail);
-            return;
-        }
-        const data = await repayRes.json();
-        alert(`偿还成功！\n本金: ${data.principal}\n利息: ${data.interest}\n总计: ${data.total}\n当前余额: ${data.balance_after}`);
-        loadFinanceOverview();
-    } catch (e) {
-        alert('操作失败: ' + e.message);
-    }
+    showTemporaryToast('旧还款功能已停止支持', 3000, 'info');
 }
 
 // 初始化财务部页面
@@ -38477,86 +38704,91 @@ async function loadPharmacyInventory() {
 
 // 制药生产弹窗
 async function openPharmacyModal() {
-    // 获取配方列表
-    const res = await fetch('/pharmacy/recipes');
-    if (!res.ok) {
-        alert('加载配方失败');
-        return;
-    }
-    const recipes = await res.json();
-    if (recipes.length === 0) {
-        alert('暂无可用配方');
-        return;
-    }
-
-    // 构建选择列表（使用 prompt 简化，后续可改为半页框）
-    const options = recipes.map((r, i) =>
-        `${i+1}. ${r.name} (成本: ${r.cost}, 售价: ${r.sell_price}, 耗时: ${r.production_time}s)`
-    ).join('\n');
-    const choice = prompt(`请选择要生产的药品：\n${options}\n\n输入序号：`);
-    if (choice === null) return;
-    const idx = parseInt(choice) - 1;
-    if (isNaN(idx) || idx < 0 || idx >= recipes.length) {
-        alert('无效选择');
-        return;
-    }
-    const recipe = recipes[idx];
-    const quantity = prompt(`请输入生产数量（默认1）：`) || '1';
-    const qty = parseInt(quantity);
-    if (isNaN(qty) || qty < 1) {
-        alert('数量必须为正整数');
-        return;
-    }
-
     try {
-        const produceRes = await fetch('/pharmacy/produce', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ drug_type: recipe.drug_type, quantity: qty })
-        });
-        if (!produceRes.ok) {
-            const err = await produceRes.json();
-            alert('生产失败: ' + (err.detail || '未知错误'));
+        const res = await fetch('/pharmacy/recipes');
+        const recipes = await res.json().catch(() => []);
+        if (!res.ok) throw new Error(extensionApiError(recipes, '加载配方失败'));
+        if (!recipes.length) {
+            showTemporaryToast('暂无可用配方', 3000, 'info');
             return;
         }
-        const data = await produceRes.json();
-        alert(`生产已启动！\n药品: ${recipe.name}\n数量: ${qty}\n预计耗时: ${data.estimated_time}s\n订单号: ${data.order_id}`);
-        // 刷新财务概览
-        if (typeof loadFinanceOverview === 'function') loadFinanceOverview();
+        const body = openExtensionOperationSheet({
+            title: '制药生产',
+            confirmLabel: '开始生产',
+            bodyHtml: `
+                <div class="pharmacy-recipe-list">
+                    ${recipes.map((recipe, index) => `
+                        <label class="pharmacy-recipe-card">
+                            <input type="radio" name="pharmacy-recipe" value="${escapeHtml(String(recipe.drug_type))}" ${index === 0 ? 'checked' : ''}>
+                            <span><strong>${escapeHtml(recipe.name || recipe.drug_type)}</strong><small>成本 ${recipe.cost} · 售价 ${recipe.sell_price} · 约 ${recipe.production_time}s</small></span>
+                        </label>
+                    `).join('')}
+                </div>
+                <label class="extension-form-field">生产数量<input id="extension-pharmacy-quantity" class="extension-form-control" type="number" min="1" step="1" value="1"></label>
+                <div id="extension-pharmacy-summary" class="extension-result-summary"></div>
+            `,
+            onConfirm: async form => {
+                const drugType = form.querySelector('input[name="pharmacy-recipe"]:checked')?.value;
+                const qty = Number(form.querySelector('#extension-pharmacy-quantity').value);
+                if (!drugType || !Number.isInteger(qty) || qty < 1) {
+                    showTemporaryToast('请选择配方并填写正整数数量', 3000, 'error');
+                    return false;
+                }
+                const produceRes = await fetch('/pharmacy/produce', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ drug_type: drugType, quantity: qty })
+                });
+                const data = await produceRes.json().catch(() => ({}));
+                if (!produceRes.ok) throw new Error(extensionApiError(data, '生产失败'));
+                await loadFinanceOverview();
+                showTemporaryToast(`生产已启动，预计耗时 ${data.estimated_time || 0}s`, 3500, 'success');
+                return true;
+            }
+        });
+        const updateSummary = () => {
+            const selected = body.querySelector('input[name="pharmacy-recipe"]:checked');
+            const recipe = recipes.find(item => String(item.drug_type) === selected?.value) || recipes[0];
+            const qty = Math.max(1, Number(body.querySelector('#extension-pharmacy-quantity').value) || 1);
+            body.querySelector('#extension-pharmacy-summary').textContent = `预计成本 ${Number(recipe.cost || 0) * qty}，预计耗时 ${Number(recipe.production_time || 0) * qty}s`;
+        };
+        body.addEventListener('input', updateSummary);
+        body.addEventListener('change', updateSummary);
+        updateSummary();
     } catch (e) {
-        alert('操作失败: ' + e.message);
+        showTemporaryToast(`制药功能加载失败：${e.message}`, 4000, 'error');
     }
 }
 
 // 出售药品
 async function sellPharmacyItem() {
-    const item = prompt('请输入要出售的药品ID（如 源石技艺抑制剂）：');
-    if (!item) return;
-    const quantity = prompt('请输入出售数量（默认1）：') || '1';
-    const qty = parseInt(quantity);
-    if (isNaN(qty) || qty < 1) {
-        alert('数量必须为正整数');
-        return;
-    }
-
-    try {
-        const res = await fetch('/pharmacy/sell', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ item_id: item, quantity: qty })
-        });
-        if (!res.ok) {
-            const err = await res.json();
-            alert('出售失败: ' + (err.detail || '未知错误'));
-            return;
+    openExtensionOperationSheet({
+        title: '出售药品',
+        confirmLabel: '确认出售',
+        bodyHtml: `
+            <label class="extension-form-field">药品ID<input id="extension-pharmacy-sell-id" class="extension-form-control" placeholder="例如：源石技艺抑制剂"></label>
+            <label class="extension-form-field">出售数量<input id="extension-pharmacy-sell-quantity" class="extension-form-control" type="number" min="1" step="1" value="1"></label>
+        `,
+        onConfirm: async form => {
+            const item = form.querySelector('#extension-pharmacy-sell-id').value.trim();
+            const qty = Number(form.querySelector('#extension-pharmacy-sell-quantity').value);
+            if (!item || !Number.isInteger(qty) || qty < 1) {
+                showTemporaryToast('请填写药品ID和正整数数量', 3000, 'error');
+                return false;
+            }
+            const res = await fetch('/pharmacy/sell', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ item_id: item, quantity: qty })
+            });
+            const data = await res.json().catch(() => ({}));
+            if (!res.ok) throw new Error(extensionApiError(data, '出售失败'));
+            await loadFinanceOverview();
+            if (typeof renderInventory === 'function') await renderInventory();
+            showTemporaryToast(`出售成功，收入 ${data.total_income || 0} 龙门币`, 3500, 'success');
+            return true;
         }
-        const data = await res.json();
-        alert(`出售成功！\n物品: ${data.name}\n数量: ${data.quantity}\n收入: ${data.total_income} 龙门币`);
-        if (typeof loadFinanceOverview === 'function') loadFinanceOverview();
-        if (typeof renderInventory === 'function') renderInventory();
-    } catch (e) {
-        alert('操作失败: ' + e.message);
-    }
+    });
 }
 
 
@@ -38566,6 +38798,7 @@ let currentOpsTab = 'pending';
 let opsTasksCache = Object.create(null);
 let opsRequestSerial = 0;
 const opsStartingTasks = new Set();
+let opsDispatchDraft = null;
 
 async function renderOpsTasks(tab = 'pending', { showLoading = true } = {}) {
     currentOpsTab = tab;
@@ -38769,7 +39002,7 @@ function openOpsTaskCreate() {
     if (generateBtn) generateBtn.onclick = generateOpsSourceEvent;
     if (eventSelect) eventSelect.onchange = renderOpsSourcePreview;
     confirmBtn.disabled = false;
-    confirmBtn.textContent = '建立待处理任务';
+    confirmBtn.textContent = '建立并安排队伍';
     opsCreateRequestId = crypto.randomUUID ? crypto.randomUUID() : `ops-${Date.now()}-${Math.random()}`;
     confirmBtn.onclick = confirmOpsTaskCreate;
     setOpsTaskSource('user');
@@ -38819,7 +39052,7 @@ async function generateOpsSourceEvent() {
     try {
         const res = await fetch('/ops/source-events/generate', { method: 'POST' });
         const data = await res.json().catch(() => ({}));
-        if (!res.ok) throw new Error(data.detail || `HTTP ${res.status}`);
+        if (!res.ok) throw new Error(data.detail?.message || data.detail || `HTTP ${res.status}`);
         await loadOpsSourceEvents();
         const select = document.getElementById('ops-source-event');
         if (select && data.event_id) {
@@ -38827,7 +39060,7 @@ async function generateOpsSourceEvent() {
             renderOpsSourcePreview();
         }
     } catch (e) {
-        alert('生成外勤事件失败: ' + e.message);
+        showTemporaryToast(`生成外勤事件失败：${e.message}`, 4000, 'error');
     } finally {
         if (button) {
             button.disabled = false;
@@ -38842,12 +39075,18 @@ async function confirmOpsTaskCreate() {
     let payload;
     if (currentOpsSourceType === 'generated') {
         const sourceEventId = document.getElementById('ops-source-event')?.value;
-        if (!sourceEventId) return alert('请先选择一个自生成事件');
+        if (!sourceEventId) {
+            showTemporaryToast('请先选择一个自生成事件', 3000, 'error');
+            return;
+        }
         payload = { source_type: 'generated', source_event_id: sourceEventId };
     } else {
         const title = document.getElementById('ops-create-title')?.value.trim();
         const description = document.getElementById('ops-create-description')?.value.trim();
-        if (!title || !description) return alert('请填写事件标题和事件描述');
+        if (!title || !description) {
+            showTemporaryToast('请填写事件标题和事件描述', 3000, 'error');
+            return;
+        }
         const urgency = Number(document.getElementById('ops-create-urgency')?.value || 3);
         const currencyMin = Math.max(0, Number(document.getElementById('ops-create-currency-min')?.value || 0));
         const currencyMax = Math.max(currencyMin, Number(document.getElementById('ops-create-currency-max')?.value || 0));
@@ -38890,41 +39129,68 @@ async function confirmOpsTaskCreate() {
         const createdTask = await verifyResponse.json();
         opsTasksCache.pending = [createdTask, ...(opsTasksCache.pending || []).filter(item => String(item.id) !== taskId)];
         closeBottomSheet('ops-task-create-bottom-sheet');
-        showTemporaryToast('外勤任务已建立', 2600, 'success');
+        showTemporaryToast('外勤任务已建立，请安排队伍', 2600, 'success');
         opsCreateRequestId = null;
-        await Promise.all([selectOpsTab('pending'), loadOpsOverview()]);
+        await openTaskDispatch(taskId);
+        void Promise.all([selectOpsTab('pending'), loadOpsOverview()]);
     } catch (e) {
         showTemporaryToast(`建立失败：${e.message}`, 4200, 'error');
     } finally {
         if (confirmBtn) {
             confirmBtn.disabled = false;
-            confirmBtn.textContent = '建立待处理任务';
+            confirmBtn.textContent = '建立并安排队伍';
         }
     }
 }
 
 // ========== 任务派遣半页框 ==========
-function taskParticipantRow(optionsHtml, index) {
-    const duties = [['recon', '侦察'], ['combat', '战斗'], ['medical', '医疗'], ['technical', '技术'], ['logistics', '后勤'], ['custom', '自定义']];
-    return `<div class="task-participant-row" data-participant-index="${index}"><select class="task-participant-operator">${optionsHtml}</select><select class="task-participant-duty">${duties.map(([value, label]) => `<option value="${value}">${label}</option>`).join('')}</select><input class="task-participant-custom-duty" maxlength="24" placeholder="自定义职责" hidden><label class="task-participant-leader"><input type="radio" name="task-participant-leader" ${index === 0 ? 'checked' : ''}>队长</label><button type="button" class="task-participant-remove" aria-label="移除参与干员" ${index === 0 ? 'hidden' : ''}>移除</button></div>`;
+function getOpsDispatchOperators() {
+    return typeof operatorMap !== 'undefined' && operatorMap instanceof Map
+        ? Array.from(operatorMap.values())
+            .filter(op => op?.id && op.id !== 'priestess' && op.id !== 'kinou' && op.capabilities?.dispatch !== false)
+            .sort((a, b) => String(a.codename || a.name || a.id).localeCompare(String(b.codename || b.name || b.id), 'zh-CN'))
+        : [];
 }
 
-function bindTaskParticipantRows(body, optionsHtml) {
-    const container = body.querySelector('#task-dispatch-participants');
-    const bindRow = row => {
+function getOpsDispatchOperator(operatorId) {
+    return getOpsDispatchOperators().find(op => String(op.id) === String(operatorId));
+}
+
+function taskParticipantRow(participant) {
+    const duties = [['recon', '侦察'], ['combat', '战斗'], ['medical', '医疗'], ['technical', '技术'], ['logistics', '后勤'], ['custom', '自定义']];
+    const operator = getOpsDispatchOperator(participant.operator_id) || {};
+    const name = operator.codename || operator.name || participant.operator_id;
+    const isLeader = String(opsDispatchDraft?.leaderId || '') === String(participant.operator_id);
+    return `<div class="task-participant-row${isLeader ? ' is-leader' : ''}" data-operator-id="${escapeHtml(String(participant.operator_id))}">
+        <div class="task-participant-identity"><img src="${getOperatorAvatarUrl(participant.operator_id)}" alt="" onerror="this.onerror=null;this.src='/static/avatars/default.webp'"><span><strong>${escapeHtml(String(name))}</strong><small>${escapeHtml(String(participant.operator_id))}</small></span>${isLeader ? '<b>队长</b>' : ''}</div>
+        <select class="task-participant-duty" aria-label="职责">${duties.map(([value, label]) => `<option value="${value}" ${participant.duty === value ? 'selected' : ''}>${label}</option>`).join('')}</select>
+        <input class="task-participant-custom-duty" maxlength="24" placeholder="自定义职责" value="${escapeHtml(String(participant.duty_label || ''))}" ${participant.duty === 'custom' ? '' : 'hidden'}>
+        <button type="button" class="task-participant-remove" aria-label="移除参与干员">${ZootIcons.html('trash')}<span>移除</span></button>
+    </div>`;
+}
+
+function bindTaskParticipantRows(body) {
+    body.querySelectorAll('.task-participant-row').forEach(row => {
+        const operatorId = String(row.dataset.operatorId || '');
         const duty = row.querySelector('.task-participant-duty');
         const custom = row.querySelector('.task-participant-custom-duty');
-        duty.addEventListener('change', () => { custom.hidden = duty.value !== 'custom'; });
-        row.querySelector('.task-participant-remove')?.addEventListener('click', () => row.remove());
-    };
-    container.querySelectorAll('.task-participant-row').forEach(bindRow);
-    body.querySelector('#task-participant-add')?.addEventListener('click', () => {
-        if (container.querySelectorAll('.task-participant-row').length >= 12) { showTemporaryToast('每次外勤最多12名参与干员', 3000, 'error'); return; }
-        const wrapper = document.createElement('div');
-        wrapper.innerHTML = taskParticipantRow(optionsHtml, Date.now());
-        const row = wrapper.firstElementChild;
-        container.appendChild(row);
-        bindRow(row);
+        duty?.addEventListener('change', () => {
+            const participant = opsDispatchDraft?.participants.find(item => item.operator_id === operatorId);
+            if (!participant) return;
+            participant.duty = duty.value;
+            participant.duty_label = duty.value === 'custom' ? custom.value.trim() : duty.options[duty.selectedIndex]?.textContent || duty.value;
+            custom.hidden = duty.value !== 'custom';
+        });
+        custom?.addEventListener('input', () => {
+            const participant = opsDispatchDraft?.participants.find(item => item.operator_id === operatorId);
+            if (participant) participant.duty_label = custom.value;
+        });
+        row.querySelector('.task-participant-remove')?.addEventListener('click', () => {
+            if (!opsDispatchDraft) return;
+            opsDispatchDraft.participants = opsDispatchDraft.participants.filter(item => item.operator_id !== operatorId);
+            if (opsDispatchDraft.leaderId === operatorId) opsDispatchDraft.leaderId = '';
+            renderTaskDispatchSheet();
+        });
     });
 }
 
@@ -38940,76 +39206,219 @@ async function openTaskDispatch(taskId) {
             const res = await fetch(`/ops/tasks/${encodeURIComponent(taskId)}`);
             if (!res.ok) throw new Error(`HTTP ${res.status}`);
             const task = await res.json();
-            const operators = getOpsOperatorOptions(false);
-            const taskStyles = Array.isArray(task.styles) && task.styles.length ? task.styles : ['稳妥处理', '快速推进', '灵活应变'];
-            const styles = taskStyles.map((style, index) =>
-                `<button class="style-option${index === 0 ? ' selected' : ''}" data-style="${escapeHtml(String(style))}">${escapeHtml(String(style))}</button>`
-            ).join('');
-
-            body.innerHTML = `
-                <div style="margin-bottom:12px;">
-                    <div style="font-weight:bold;font-size:16px;">${escapeHtml(String(task.title || '未命名任务'))}</div>
-                    <div style="font-size:14px;color:var(--text-secondary);margin-top:4px;">${escapeHtml(String(task.description || '暂无任务描述'))}</div>
-                </div>
-                <div style="margin-bottom:12px;">
-                    <label style="display:block;margin-bottom:4px;">任务类型</label>
-                    <select id="task-dispatch-mode"><option value="standard" ${task.mission_mode !== 'long' ? 'selected' : ''}>标准外勤</option><option value="long" ${task.mission_mode === 'long' ? 'selected' : ''}>长线外勤</option></select>
-                    ${Number(task.base_duration || 0) >= 86400 && task.mission_mode !== 'long' ? '<small class="task-long-suggestion">预计时长达到24小时，建议切换为长线外勤。</small>' : ''}
-                </div>
-                <div style="margin-bottom:12px;">
-                    <label style="display:block;margin-bottom:4px;">参与干员、职责与队长</label>
-                    <div id="task-dispatch-participants">${taskParticipantRow(operators, 0)}</div>
-                    <button type="button" id="task-participant-add">增加参与干员</button>
-                </div>
-                <div style="margin-bottom:12px;">
-                    <label style="display:block;margin-bottom:4px;">处理风格</label>
-                    <div id="task-dispatch-styles" style="display:flex;gap:8px;flex-wrap:wrap;">
-                        ${styles}
-                    </div>
-                </div>
-                <div style="font-size:12px;color:var(--text-secondary);">
-                    <span>💰 奖励: ${task.recommended_rewards?.currency?.min || 0}-${task.recommended_rewards?.currency?.max || 0} 龙门币</span>
-                    <span style="margin-left:12px;">❤️ 信赖: ${task.recommended_rewards?.trust?.min || 0}-${task.recommended_rewards?.trust?.max || 0}</span>
-                </div>
-            `;
-            // 绑定风格选择
-            body.querySelectorAll('.style-option').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    body.querySelectorAll('.style-option').forEach(b => b.classList.remove('selected'));
-                    btn.classList.add('selected');
-                });
-            });
-            bindTaskParticipantRows(body, operators);
-            // 绑定确认按钮
-            const confirmBtn = document.getElementById('task-dispatch-confirm');
-            confirmBtn.onclick = () => confirmTaskDispatch(taskId);
+            if (!opsDispatchDraft || String(opsDispatchDraft.taskId) !== String(taskId)) {
+                let participants = Array.isArray(task.participants) ? task.participants.map(item => ({
+                    operator_id: String(item.operator_id || ''),
+                    duty: String(item.duty || 'recon'),
+                    duty_label: String(item.duty_label || (item.duty === 'custom' ? '' : '侦察')),
+                })).filter(item => item.operator_id) : [];
+                if (!participants.length && task.assigned_operator) {
+                    participants = [{ operator_id: String(task.assigned_operator), duty: 'custom', duty_label: '队长' }];
+                }
+                const taskStyles = Array.isArray(task.styles) && task.styles.length ? task.styles.map(String) : ['稳妥处理', '快速推进', '灵活应变'];
+                opsDispatchDraft = {
+                    taskId: String(taskId),
+                    task,
+                    participants,
+                    leaderId: String(task.participants?.find(item => item?.is_leader)?.operator_id || task.assigned_operator || ''),
+                    selectedStyle: taskStyles[0],
+                    missionMode: task.mission_mode === 'long' ? 'long' : 'standard',
+                };
+            } else {
+                opsDispatchDraft.task = task;
+            }
+            renderTaskDispatchSheet();
     } catch (e) {
         console.error('加载任务详情失败', e);
         body.innerHTML = '<div class="ops-empty">任务详情加载失败</div>';
     }
 }
 
+function renderTaskDispatchSheet() {
+    const sheet = document.getElementById('task-dispatch-bottom-sheet');
+    const body = document.getElementById('task-dispatch-body');
+    const draft = opsDispatchDraft;
+    if (!sheet || !body || !draft) return;
+    const task = draft.task || {};
+    const taskStyles = Array.isArray(task.styles) && task.styles.length ? task.styles.map(String) : ['稳妥处理', '快速推进', '灵活应变'];
+    if (!taskStyles.includes(draft.selectedStyle)) draft.selectedStyle = taskStyles[0];
+    const participantsHtml = draft.participants.length
+        ? draft.participants.map(taskParticipantRow).join('')
+        : '<div class="ops-dispatch-team-empty">尚未选择参与干员</div>';
+    const leader = getOpsDispatchOperator(draft.leaderId);
+    const leaderName = leader?.codename || leader?.name || draft.leaderId;
+    body.innerHTML = `
+        <div class="task-dispatch-summary">
+            <div class="task-dispatch-title">${escapeHtml(String(task.title || '未命名任务'))}</div>
+            <div class="task-dispatch-description">${escapeHtml(String(task.description || '暂无任务描述'))}</div>
+        </div>
+        <label class="extension-form-field">任务类型
+            <select id="task-dispatch-mode" class="extension-form-control"><option value="standard" ${draft.missionMode !== 'long' ? 'selected' : ''}>标准外勤</option><option value="long" ${draft.missionMode === 'long' ? 'selected' : ''}>长线外勤</option></select>
+            ${Number(task.base_duration || 0) >= 86400 && draft.missionMode !== 'long' ? '<small class="task-long-suggestion">预计时长达到24小时，建议切换为长线外勤。</small>' : ''}
+        </label>
+        <div class="task-dispatch-section">
+            <div class="task-dispatch-section-title">第一步 · 批量选择参与干员</div>
+            <button type="button" id="task-select-participants" class="ops-selector-launch">${draft.participants.length ? `已选择 ${draft.participants.length} 名干员，重新选择` : '打开参与干员选择页'}</button>
+            <div id="task-dispatch-participants">${participantsHtml}</div>
+        </div>
+        <div class="task-dispatch-section">
+            <div class="task-dispatch-section-title">第二步 · 从队伍中选择队长</div>
+            <button type="button" id="task-select-leader" class="ops-selector-launch" ${draft.participants.length ? '' : 'disabled'}>${leaderName ? `当前队长：${escapeHtml(String(leaderName))}` : '打开队长选择页'}</button>
+        </div>
+        <div class="task-dispatch-section">
+            <div class="task-dispatch-section-title">处理风格</div>
+            <div id="task-dispatch-styles" class="task-dispatch-styles">${taskStyles.map(style => `<button class="style-option${style === draft.selectedStyle ? ' selected' : ''}" data-style="${escapeHtml(style)}">${escapeHtml(style)}</button>`).join('')}</div>
+        </div>
+        <div class="task-dispatch-rewards">
+            <span>${ZootIcons.html('wallet')} 奖励：${task.recommended_rewards?.currency?.min || 0}-${task.recommended_rewards?.currency?.max || 0} 龙门币</span>
+            <span>${ZootIcons.html('heart')} 信赖：${task.recommended_rewards?.trust?.min || 0}-${task.recommended_rewards?.trust?.max || 0}</span>
+        </div>`;
+    body.querySelector('#task-dispatch-mode')?.addEventListener('change', event => { draft.missionMode = event.target.value; });
+    body.querySelector('#task-select-participants')?.addEventListener('click', openOpsParticipantSelector);
+    body.querySelector('#task-select-leader')?.addEventListener('click', openOpsLeaderSelector);
+    body.querySelectorAll('.style-option').forEach(button => button.addEventListener('click', () => {
+        draft.selectedStyle = button.dataset.style;
+        body.querySelectorAll('.style-option').forEach(item => item.classList.toggle('selected', item === button));
+    }));
+    bindTaskParticipantRows(body);
+    const confirmBtn = document.getElementById('task-dispatch-confirm');
+    if (confirmBtn) {
+        confirmBtn.disabled = false;
+        confirmBtn.textContent = '确认派遣';
+        confirmBtn.onclick = () => confirmTaskDispatch(draft.taskId);
+    }
+    window.ZootIcons?.hydrateTree?.(body);
+    openBottomSheet('task-dispatch-bottom-sheet');
+}
+
+function getOpsSelectorInitial(operator) {
+    const initial = String(operator?.pinyin_initial || '#').trim().charAt(0).toUpperCase();
+    return /^[A-Z]$/.test(initial) ? initial : '#';
+}
+
+function renderOpsOperatorSelector(mode) {
+    const isLeader = mode === 'leader';
+    const prefix = isLeader ? 'ops-leader-selector' : 'ops-participant-selector';
+    const container = document.getElementById(`${prefix}-list`);
+    const index = document.getElementById(`${prefix}-index`);
+    const search = document.getElementById(`${prefix}-search`);
+    if (!container || !index || !search || !opsDispatchDraft) return;
+    const allowedIds = new Set(opsDispatchDraft.participants.map(item => item.operator_id));
+    const source = getOpsDispatchOperators().filter(operator => !isLeader || allowedIds.has(String(operator.id)));
+    const grouped = source.reduce((result, operator) => {
+        const letter = getOpsSelectorInitial(operator);
+        (result[letter] ||= []).push(operator);
+        return result;
+    }, {});
+    const letters = Object.keys(grouped).sort((a, b) => a === '#' ? 1 : b === '#' ? -1 : a.localeCompare(b));
+    const selected = new Set(isLeader ? [opsDispatchDraft.leaderId].filter(Boolean) : allowedIds);
+    const inputType = isLeader ? 'radio' : 'checkbox';
+    const inputName = isLeader ? 'ops-dispatch-leader-choice' : 'ops-dispatch-participant-choice';
+    container.innerHTML = letters.map(letter => `<section class="ops-selector-group" data-letter="${escapeHtml(letter)}"><div class="contact-letter">${escapeHtml(letter)}</div>${grouped[letter].map(operator => {
+        const operatorId = String(operator.id);
+        const name = String(operator.codename || operator.name || operatorId);
+        return `<label class="contact-item ops-selector-row" data-search="${escapeHtml(`${name} ${operatorId}`.toLocaleLowerCase())}"><input class="ops-selector-control" type="${inputType}" name="${inputName}" value="${escapeHtml(operatorId)}" ${selected.has(operatorId) ? 'checked' : ''}><img src="${getOperatorAvatarUrl(operatorId)}" class="contact-avatar" alt="" loading="lazy" onerror="this.onerror=null;this.src='/static/avatars/default.webp'"><span class="ops-selector-copy"><strong>${escapeHtml(name)}</strong><small>${escapeHtml(operatorId)}</small></span></label>`;
+    }).join('')}</section>`).join('') || '<div class="ops-empty">没有可选择的干员</div>';
+    index.innerHTML = letters.map(letter => `<button type="button" data-letter="${escapeHtml(letter)}">${escapeHtml(letter)}</button>`).join('');
+    const updateCount = () => {
+        const checked = [...container.querySelectorAll('.ops-selector-control:checked')];
+        const count = document.getElementById(`${prefix}-count`);
+        if (count) count.textContent = isLeader ? (checked.length ? `已选择 ${checked[0].closest('.ops-selector-row')?.querySelector('strong')?.textContent || ''}` : '尚未选择队长') : `已选 ${checked.length}/12`;
+    };
+    container.onchange = event => {
+        if (!isLeader && event.target.matches('.ops-selector-control') && container.querySelectorAll('.ops-selector-control:checked').length > 12) {
+            event.target.checked = false;
+            showTemporaryToast('每次外勤最多选择12名参与干员', 3000, 'error');
+        }
+        updateCount();
+    };
+    const applySearch = () => {
+        const keyword = search.value.trim().toLocaleLowerCase();
+        container.querySelectorAll('.ops-selector-group').forEach(group => {
+            let visible = 0;
+            group.querySelectorAll('.ops-selector-row').forEach(row => {
+                row.hidden = Boolean(keyword && !String(row.dataset.search || '').includes(keyword));
+                if (!row.hidden) visible += 1;
+            });
+            group.hidden = visible === 0;
+        });
+        index.hidden = Boolean(keyword);
+    };
+    search.value = '';
+    search.oninput = applySearch;
+    index.onclick = event => {
+        const button = event.target.closest('button[data-letter]');
+        const group = button && [...container.querySelectorAll('.ops-selector-group')]
+            .find(item => item.dataset.letter === button.dataset.letter);
+        group?.scrollIntoView({ block: 'start' });
+    };
+    if (!isLeader) {
+        document.getElementById('ops-participant-selector-select-visible').onclick = () => {
+            const visible = [...container.querySelectorAll('.ops-selector-row:not([hidden]) .ops-selector-control:not(:checked)')];
+            const remaining = 12 - container.querySelectorAll('.ops-selector-control:checked').length;
+            visible.slice(0, Math.max(0, remaining)).forEach(input => { input.checked = true; });
+            if (visible.length > remaining) showTemporaryToast('已达到12名参与干员上限', 2600, 'info');
+            updateCount();
+        };
+        document.getElementById('ops-participant-selector-clear').onclick = () => {
+            container.querySelectorAll('.ops-selector-control').forEach(input => { input.checked = false; });
+            updateCount();
+        };
+    }
+    document.getElementById(`${prefix}-confirm`).onclick = () => {
+        const checkedIds = [...container.querySelectorAll('.ops-selector-control:checked')].map(input => String(input.value));
+        if (isLeader) {
+            if (checkedIds.length !== 1) { showTemporaryToast('请选择一名队长', 2800, 'error'); return; }
+            opsDispatchDraft.leaderId = checkedIds[0];
+        } else {
+            const existing = new Map(opsDispatchDraft.participants.map(item => [item.operator_id, item]));
+            opsDispatchDraft.participants = checkedIds.map(operatorId => existing.get(operatorId) || ({ operator_id: operatorId, duty: 'recon', duty_label: '侦察' }));
+            if (!checkedIds.includes(opsDispatchDraft.leaderId)) opsDispatchDraft.leaderId = '';
+        }
+        finishOpsDispatchSelection();
+    };
+    updateCount();
+}
+
+function openOpsParticipantSelector() {
+    if (!opsDispatchDraft) return;
+    closeBottomSheet('task-dispatch-bottom-sheet');
+    showPage('ops-participant-select');
+    renderOpsOperatorSelector('participants');
+}
+
+function openOpsLeaderSelector() {
+    if (!opsDispatchDraft?.participants.length) { showTemporaryToast('请先选择参与干员', 2800, 'error'); return; }
+    closeBottomSheet('task-dispatch-bottom-sheet');
+    showPage('ops-leader-select');
+    renderOpsOperatorSelector('leader');
+}
+
+function finishOpsDispatchSelection() {
+    goBack();
+    setTimeout(renderTaskDispatchSheet, 40);
+}
+
+function cancelOpsDispatchSelection() {
+    finishOpsDispatchSelection();
+}
+
 async function confirmTaskDispatch(taskId) {
-    const rows = [...document.querySelectorAll('#task-dispatch-participants .task-participant-row')];
-    const participants = rows.map(row => ({operator_id: row.querySelector('.task-participant-operator')?.value || '', duty: row.querySelector('.task-participant-duty')?.value || '', duty_label: row.querySelector('.task-participant-custom-duty')?.value || '', is_leader: Boolean(row.querySelector('.task-participant-leader input')?.checked)}));
-    const operator = participants.find(item => item.is_leader)?.operator_id;
-    const selectedStyle = document.querySelector('#task-dispatch-body .style-option.selected')?.dataset.style;
-    if (!participants.length || participants.some(item => !item.operator_id)) {
-        showTemporaryToast('请为每个席位选择干员', 3000, 'error');
+    const draft = opsDispatchDraft;
+    if (!draft || String(draft.taskId) !== String(taskId)) return;
+    const participants = draft.participants.map(item => ({ ...item, is_leader: item.operator_id === draft.leaderId }));
+    const operator = draft.leaderId;
+    if (!participants.length) {
+        showTemporaryToast('请先批量选择参与干员', 3000, 'error');
         return;
     }
-    if (new Set(participants.map(item => item.operator_id)).size !== participants.length) { showTemporaryToast('同一干员不能重复加入任务', 3000, 'error'); return; }
-    if (participants.filter(item => item.is_leader).length !== 1) { showTemporaryToast('请选择且仅选择一名队长', 3000, 'error'); return; }
+    if (!operator || !participants.some(item => item.operator_id === operator)) { showTemporaryToast('请从参与干员中选择一名队长', 3000, 'error'); return; }
     if (participants.some(item => item.duty === 'custom' && !item.duty_label.trim())) { showTemporaryToast('自定义职责不能为空', 3000, 'error'); return; }
-    if (!selectedStyle) {
-        showTemporaryToast('请选择处理风格', 3000, 'error');
-        return;
-    }
     const normalizedTaskId = String(taskId);
     if (opsStartingTasks.has(normalizedTaskId)) return;
     opsStartingTasks.add(normalizedTaskId);
-    closeBottomSheet('task-dispatch-bottom-sheet');
-    renderOpsTaskList();
+    const confirmButton = document.getElementById('task-dispatch-confirm');
+    if (confirmButton) { confirmButton.disabled = true; confirmButton.textContent = '正在生成任务链…'; }
     showTemporaryToast('派遣请求已提交，正在生成执行结点…', 3500, 'info');
     try {
         const res = await fetch('/ops/tasks/start', {
@@ -39018,24 +39427,25 @@ async function confirmTaskDispatch(taskId) {
             body: JSON.stringify({
                 task_id: taskId,
                 assigned_operator: operator,
-                selected_style: selectedStyle,
-                mission_mode: document.getElementById('task-dispatch-mode')?.value || 'standard',
+                selected_style: draft.selectedStyle,
+                mission_mode: draft.missionMode,
                 participants
             })
         });
+        const result = await res.json().catch(() => ({}));
         if (!res.ok) {
-            const err = await res.json();
-            throw new Error(err.detail || '未知错误');
+            throw new Error(result.detail?.message || result.detail || '未知错误');
         }
-        await res.json();
-        showTemporaryToast('任务已启动，后续进度将自动更新', 3000, 'success');
+        closeBottomSheet('task-dispatch-bottom-sheet');
+        opsDispatchDraft = null;
+        showTemporaryToast(result.chain_source === 'deterministic_fallback' ? (result.chain_warning || '任务已启动，当前使用本地安全任务链') : '任务已启动，后续进度将自动更新', 3800, result.chain_source === 'deterministic_fallback' ? 'info' : 'success');
         await Promise.all([selectOpsTab('processing'), loadOpsOverview()]);
     } catch (e) {
-        showTemporaryToast('任务启动失败，请重试', 3500, 'error');
-        showTemporaryToast(`操作失败：${e.message}`, 4200, 'error');
+        showTemporaryToast(`派遣失败：${e.message}`, 4200, 'error');
         await renderOpsTasks('pending', { showLoading: false });
     } finally {
         opsStartingTasks.delete(normalizedTaskId);
+        if (confirmButton?.isConnected) { confirmButton.disabled = false; confirmButton.textContent = '确认派遣'; }
         renderOpsTaskList();
     }
 }
@@ -39120,13 +39530,13 @@ function openTaskDetail(taskId) {
         })
         .catch(e => {
             console.error('加载任务详情失败', e);
-            alert('加载失败');
+            showTemporaryToast('任务详情加载失败', 3500, 'error');
         });
 }
 
 // ========== 取消任务 ==========
 async function cancelTask(taskId) {
-    if (!confirm('确定要取消这个任务吗？')) return;
+    if (!await requestProjectConfirmation('取消外勤任务', '确定要取消这个任务吗？已经产生的任务日志会保留。')) return;
     try {
         const res = await fetch('/ops/tasks/cancel', {
             method: 'POST',
@@ -39134,26 +39544,25 @@ async function cancelTask(taskId) {
             body: JSON.stringify({ task_id: taskId })
         });
         if (!res.ok) {
-            const err = await res.json();
-            alert('取消失败: ' + (err.detail || '未知错误'));
-            return;
+            const err = await res.json().catch(() => ({}));
+            throw new Error(err.detail?.message || err.detail || '未知错误');
         }
-        alert('任务已取消');
         await Promise.all([renderOpsTasks(currentOpsTab), loadOpsOverview()]);
+        showTemporaryToast('任务已取消', 3000, 'success');
     } catch (e) {
-        alert('操作失败: ' + e.message);
+        showTemporaryToast(`取消失败：${e.message}`, 4000, 'error');
     }
 }
 
 async function deleteOpsTask(taskId) {
-    if (!confirm('删除后将无法恢复这条任务记录，是否继续？')) return;
+    if (!await requestProjectConfirmation('删除外勤任务', '删除后将无法恢复这条任务记录，是否继续？')) return;
     try {
         const res = await fetch(`/ops/tasks/${encodeURIComponent(taskId)}`, { method: 'DELETE' });
         const data = await res.json().catch(() => ({}));
-        if (!res.ok) throw new Error(data.detail || `HTTP ${res.status}`);
+        if (!res.ok) throw new Error(data.detail?.message || data.detail || `HTTP ${res.status}`);
         await Promise.all([renderOpsTasks(currentOpsTab), loadOpsOverview()]);
     } catch (e) {
-        alert('删除失败: ' + e.message);
+        showTemporaryToast(`删除失败：${e.message}`, 4000, 'error');
     }
 }
 
@@ -39316,7 +39725,7 @@ function openWhOperation(type) {
     const title = document.getElementById('wh-op-title');
     const confirmBtn = document.getElementById('wh-op-confirm');
 
-    const titles = { 'add': '📥 入库', 'remove': '📤 出库', 'discard': '🗑️ 丢弃' };
+    const titles = { 'add': '物品入库', 'remove': '物品出库', 'discard': '丢弃物品' };
     title.textContent = titles[type] || '物品操作';
 
     document.getElementById('wh-op-item-id').value = '';
@@ -39336,11 +39745,11 @@ async function whConfirmHandler() {
     const reason = document.getElementById('wh-op-reason').value.trim() || `${whOperationType}操作`;
 
     if (!itemId) {
-        alert('请输入物品ID');
+        showTemporaryToast('请输入物品ID', 3000, 'error');
         return;
     }
     if (quantity <= 0) {
-        alert('数量必须大于0');
+        showTemporaryToast('数量必须大于0', 3000, 'error');
         return;
     }
 
@@ -39361,17 +39770,15 @@ async function whConfirmHandler() {
             })
         });
         if (!res.ok) {
-            const err = await res.json();
-            alert('操作失败: ' + (err.detail || '未知错误'));
-            return;
+            const err = await res.json().catch(() => ({}));
+            throw new Error(extensionApiError(err, '未知错误'));
         }
         const data = await res.json();
-        alert(`操作成功！${itemId} 当前数量: ${data.balance_after}`);
         closeBottomSheet('wh-operation-sheet');
-        renderInventory();
-        renderWhTransactions();
+        await Promise.all([renderInventory(), renderWhTransactions()]);
+        showTemporaryToast(`操作成功，${itemId} 当前数量 ${data.balance_after}`, 3500, 'success');
     } catch (e) {
-        alert('操作失败: ' + e.message);
+        showTemporaryToast(`操作失败：${e.message}`, 4000, 'error');
     }
 }
 
@@ -39449,14 +39856,22 @@ window.onload = async () => {
             renderContacts();
         }).catch(e => console.error('加载干员失败', e));
 
-        // 并行执行其他不需要顺序的加载。聊天列表只在服务器就绪后请求一次，
-        // 本地缓存先同步渲染，远端结果随后原位刷新，不触发页面导航。
-        loadChatsFromLocalStorage();
+        // 先确定当前人格，再读取对应的聊天缓存和请求列表，避免启动时先加载
+        // doctor 人格后又为实际人格重复加载一次。
+        const startupChatPromise = getCurrentPersona()
+            .catch(error => {
+                console.warn('[聊天列表] 当前人格加载失败，使用兼容人格继续启动', error);
+                return null;
+            })
+            .then(() => {
+                loadChatsFromLocalStorage();
+                return loadChats();
+            });
         const startupDataPromise = Promise.allSettled([
             loadAllStars(),
             loadAppVersion(),
             fetchGlobalYear(),
-            loadChats(),
+            startupChatPromise,
             checkAndShowSetupWizard()
         ]);
         const hydrateEmojiMetadata = async () => {

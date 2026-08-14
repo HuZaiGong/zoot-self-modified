@@ -45,6 +45,7 @@
         cardGesture: null,
         suppressCardClickUntil: 0,
         batchSubmitting: false,
+        failedActionDraft: '',
     };
 
     const JOURNEY_PAGES = new Set([
@@ -678,6 +679,7 @@
         const profileId = root.querySelector('[data-journey-quick-profile]').value || 'balanced_journey';
         const seedValue = root.querySelector('[data-journey-quick-seed]').value;
         const useLlm = Boolean(root.querySelector('[data-journey-quick-use-llm]').checked);
+        const journeyDefaults = readJsonPreference('journey-settings-defaults-v1', {});
         state.quickStartSubmitting = true;
         button.disabled = true;
         button.textContent = '正在建立旅程…';
@@ -705,7 +707,7 @@
                     mode,
                     sync_policy: syncPolicy,
                     canon_policy: canonPolicy,
-                    settings: {experience_profile_id: profileId},
+                    settings: {...journeyDefaults, experience_profile_id: profileId},
                     blueprint: generated.blueprint,
                 }),
             });
@@ -953,6 +955,8 @@
         const parent = state.campaigns.find(item => item.campaign_id === parentId);
         const presetId = root.querySelector('[data-builder-preset]').value;
         const preset = state.presets.find(item => item.preset_id === presetId);
+        const journeyDefaults = readJsonPreference('journey-settings-defaults-v1', {});
+        const defaultPolish = journeyDefaults.narrative_polish || {};
         status.textContent = '正在创建故事与时间线…';
         const campaign = await api('/terra-journey/campaigns', {
             method: 'POST', headers: {'Content-Type': 'application/json'},
@@ -972,7 +976,7 @@
                 join_node_id: root.querySelector('[data-builder-join-node]').value || null,
                 director_mode: root.querySelector('[data-builder-director]').checked,
                 settings: {
-                    ...state.settings,
+                    ...journeyDefaults,
                     experience_profile_id: root.querySelector('[data-builder-profile]') ? root.querySelector('[data-builder-profile]').value : 'balanced_journey',
                     orchestration_mode: root.querySelector('[data-builder-orchestration]') ? root.querySelector('[data-builder-orchestration]').value : 'single_ensemble',
                     acknowledge_multi_call: Boolean(root.querySelector('[data-builder-multi-call]') && root.querySelector('[data-builder-multi-call]').checked),
@@ -980,6 +984,7 @@
                     knowledge_mode: 'hybrid_v2',
                     knowledge_budget: Number(root.querySelector('[data-builder-knowledge-budget]').value) || 9000,
                     narrative_polish: {
+                        ...defaultPolish,
                         enabled: Boolean(root.querySelector('[data-builder-polish]') && root.querySelector('[data-builder-polish]').checked),
                         acknowledge_cost: Boolean(root.querySelector('[data-builder-polish-cost]') && root.querySelector('[data-builder-polish-cost]').checked),
                         corpus_mode: root.querySelector('[data-builder-polish-corpus]') ? root.querySelector('[data-builder-polish-corpus]').value : 'character_and_campaign',
@@ -1285,6 +1290,10 @@
         const zones = root.querySelector('[data-journey-zones]');
         if (zones) zones.innerHTML = zoneMarkup(data.zone_graph || {});
         renderTurns(root, data.turns || []);
+        const actionInput = root.querySelector('[data-journey-action-form] textarea[name="action"]');
+        if (actionInput && !actionInput.value) {
+            actionInput.value = safeStorageGet(`journey-action-draft:${state.currentCampaignId}`, '');
+        }
         renderAdaptiveViews(root, data);
         if (window.ZootIcons && typeof window.ZootIcons.hydrate === 'function') window.ZootIcons.hydrate(root);
         loadAdjudications().catch(() => null);
@@ -1293,7 +1302,8 @@
 
     function renderTurns(root, turns) {
         const target = root.querySelector('[data-journey-log]');
-        target.innerHTML = turns.map(item => {
+        const opening = openingMarkup((state.playPayload || {}).opening_context || {});
+        const turnMarkup = turns.map(item => {
             const polish = (item.result || {}).narrative_polish || {};
             const badge = polish.status === 'succeeded'
                 ? '<small class="journey-polish-badge">已结合人物语料润色</small>'
@@ -1302,11 +1312,20 @@
                 ? `<small class="journey-generation-badge fallback">本地叙事 · ${escapeHtml((((item.result || {}).fallback_reason || {}).message) || '模型暂时不可用')}</small>`
                 : '';
             const visuals = state.visualProposals.filter(proposal => String(proposal.turn_id) === String(item.turn_id));
-            return `<article class="journey-turn"><div class="journey-turn-action">${escapeHtml(item.action_text)}</div><div class="journey-turn-narrative">${escapeHtml(item.narrative)}</div>${generation}${badge}${visuals.map(visualProposalMarkup).join('')}</article>`;
-        }).join('') || '<div class="journey-empty">故事尚未开始。描述主角的第一个行动。</div>';
+            return `<article class="journey-turn"><div class="journey-turn-action"><small>你的行动</small><span>${escapeHtml(item.action_text)}</span></div><div class="journey-turn-narrative">${escapeHtml(item.narrative)}</div>${generation}${badge}${visuals.map(visualProposalMarkup).join('')}</article>`;
+        }).join('');
+        target.innerHTML = opening + turnMarkup;
         target.scrollTop = target.scrollHeight;
         const latest = turns.length ? (turns[turns.length - 1].result || {}) : {};
-        renderSuggestions(latest.suggestions || []);
+        const openingSuggestions = ((state.playPayload || {}).opening_context || {}).suggestions || [];
+        renderSuggestions(turns.length ? (latest.suggestions || []) : openingSuggestions);
+    }
+
+    function openingMarkup(opening) {
+        const narrative = String(opening.opening || '').trim();
+        if (!narrative) return '<div class="journey-empty">故事尚未开始。描述主角的第一个行动。</div>';
+        const context = [opening.era, opening.region, opening.tone].filter(Boolean).join(' · ');
+        return `<article class="journey-opening"><small>旅程开场${context ? ` · ${escapeHtml(context)}` : ''}</small><div class="journey-turn-narrative">${escapeHtml(narrative)}</div><small>当前目标 · ${escapeHtml(opening.objective || '继续旅程')}</small></article>`;
     }
 
     function renderSuggestions(items) {
@@ -1588,6 +1607,10 @@
         const button = form.querySelector('button[type="submit"]');
         const startedAt = Date.now();
         const campaignId = String(state.currentCampaignId || '');
+        textarea.value = '';
+        textarea.style.height = '';
+        try { window.localStorage.removeItem(`journey-action-draft:${campaignId}`); } catch (_error) { /* best effort */ }
+        state.failedActionDraft = '';
         state.pendingRequest = {status: 'submitting'};
         button.disabled = true;
         try {
@@ -1616,15 +1639,23 @@
             const completedTurnId = String(((completed.result || {}).turn_id) || completed.turn_id || '');
             const authoritativeRendered = canonicalTurns.some(item => String(item.turn_id || '') === completedTurnId && String(item.narrative || '').trim());
             if (!rendered && !authoritativeRendered) throw new Error('故事回合已结束，但没有读取到可显示的正文；行动草稿已保留');
-            textarea.value = '';
-            textarea.style.height = '';
         } catch (error) {
+            if (!textarea.value.trim()) {
+                textarea.value = action;
+                textarea.dispatchEvent(new Event('input', {bubbles: true}));
+            } else {
+                state.failedActionDraft = action;
+                status.hidden = false;
+                status.innerHTML = '<span>上一条行动发送失败，当前新草稿已保留。</span><button type="button" data-journey-recover-action>恢复上一条</button>';
+            }
             toast(errorMessage(error), 'error');
         } finally {
             state.pendingRequest = null;
             state.operation = null;
-            status.hidden = true;
-            status.textContent = '';
+            if (!state.failedActionDraft) {
+                status.hidden = true;
+                status.textContent = '';
+            }
             button.disabled = false;
         }
     }
@@ -1714,7 +1745,12 @@
     }
 
     async function initializeSettings() {
+        ensureNarrativeSettingsUi();
         ensureVisualSettingsUi();
+        if (!(state.capabilities || {}).chat_route) {
+            try { state.capabilities = await api('/terra-journey/capabilities'); }
+            catch (_error) { state.capabilities = state.capabilities || {}; }
+        }
         const presentation = document.querySelector('[data-journey-presentation]');
         const performance = document.querySelector('[data-journey-performance]');
         const statusSelect = document.querySelector('[data-journey-status-level]');
@@ -1737,7 +1773,12 @@
             const saved = safeStorageGet(`journey-render-feature:${input.dataset.journeyRenderFeature}${suffix}`, '');
             input.checked = saved === '' ? !['smooth', 'safe'].includes(effectivePerformancePolicy()) : saved === 'true';
         });
-        if (!state.currentCampaignId) return;
+        if (!state.currentCampaignId) {
+            const savedDefaults = readJsonPreference('journey-settings-defaults-v1', {});
+            state.settings = savedDefaults;
+            applyNarrativeSettings(savedDefaults);
+            return;
+        }
         const campaign = await api(`/terra-journey/campaigns/${encodeURIComponent(state.currentCampaignId)}`);
         state.settings = {...(campaign.settings || {})};
         document.querySelectorAll('[data-journey-setting]').forEach(input => {
@@ -1747,15 +1788,7 @@
                 else input.value = state.settings[key];
             }
         });
-        const polish = state.settings.narrative_polish || {};
-        const polishEnabled = document.querySelector('[data-journey-polish-enabled]');
-        const polishCost = document.querySelector('[data-journey-polish-cost]');
-        const polishCorpus = document.querySelector('[data-journey-polish-corpus]');
-        const polishBudget = document.querySelector('[data-journey-polish-budget]');
-        if (polishEnabled) polishEnabled.checked = Boolean(polish.enabled);
-        if (polishCost) polishCost.checked = Boolean(polish.acknowledge_cost);
-        if (polishCorpus) polishCorpus.value = polish.corpus_mode || 'character_and_campaign';
-        if (polishBudget) polishBudget.value = Number(polish.max_corpus_chars || 6000);
+        applyNarrativeSettings(state.settings);
         const visualRecord = await api(`/terra-journey/campaigns/${encodeURIComponent(state.currentCampaignId)}/visual-policy`);
         state.visualPolicy = visualRecord;
         const visualPolicy = visualRecord.policy || {};
@@ -1765,6 +1798,89 @@
             if (input.type === 'checkbox') input.checked = Boolean(visualPolicy[key]);
             else input.value = visualPolicy[key];
         });
+    }
+
+    function ensureNarrativeSettingsUi() {
+        const page = document.querySelector('#page-terra-journey-settings .journey-settings-page');
+        if (!page) return;
+        const playGrid = page.querySelector('[data-settings-panel="play"] .journey-settings-grid');
+        if (playGrid && !playGrid.querySelector('[data-journey-turn-length]')) {
+            playGrid.insertAdjacentHTML('beforeend', '<label>单回合正文长度<select data-journey-turn-length><option value="concise">精简 · 250–450字</option><option value="standard">标准 · 400–700字</option><option value="detailed">充实 · 600–1000字</option><option value="long">长篇 · 900–1500字</option></select></label>');
+        }
+        const modelPanel = page.querySelector('[data-settings-panel="model"]');
+        if (!modelPanel || modelPanel.querySelector('[data-journey-polish-card]')) return;
+        const grid = modelPanel.querySelector('.journey-settings-grid');
+        const enabled = modelPanel.querySelector('[data-journey-polish-enabled]');
+        const corpus = modelPanel.querySelector('[data-journey-polish-corpus]');
+        const budget = modelPanel.querySelector('[data-journey-polish-budget]');
+        const cost = modelPanel.querySelector('[data-journey-polish-cost]');
+        const legacyLabels = [enabled, corpus, budget, cost].map(item => item && item.closest('label')).filter(Boolean);
+        const card = document.createElement('details');
+        card.className = 'journey-polish-card';
+        card.dataset.journeyPolishCard = 'true';
+        card.innerHTML = '<summary><span><strong>正文二次润色</strong><small data-journey-polish-summary>关闭 · 跟随全局Chat路由</small></span><label class="journey-polish-switch"><input type="checkbox" data-journey-polish-switch aria-label="启用正文二次润色"><span></span></label></summary><div class="journey-polish-card-body"><div class="journey-settings-grid"><label>润色模型<select data-journey-polish-route><option value="inherit_chat">跟随全局Chat路由</option></select></label><label>润色目标<select data-journey-polish-target><option value="both">角色发言与情景描述</option><option value="dialogue_only">仅角色发言</option><option value="scene_only">仅情景描述</option></select></label></div><div class="journey-route-health" data-journey-route-health></div></div>';
+        const switchInput = card.querySelector('[data-journey-polish-switch]');
+        if (enabled) {
+            switchInput.checked = enabled.checked;
+            enabled.replaceWith(switchInput);
+            switchInput.removeAttribute('data-journey-polish-switch');
+            switchInput.dataset.journeyPolishEnabled = '';
+            card.querySelector('.journey-polish-switch').prepend(switchInput);
+        }
+        const bodyGrid = card.querySelector('.journey-polish-card-body .journey-settings-grid');
+        legacyLabels.slice(1).forEach(label => bodyGrid.appendChild(label));
+        legacyLabels[0]?.remove();
+        grid.insertAdjacentElement('afterend', card);
+        card.querySelector('.journey-polish-switch')?.addEventListener('click', event => {
+            event.stopPropagation();
+        });
+        card.querySelector('[data-journey-polish-enabled]')?.addEventListener('change', updatePolishSummary);
+        card.querySelector('[data-journey-polish-route]')?.addEventListener('change', updatePolishSummary);
+    }
+
+    function applyNarrativeSettings(settings) {
+        const turnOutput = (settings && settings.turn_output) || {};
+        const length = document.querySelector('[data-journey-turn-length]');
+        if (length) length.value = turnOutput.length_preset || 'detailed';
+        const polish = (settings && settings.narrative_polish) || {};
+        const enabled = document.querySelector('[data-journey-polish-enabled]');
+        const cost = document.querySelector('[data-journey-polish-cost]');
+        const corpus = document.querySelector('[data-journey-polish-corpus]');
+        const budget = document.querySelector('[data-journey-polish-budget]');
+        const target = document.querySelector('[data-journey-polish-target]');
+        const route = document.querySelector('[data-journey-polish-route]');
+        if (enabled) enabled.checked = Boolean(polish.enabled);
+        if (cost) cost.checked = Boolean(polish.acknowledge_cost);
+        if (corpus) corpus.value = polish.corpus_mode || 'character_and_campaign';
+        if (budget) budget.value = Number(polish.max_corpus_chars || 6000);
+        if (target) target.value = polish.target || 'both';
+        renderPolishRoutes(polish.route_mode === 'profile' ? polish.profile_id : 'inherit_chat');
+        if (route && route.value === '') route.value = 'inherit_chat';
+        updatePolishSummary();
+    }
+
+    function renderPolishRoutes(selected) {
+        const select = document.querySelector('[data-journey-polish-route]');
+        if (!select) return;
+        const route = (state.capabilities || {}).chat_route || {};
+        const profiles = Array.isArray(route.profiles) ? route.profiles : [];
+        select.innerHTML = '<option value="inherit_chat">跟随全局Chat路由</option>' + profiles.filter(item => item.enabled).map(item => `<option value="${escapeHtml(item.profile_id)}">${escapeHtml(item.display_name)} · ${escapeHtml(item.model || '未选择模型')}</option>`).join('');
+        select.value = selected || 'inherit_chat';
+        if (select.value !== (selected || 'inherit_chat')) {
+            select.insertAdjacentHTML('beforeend', `<option value="${escapeHtml(selected)}">已不可用的原路由</option>`);
+            select.value = selected;
+        }
+        const health = document.querySelector('[data-journey-route-health]');
+        if (health) health.innerHTML = route.available
+            ? '<small>正文生成默认复用全局Chat能力路由，无需重复填写API。固定润色档案只影响二次润色。</small>'
+            : '<small class="warning">当前没有可用Chat路由；故事会使用本地叙事兜底。请前往API设置检查连接。</small><button type="button" data-page="settings-api">检查全局API路由</button>';
+    }
+
+    function updatePolishSummary() {
+        const enabled = Boolean(document.querySelector('[data-journey-polish-enabled]')?.checked);
+        const route = document.querySelector('[data-journey-polish-route]');
+        const summary = document.querySelector('[data-journey-polish-summary]');
+        if (summary) summary.textContent = `${enabled ? '开启' : '关闭'} · ${route?.selectedOptions?.[0]?.textContent || '跟随全局Chat路由'}`;
     }
 
     function ensureVisualSettingsUi() {
@@ -1953,7 +2069,7 @@
     }
 
     async function saveSettings() {
-        const values = {};
+        const values = {...(state.settings || {})};
         if (document.querySelector('[data-journey-polish-enabled]').checked && !document.querySelector('[data-journey-polish-cost]').checked) {
             const status = document.querySelector('[data-journey-settings-status]');
             status.textContent = '启用正文润色前，请先确认额外模型调用与费用风险';
@@ -1962,14 +2078,21 @@
         document.querySelectorAll('[data-journey-setting]').forEach(input => {
             values[input.dataset.journeySetting] = input.type === 'number' ? Number(input.value) : input.type === 'checkbox' ? input.checked : input.value;
         });
+        values.turn_output = {
+            ...(values.turn_output || {}),
+            length_preset: document.querySelector('[data-journey-turn-length]')?.value || 'detailed',
+        };
+        const polishRoute = document.querySelector('[data-journey-polish-route]')?.value || 'inherit_chat';
         values.narrative_polish = {
             enabled: Boolean(document.querySelector('[data-journey-polish-enabled]') && document.querySelector('[data-journey-polish-enabled]').checked),
             acknowledge_cost: Boolean(document.querySelector('[data-journey-polish-cost]') && document.querySelector('[data-journey-polish-cost]').checked),
             corpus_mode: document.querySelector('[data-journey-polish-corpus]') ? document.querySelector('[data-journey-polish-corpus]').value : 'character_and_campaign',
             max_corpus_chars: Number(document.querySelector('[data-journey-polish-budget]') ? document.querySelector('[data-journey-polish-budget]').value : 6000),
             preserve_length: true,
+            target: document.querySelector('[data-journey-polish-target]')?.value || 'both',
+            route_mode: polishRoute === 'inherit_chat' ? 'inherit_chat' : 'profile',
+            profile_id: polishRoute === 'inherit_chat' ? '' : polishRoute,
         };
-        state.settings = values;
         const presentation = document.querySelector('[data-journey-presentation]');
         const performance = document.querySelector('[data-journey-performance]');
         const presentationKey = state.currentCampaignId ? `journey-presentation-mode:${state.currentCampaignId}` : 'journey-presentation-mode';
@@ -1984,6 +2107,8 @@
         });
         const status = document.querySelector('[data-journey-settings-status]');
         if (!state.currentCampaignId) {
+            state.settings = values;
+            saveJsonPreference('journey-settings-defaults-v1', values);
             status.textContent = '已保存为下一份故事的本机草稿默认值';
             return;
         }
@@ -2021,6 +2146,8 @@
                 method: 'PATCH', headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({expected_revision: campaign.revision, settings: values, media}),
             });
+            state.settings = {...(campaign.settings || {})};
+            applyNarrativeSettings(state.settings);
             status.textContent = `已保存 r${campaign.revision}`;
         } catch (error) {
             status.textContent = errorMessage(error);
@@ -2425,7 +2552,21 @@
             } catch (error) { toast(errorMessage(error), 'error'); favorite.disabled = false; }
         }
         const suggestion = event.target.closest('[data-suggestion]');
-        if (suggestion) document.querySelector('[data-journey-action-form] textarea').value = suggestion.dataset.suggestion;
+        if (suggestion) {
+            const input = document.querySelector('[data-journey-action-form] textarea');
+            input.value = suggestion.dataset.suggestion;
+            input.dispatchEvent(new Event('input', {bubbles: true}));
+        }
+        const recoverAction = event.target.closest('[data-journey-recover-action]');
+        if (recoverAction && state.failedActionDraft) {
+            const input = document.querySelector('[data-journey-action-form] textarea');
+            const current = input.value.trim();
+            input.value = current ? `${state.failedActionDraft}\n${current}` : state.failedActionDraft;
+            state.failedActionDraft = '';
+            input.dispatchEvent(new Event('input', {bubbles: true}));
+            const status = document.querySelector('[data-journey-generation]');
+            if (status) { status.hidden = true; status.textContent = ''; }
+        }
         const adjudication = event.target.closest('[data-adjudication] [data-decision]');
         if (adjudication) {
             const owner = adjudication.closest('[data-adjudication]');
@@ -2704,7 +2845,11 @@
             };
             textarea.addEventListener('compositionstart', () => { composing = true; });
             textarea.addEventListener('compositionend', () => { composing = false; resize(); });
-            textarea.addEventListener('input', resize);
+            textarea.addEventListener('input', () => {
+                resize();
+                try { window.localStorage.setItem(`journey-action-draft:${state.currentCampaignId}`, textarea.value); }
+                catch (_error) { /* local draft cache unavailable */ }
+            });
         }
         const rollButton = document.querySelector('[data-journey-roll]');
         if (rollButton) rollButton.addEventListener('click', async () => {

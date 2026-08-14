@@ -22,6 +22,18 @@
 
     const icon = (name) => `<span class="zoot-ui-icon" data-zoot-icon="${escapeHtml(name)}" aria-hidden="true"></span>`;
 
+    const voucherQuantity = () => Number(
+        state.inventory.find(item => item.item_id === 'black_market_any_item_voucher')?.quantity || 0
+    );
+
+    function confirmAction(title, message, onConfirm) {
+        if (typeof window.showConfirmDialog !== 'function') {
+            setStatus('确认组件尚未就绪，请稍后重试', 'error');
+            return;
+        }
+        window.showConfirmDialog(title, message, onConfirm);
+    }
+
     async function request(path, options = {}) {
         const response = await fetch(path, {
             ...options,
@@ -61,6 +73,7 @@
             <div class="procurement-product-action">
                 <strong>${Number(product.price || 0).toLocaleString()}</strong>
                 ${purchase ? `<button data-procurement-buy="${escapeHtml(product.product_id)}">购买</button>` : ''}
+                ${purchase && voucherQuantity() > 0 ? `<button data-procurement-voucher="${escapeHtml(product.product_id)}">使用兑换券</button>` : ''}
             </div>
         </article>`;
     }
@@ -89,7 +102,7 @@
                     return `<article class="procurement-product"><div class="procurement-product-icon">${icon('bank')}</div><div class="procurement-product-copy"><small>${escapeHtml(listing.seller_name)}</small><h4>${escapeHtml(product.name)}</h4><p>${escapeHtml(product.description || '')}</p></div><div class="procurement-product-action"><strong>${Number(listing.price).toLocaleString()}</strong><button data-flea-buy="${escapeHtml(listing.listing_id)}">购买</button></div></article>`;
                 }).join('')}</div></section>`;
         } else if (state.tab === 'redeem') {
-            root.innerHTML = `<section class="procurement-section"><header><h3>兑换中心</h3><p>离线码必须通过随包公钥验签并匹配本设备；重复提交不会重复到账。</p></header>
+            root.innerHTML = `<section class="procurement-section"><header><h3>兑换中心</h3><p>支持内置短码、离线签名码和云端码；网络重试不会重复到账。</p></header>
                 <form id="procurement-redeem-form" class="procurement-redeem"><label>兑换码<textarea name="code" rows="3" required autocomplete="off" placeholder="粘贴完整兑换码"></textarea></label><button type="submit">验证并兑换</button></form></section>`;
         } else {
             root.innerHTML = `<section class="procurement-section"><header><h3>交易与赠送审计</h3><p>这里只显示业务结果，不包含密钥或聊天正文。</p></header><div class="procurement-audit">${state.operations.map(item => `<article><span data-state="${escapeHtml(item.state)}"></span><div><strong>${escapeHtml(item.operation_type)}</strong><small>${new Date(Number(item.updated_at || 0) * 1000).toLocaleString()}</small></div><b>${escapeHtml(item.state)}</b></article>`).join('') || '<div class="procurement-empty">暂无交易记录</div>'}</div></section>`;
@@ -123,56 +136,68 @@
         }
     }
 
-    async function buyProduct(productId) {
-        if (!window.confirm('确认使用博士钱包购买此商品？')) return;
-        setStatus('正在确认钱包与库存事务');
-        try {
-            await request('/procurement/purchase', {
-                method: 'POST',
-                body: JSON.stringify({
-                    product_id: productId,
-                    quantity: 1,
-                    client_request_id: crypto.randomUUID?.() || `purchase-${Date.now()}-${Math.random()}`
-                })
-            });
-            setStatus('购买成功，物品已入库', 'success');
-            await refresh();
-        } catch (error) {
-            setStatus(error.message, 'error');
-        }
+    function buyProduct(productId, paymentMethod = 'wallet') {
+        const usingVoucher = paymentMethod === 'voucher';
+        confirmAction(
+            usingVoucher ? '使用兑换券' : '确认购买',
+            usingVoucher ? '确认消耗一张黑市任意物品兑换券换取该商品？本次不会扣除龙门币。' : '确认使用博士钱包购买此商品？',
+            async () => {
+                setStatus(usingVoucher ? '正在核销兑换券并办理入库' : '正在确认钱包与库存事务');
+                try {
+                    await request('/procurement/purchase', {
+                        method: 'POST',
+                        body: JSON.stringify({
+                            product_id: productId,
+                            quantity: 1,
+                            payment_method: paymentMethod,
+                            client_request_id: crypto.randomUUID?.() || `purchase-${Date.now()}-${Math.random()}`
+                        })
+                    });
+                    setStatus(usingVoucher ? '兑换成功，商品已入库' : '购买成功，物品已入库', 'success');
+                    await refresh();
+                } catch (error) {
+                    setStatus(error.message, 'error');
+                }
+            }
+        );
     }
 
-    async function buyFlea(listingId) {
-        if (!window.confirm('确认购买此模拟市场挂牌？')) return;
-        setStatus('正在结算挂牌');
-        try {
-            await request(`/procurement/flea/${encodeURIComponent(listingId)}/buy`, {
-                method: 'POST',
-                body: JSON.stringify({client_request_id: crypto.randomUUID?.() || `flea-${Date.now()}-${Math.random()}`})
-            });
-            setStatus('成交完成', 'success');
-            await refresh();
-        } catch (error) {
-            setStatus(error.message, 'error');
-        }
+    function buyFlea(listingId) {
+        confirmAction('确认购买', '确认购买此模拟市场挂牌？', async () => {
+            setStatus('正在结算挂牌');
+            try {
+                await request(`/procurement/flea/${encodeURIComponent(listingId)}/purchase`, {
+                    method: 'POST',
+                    body: JSON.stringify({client_request_id: crypto.randomUUID?.() || `flea-${Date.now()}-${Math.random()}`})
+                });
+                setStatus('成交完成', 'success');
+                await refresh();
+            } catch (error) {
+                setStatus(error.message, 'error');
+            }
+        });
     }
 
-    async function giveGift(itemId) {
+    function giveGift(itemId) {
         const operatorId = document.getElementById('procurement-gift-operator')?.value;
         if (!operatorId) { setStatus('请先选择赠送对象', 'error'); return; }
-        if (!window.confirm('确认将礼物交给该干员，并让当前 Chat 服务判断回应？')) return;
-        setStatus('正在预留礼物并等待干员回应');
-        try {
-            const reservation = await request('/procurement/gifts/reserve', {method: 'POST', body: JSON.stringify({operator_id: operatorId, item_id: itemId, branch_id: 'main'})});
-            const result = await request(`/procurement/gifts/${encodeURIComponent(reservation.reservation_id)}/react`, {method: 'POST', body: JSON.stringify({context: '从采购部明确发起的礼物赠送互动'})});
-            setStatus(`礼物回应：${result.state}；信赖变化 ${Number(result.trust_delta || 0)}`, 'success');
-            await refresh();
-        } catch (error) { setStatus(error.message, 'error'); await refresh(); }
+        confirmAction('确认赠送', '确认将礼物交给该干员，并让当前 Chat 服务判断回应？', async () => {
+            setStatus('正在预留礼物并等待干员回应');
+            try {
+                const reservation = await request('/procurement/gifts/reserve', {method: 'POST', body: JSON.stringify({operator_id: operatorId, item_id: itemId, branch_id: 'main'})});
+                const result = await request(`/procurement/gifts/${encodeURIComponent(reservation.reservation_id)}/react`, {method: 'POST', body: JSON.stringify({context: '从采购部明确发起的礼物赠送互动'})});
+                setStatus(`礼物回应：${result.state}；信赖变化 ${Number(result.trust_delta || 0)}`, 'success');
+                await refresh();
+            } catch (error) { setStatus(error.message, 'error'); await refresh(); }
+        });
     }
 
     function bindContentActions(root) {
         root.querySelectorAll('[data-procurement-buy]').forEach(button => {
             button.addEventListener('click', () => buyProduct(button.dataset.procurementBuy));
+        });
+        root.querySelectorAll('[data-procurement-voucher]').forEach(button => {
+            button.addEventListener('click', () => buyProduct(button.dataset.procurementVoucher, 'voucher'));
         });
         root.querySelectorAll('[data-flea-buy]').forEach(button => {
             button.addEventListener('click', () => buyFlea(button.dataset.fleaBuy));
@@ -182,19 +207,34 @@
         });
         root.querySelector('#procurement-redeem-form')?.addEventListener('submit', async event => {
             event.preventDefault();
-            const code = new FormData(event.currentTarget).get('code');
+            const form = event.currentTarget;
+            const code = new FormData(form).get('code');
+            const submitButton = form.querySelector('button[type="submit"]');
+            if (submitButton?.disabled) return;
+            if (submitButton) submitButton.disabled = true;
             setStatus('正在验证兑换码');
             try {
-                const cloud = state.redemptionStatus.cloud_available && !String(code || '').includes('.');
-                const result = await request(cloud ? '/procurement/redemption/cloud' : '/procurement/redemption/redeem', {
+                const result = await request('/procurement/redemption/redeem', {
                     method: 'POST',
-                    body: JSON.stringify({code})
+                    body: JSON.stringify({
+                        code,
+                        client_request_id: crypto.randomUUID?.() || `redeem-${Date.now()}-${Math.random()}`
+                    })
                 });
-                setStatus(`兑换成功：${(result.rewards || []).length} 项奖励已到账`, 'success');
-                event.currentTarget.reset();
+                const currency = Number(result.currency_delta || 0);
+                const currencyText = currency ? `龙门币 ${currency > 0 ? '+' : ''}${currency.toLocaleString()}` : '';
+                const itemText = (result.items || [])
+                    .map(item => `${item.name || item.item_id} ×${Number(item.quantity || 0)}`)
+                    .join('、');
+                const details = [currencyText, itemText].filter(Boolean).join('；') || '兑换记录已确认';
+                const prefix = result.idempotent_replay ? '该请求已处理：' : '兑换成功：';
+                setStatus(`${prefix}${details}；钱包余额 ${Number(result.wallet_balance || 0).toLocaleString()}`, 'success');
+                form.reset();
                 await refresh();
             } catch (error) {
                 setStatus(error.message, 'error');
+            } finally {
+                if (submitButton) submitButton.disabled = false;
             }
         });
     }

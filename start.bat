@@ -20,19 +20,31 @@ if exist "%~dp0venv\Scripts\pythonw.exe" (
     if not defined PY where python.exe >nul 2>nul && set "PY=python.exe"
 )
 
-rem No python at all: use uv to install Python 3.13 (user scope), then create venv.
+rem Python missing or not 3.13: use uv to install Python 3.13 (user scope),
+rem then (re)create the repo-local venv on it. This also recovers a venv
+rem previously created with an older interpreter.
+set "NEED_UV=0"
 if not defined PY (
+    set "NEED_UV=1"
+) else (
+    "%PY%" -c "import sys;sys.exit(0 if sys.version_info[:2]==(3,13) else 1)" >nul 2>nul
+    if errorlevel 1 set "NEED_UV=1"
+)
+if "%NEED_UV%"=="1" (
     where uv.exe >nul 2>nul || (
         echo uv not found. Install uv first: https://docs.astral.sh/uv/getting-started/installation/
         pause
         exit /b 1
     )
-    echo Installing Python 3.13 via uv...
+    if defined PY (
+        echo Python "%PY%" is not 3.13, rebuilding venv with uv...
+    ) else (
+        echo No usable Python found. Installing Python 3.13 via uv...
+    )
     uv python install 3.13 || (echo Failed to install Python 3.13. & pause & exit /b 1)
     for /f "delims=" %%p in ('uv python find 3.13') do set "UVPY=%%p"
     if not defined UVPY (echo uv python find returned nothing. & pause & exit /b 1)
-    echo Creating venv with uv...
-    uv venv "%~dp0venv" --python "%UVPY%" || (echo Failed to create venv. & pause & exit /b 1)
+    uv venv "%~dp0venv" --python "%UVPY%" --clear || (echo Failed to create venv. & pause & exit /b 1)
     set "PY=%~dp0venv\Scripts\pythonw.exe"
     if not exist "%PY%" set "PY=%~dp0venv\Scripts\python.exe"
 )

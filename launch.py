@@ -19,11 +19,14 @@
 from __future__ import annotations
 
 import argparse
+import importlib.util
+import logging
 import os
 import socket
 import sys
 import threading
 import time
+import traceback
 import urllib.error
 import urllib.request
 
@@ -168,6 +171,158 @@ def _install_api_error_handlers(app) -> None:
         pass
 
 
+class _PluginContext:
+    """交给可信插件入口的宿主能力句柄。"""
+
+    def __init__(self, adapter, plugin_id):
+        self._adapter = adapter
+        self.plugin_id = plugin_id
+        self.log = logging.getLogger(f"zoot.plugin.{plugin_id}")
+        self.manifest = None
+
+    @property
+    def runtime(self):
+        return self._adapter.runtime
+
+    @property
+    def app(self):
+        return getattr(app_main, "app", None)
+
+    @property
+    def vector_runtime(self):
+        from app.services.vector_runtime import get_vector_runtime
+
+        return get_vector_runtime()
+
+    def get_config(self, include_secrets=True):
+        outcome = self._adapter.runtime.get_config(
+            self.plugin_id, include_secrets=include_secrets
+        )
+        return dict(outcome or {})
+
+    def set_config(self, config):
+        return self._adapter.runtime.update_config(self.plugin_id, dict(config))
+
+
+class _TrustedPluginAdapter:
+    """PC 端 trusted_python 插件执行适配器。
+
+    PluginRuntime 仅定义适配器契约并把执行委托给宿主；Android 端由宿主注入，
+    PC 移植缺失导致可信插件启用报「当前宿主不支持可信 Python 插件」。
+
+    适配器从插件安装目录执行入口模块 plugin.py，模块可实现：
+
+    * on_activate(zctx) / on_deactivate(zctx) —— 启停生命周期
+    * handle(action, payload, zctx) —— 动作与 __event__ 钩子入口
+    """
+
+    def __init__(self, runtime):
+        self.runtime = runtime
+        self._loaded = {}
+        self._lock = threading.RLock()
+
+    def start(self, plugin_id, plugin_path, manifest):
+        try:
+            module, zctx = self._load(plugin_id, plugin_path)
+            zctx.manifest = manifest
+            hook = getattr(module, "on_activate", None)
+            if callable(hook):
+                outcome = hook(zctx)
+                if isinstance(outcome, dict) and outcome.get("ok") is False:
+                    raise RuntimeError(
+                        str(outcome.get("error") or "插件激活失败")
+                    )
+            return outcome if isinstance(outcome, dict) else {"ok": True}
+        except Exception:
+            print(
+                f"[PluginAdapter] 插件 {plugin_id} 启动失败：",
+                file=sys.stderr,
+            )
+            traceback.print_exc(file=sys.stderr)
+            raise
+
+    def stop(self, plugin_id):
+        with self._lock:
+            module, zctx, _ = self._loaded.pop(plugin_id, (None, None, None))
+        if module is None:
+            return {"ok": True}
+        hook = getattr(module, "on_deactivate", None)
+        if callable(hook):
+            try:
+                hook(zctx)
+            except Exception as exc:
+                zctx.log.warning("on_deactivate 失败：%s", exc)
+        return {"ok": True}
+
+    def call(self, plugin_id, action, payload):
+        try:
+            with self._lock:
+                entry = self._loaded.get(plugin_id)
+            module, zctx, _ = entry if entry else (None, None, None)
+            if module is None:
+                record = self.runtime._record(plugin_id)
+                module, zctx = self._load(
+                    plugin_id, self.runtime._plugin_path(record)
+                )
+            handler = getattr(module, "handle", None)
+            if not callable(handler):
+                return {"ok": False, "error": "插件未实现 handle(action, payload, zctx)"}
+            outcome = handler(
+                action, payload if isinstance(payload, dict) else {}, zctx
+            )
+            return outcome if isinstance(outcome, dict) else {"ok": True, "result": outcome}
+        except Exception:
+            print(
+                f"[PluginAdapter] 插件 {plugin_id} 动作 {action} 执行失败：",
+                file=sys.stderr,
+            )
+            traceback.print_exc(file=sys.stderr)
+            raise
+
+    def _load(self, plugin_id, plugin_path):
+        from pathlib import Path
+
+        plugin_dir = Path(plugin_path)
+        source = None
+        for candidate in ("plugin.py", "__init__.py", "main.py"):
+            item = plugin_dir / candidate
+            if item.is_file():
+                source = item
+                break
+        if source is None:
+            raise RuntimeError(f"插件 {plugin_id} 缺少可执行入口 plugin.py")
+        signature = (str(source), source.stat().st_mtime)
+        with self._lock:
+            cached = self._loaded.get(plugin_id)
+            if cached is not None and cached[2] == signature:
+                return cached[0], cached[1]
+        zctx = _PluginContext(self, plugin_id)
+        spec = importlib.util.spec_from_file_location(
+            f"zoot_plugins.{plugin_id}", source
+        )
+        module = importlib.util.module_from_spec(spec)
+        sys.modules[spec.name] = module
+        try:
+            spec.loader.exec_module(module)
+        except BaseException:
+            sys.modules.pop(spec.name, None)
+            raise
+        with self._lock:
+            self._loaded[plugin_id] = (module, zctx, signature)
+        return module, zctx
+
+
+def _install_trusted_plugin_adapter() -> None:
+    """为 PC 宿主补齐 PluginRuntime 的 trusted_adapter。"""
+    runtime = getattr(app_main, "plugin_runtime", None)
+    if runtime is None:
+        state = getattr(getattr(app_main, "app", None), "state", None)
+        runtime = getattr(state, "plugin_runtime", None)
+    if runtime is None or getattr(runtime, "trusted_adapter", None) is not None:
+        return
+    runtime.trusted_adapter = _TrustedPluginAdapter(runtime)
+
+
 def load_app():
     """延迟加载后端；解释器版本不兼容时给出可操作的错误提示。"""
     global app_main
@@ -200,6 +355,7 @@ def load_app():
     _ensure_runtime_schema()
     _populate_operator_catalog_ids()
     _install_api_error_handlers(app_main.app)
+    _install_trusted_plugin_adapter()
     return app_main
 
 

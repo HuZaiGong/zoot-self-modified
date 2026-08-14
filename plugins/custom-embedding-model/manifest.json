@@ -1,0 +1,96 @@
+{
+  "id": "custom-embedding-model",
+  "api_version": "2.0",
+  "kind": "trusted_python",
+  "name": "自定义嵌入模型",
+  "version": "1.0.0",
+  "author": "ZOOT PC Port",
+  "description": "将记忆向量化切换到自定义 Embeddings 服务（OpenAI 兼容 /embeddings，如 OpenAI、Ollama、LM Studio、vLLM），替代内置本地 BGE ONNX 模型；独立向量空间、自动维度探测、启用后自动重建索引。",
+  "platform": ["pc"],
+  "permissions": ["storage:plugin", "system:trusted_python"],
+  "activation": {
+    "backend": true
+  },
+  "contributions": {},
+  "actions": {
+    "status": {
+      "name": "查看状态"
+    },
+    "test": {
+      "name": "连接测试"
+    },
+    "apply": {
+      "name": "立即应用"
+    },
+    "restore": {
+      "name": "恢复内置模型"
+    },
+    "reindex": {
+      "name": "重建向量索引"
+    }
+  },
+  "config_schema": {
+    "type": "object",
+    "properties": {
+      "endpoint": {
+        "type": "string",
+        "title": "Embeddings 接口地址",
+        "description": "OpenAI 兼容服务的 /embeddings 完整 URL，例如 https://api.openai.com/v1/embeddings 或 http://127.0.0.1:11434/v1/embeddings"
+      },
+      "model": {
+        "type": "string",
+        "title": "模型名称",
+        "description": "请求中的 model 字段，例如 text-embedding-3-small、bge-m3"
+      },
+      "api_key": {
+        "type": "string",
+        "secret": true,
+        "title": "API Key",
+        "description": "可选，仅保存在本机加密存储"
+      },
+      "dimensions": {
+        "type": "integer",
+        "title": "向量维度",
+        "description": "留 0 或负数则在首次激活时探测一次接口自动确定",
+        "default": -1,
+        "minimum": -1,
+        "maximum": 8192
+      },
+      "query_instruction": {
+        "type": "string",
+        "title": "查询指令前缀",
+        "description": "编码检索查询时附加的前缀；BGE 类模型常需要，OpenAI 类留空",
+        "default": "",
+        "maxLength": 512
+      },
+      "document_instruction": {
+        "type": "string",
+        "title": "文档指令前缀",
+        "description": "编码记忆/消息文本时附加的前缀，不需要留空",
+        "default": "",
+        "maxLength": 512
+      },
+      "timeout_seconds": {
+        "type": "number",
+        "title": "请求超时（秒）",
+        "default": 60,
+        "minimum": 1,
+        "maximum": 600
+      },
+      "batch_size": {
+        "type": "integer",
+        "title": "单次请求批量",
+        "default": 8,
+        "minimum": 1,
+        "maximum": 256
+      },
+      "auto_reindex": {
+        "type": "boolean",
+        "title": "激活后自动重建向量索引",
+        "description": "用新模型重新向量化既有记忆（数据多时较慢，可在动作里手动触发）",
+        "default": true
+      }
+    },
+    "required": ["endpoint", "model"]
+  }
+}

@@ -141,6 +141,17 @@ def _apply_proxy_settings() -> None:
         os.environ.setdefault("HTTPS_PROXY", https_proxy)
 
 
+def _apply_feature_defaults() -> None:
+    """桌面版默认打开向量检索与 NLP 状态跟踪。
+
+    config.pyc 用 os.getenv(..., 'false') 读取这两个开关，Android 原版
+    默认关闭；桌面版没有移动端省电压力，这里在导入后端前把默认值改为
+    true（用户显式设置的环境变量仍然优先，可设 0 关闭）。
+    """
+    for key in ("ENABLE_VECTOR_RETRIEVAL", "ENABLE_NLP_STATE_TRACKING"):
+        os.environ.setdefault(key, "true")
+
+
 def _install_api_error_handlers(app) -> None:
     """注册原版未处理的业务异常到合理的 HTTP 状态码。
 
@@ -338,6 +349,7 @@ def load_app():
         raise SystemExit(1)
     try:
         _apply_proxy_settings()
+        _apply_feature_defaults()
         _install_posix_shims()
         _install_builtin_shims()
         import app.main

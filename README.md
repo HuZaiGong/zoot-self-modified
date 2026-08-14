@@ -118,8 +118,8 @@ python launch.py --data-dir ~/zoot-data # 覆盖数据目录（等价 ZOOT_DATA_
 |---|---|
 | `DEEPSEEK_API_KEY` | 对话模型 API 密钥（首次使用需在前端 API 设置页配置或直接填入） |
 | `KNOWLEDGE_SERVICE_URL` / `KNOWLEDGE_SERVICE_API_KEY` | 知识图谱服务地址与密钥 |
-| `ENABLE_VECTOR_RETRIEVAL` / `VECTOR_RETRIEVAL_COUNT` | 向量检索开关与返回条数（默认关闭） |
-| `ENABLE_NLP_STATE_TRACKING` | NLP 状态跟踪（默认关闭） |
+| `ENABLE_VECTOR_RETRIEVAL` / `VECTOR_RETRIEVAL_COUNT` | 向量检索开关与返回条数（桌面版默认开启，设 `0` 关闭） |
+| `ENABLE_NLP_STATE_TRACKING` | NLP 状态跟踪（桌面版默认开启，设 `0` 关闭） |
 | `LOG_LEVEL` / `LOG_FILE` / `LOG_MAX_BYTES` / `LOG_BACKUP_COUNT` | 日志配置 |
 | `ZOOT_DATA_ROOT` | 可写数据根目录（覆盖默认位置） |
 | `ZOOT_RESOURCE_ROOT` | 覆盖只读资源目录（`resources/`） |
@@ -215,7 +215,7 @@ ZOOT 自带 Manifest v2 插件系统（插件管理页 + `/api/plugins/*` 接口
 ## 已知限制
 
 - 后台主动发言、系统通知等 Android 专属能力不可用
-- 向量检索、NLP 状态跟踪默认关闭（`.env` 中开启）
+- 向量检索、NLP 状态跟踪桌面版默认开启（`.env` 设 `0` 可关闭）
 - 云端远程能力（远程配置、遥测、知识图谱）需要可达的外网：无代理的网络环境会降级失败（单请求 5 秒超时，接口返回错误而非挂起），设 `HTTP_PROXY` / `ZOOT_HTTP_PROXY` 即可恢复
 - 未配置 API 密钥时，聊天与 AI 事件生成不可用（前端 API 设置页或 `.env` 配置）
 - 控制矩阵、更新检查等界面已按 PC 平台渲染（`/api/version/local` 返回 `platform: pc`）
